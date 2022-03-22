@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md items-start">
       <div class="row">
-        <div class="col">
+        <div class="col q-pa-sm">
           <q-card class="my-card">
             <q-card-section>
               <div class="text-h6">
@@ -11,7 +11,7 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="col">
+        <div class="col q-pa-sm">
           <q-card class="my-card">
             <q-card-section>
               <div class="text-h6">
@@ -21,7 +21,7 @@
             </q-card-section>
           </q-card>
         </div>
-        <div class="col">
+        <div class="col q-pa-sm">
           <q-card class="my-card">
             <q-card-section>
               <div class="text-h6">
@@ -33,7 +33,7 @@
         </div>
       </div>
     <div class="row">
-      <div class="col">
+      <div class="col q-pa-sm">
         <q-card class="my-card">
           <q-card-section>
             <div class="text-h6">
@@ -43,7 +43,7 @@
           </q-card-section>
         </q-card>
       </div>
-      <div class="col">
+      <div class="col q-pa-sm">
         <q-card class="my-card">
           <q-card-section class="text-center">
             <div class="text-h6">
@@ -53,7 +53,7 @@
           </q-card-section>
         </q-card>
       </div>
-      <div class="col">
+      <div class="col q-pa-sm">
         <q-card class="my-card">
           <q-card-section>
             <div class="text-h6">
@@ -71,6 +71,8 @@
 
 </script>
 
-<style>
-
+<style scoped>
+.q-card {
+  border-radius: 0;
+}
 </style>

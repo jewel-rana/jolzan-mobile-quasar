@@ -28,7 +28,7 @@
           class="bg-primary text-white shadow-2"
           :breakpoint="0"
         >
-          <q-route-tab v-for="nav in navigations" :to="nav.to" :name="nav.level" :key="nav.level" :icon="nav.icon" :label="nav.level" />
+          <q-route-tab v-for="nav in navigations" :to="nav.to" :name="nav.to" :key="nav.level" :icon="nav.icon" :label="nav.level" exact-active-class="tab-active" />
         </q-tabs>
     </q-footer>
 
@@ -119,3 +119,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.q-tab__indicator {
+   background: none;
+}
+.tab-active {
+  background: #fff;
+  color: #000;
+}
+</style>

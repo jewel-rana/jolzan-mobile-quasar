@@ -57,7 +57,7 @@
 
         <div class="row">
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="from_date" mask="date" @click="$refs.qDateProxy.show()">
+            <q-input class="q-ma-sm" filled v-model="from_date" label="Journey date" mask="date" @click="$refs.qDateProxy.show()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
@@ -74,7 +74,7 @@
             </q-input>
           </div>
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="to_date" mask="date" @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
+            <q-input class="q-ma-sm" filled v-model="to_date" label="Return date" mask="date" @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy2" cover transition-show="scale" transition-hide="scale">
