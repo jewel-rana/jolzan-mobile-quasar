@@ -137,9 +137,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `jolzan app`,
-        short_name: `jolzan app`,
-        description: `Jolzan app using quasar and vuejs`,
+        name: `My First App`,
+        short_name: `My App`,
+        description: `My first app using quasar and vuejs`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
