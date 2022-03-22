@@ -17,14 +17,22 @@
           indicator-color="primary"
           narrow-indicator
         >
-          <q-tab name="mails" label="Cabin" />
-          <q-tab name="alarms" label="Seat" />
+          <q-tab name="mails" label="Cabin"/>
+          <q-tab name="alarms" label="Seat"/>
         </q-tabs>
 
-        <q-separator />
+        <q-separator/>
 
         <q-tab-panels v-model="tab">
           <q-tab-panel name="mails">
+            <div class="row">
+              <div class="col q-pa-sm">
+                <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"/>
+              </div>
+              <div class="col q-pa-sm">
+                <q-select standout="bg-teal text-white" v-model="type" :options="options" label="Cabin type"/>
+              </div>
+            </div>
             <div class="text-h6">Mails</div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </q-tab-panel>
@@ -44,24 +52,50 @@
   </div>
 </template>
 <script>
-import { ref } from 'vue'
+import {ref} from 'vue'
 
 export default {
-  setup () {
+  setup() {
     return {
-      tab: ref('mails')
+      tab: ref('mails'),
+      type: ref(null),
+      floor: ref({label: "Second floor", value: 2}),
+      options: [
+        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+      ],
+      floors: [
+        {
+          label: 'First floor',
+          value: 1
+        },
+        {
+          label: 'Second floor',
+          value: 2,
+          selected: true
+        },
+        {
+          label: 'Third floor',
+          value: 3
+        }
+      ]
     }
   }
 }
 </script>
 <style scoped>
-.q-card__section--vert {
-   padding: 0px;
+.q-card {
+  border-radius: 0;
 }
+
+.q-card__section--vert {
+  padding: 0px;
+}
+
 .q-tabs--dense .q-tab {
   background: #1976d2;
   color: #fff;
 }
+
 .text-primary {
   color: #F4F6F9 !important;
 }

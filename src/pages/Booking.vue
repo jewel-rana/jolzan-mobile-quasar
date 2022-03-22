@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <booking-form></booking-form>
-    <search-result @click="goToBooking(0)" v-if="1 === 1"></search-result>
+    <search-result @click="goToBooking(2123)" v-if="1 === 1"></search-result>
     <no-result v-else></no-result>
   </q-page>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     goToBooking(item) {
-      this.$router.push('/booking/2122')
+      this.$router.push('/booking/' + item)
     }
   }
 }
