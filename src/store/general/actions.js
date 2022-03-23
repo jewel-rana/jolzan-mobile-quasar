@@ -1,3 +1,4 @@
+import Api from '../../services/ApiService.js'
 export function sendDownloadLink({commit}, payload) {
   return Api.DownloadLink(payload)
     .then(response => {
@@ -128,9 +129,11 @@ export function checkPNR({commit}, payload) {
     .catch(error => {})
 }
 export function searchTrip({commit}, payload) {
+  console.log(payload)
   commit("CLEAR_SEARCH_DATA")
   return Api.search(payload)
     .then(response => {
+      console.log(response.data)
       commit("SEARCH_RESULTS", response.data)
     })
     .catch(error => {})

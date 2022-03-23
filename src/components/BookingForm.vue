@@ -100,7 +100,7 @@
 
 <script>
 import { ref } from 'vue'
-import {Quasar} from "quasar";
+import { mapGetters,  mapActions} from 'vuex'
 const stringOptions = [
   'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
 ]
@@ -109,22 +109,26 @@ export default {
     const options = ref(stringOptions)
 
     return {
-      type: ref('launch'),
-      from: ref(null),
-      to: ref(null),
-      from_date: ref("2022/01/02"),
-      to_date:  ref("2022/01/02"),
+      form: {
+        type: ref('launch'),
+        from: ref(null),
+        to: ref(null),
+        from_date: ref("2022/01/02"),
+        to_date: ref("2022/01/02"),
+      },
       options: ref(stringOptions),
     }
   },
   methods: {
     formSubmit()
     {
-      alert('ok')
+      console.log(this.$store)
+      this.searchTrip(this.form)
     },
     closeFromDate() {
       this.$refs.qStartProxy.hide();
-    }
+    },
+    ...mapActions('general', ['searchTrip'])
   }
 }
 </script>

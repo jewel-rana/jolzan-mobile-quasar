@@ -15,7 +15,7 @@ import General from './general'
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
-      General
+      general: General
     },
 
     // enable strict mode (adds overhead!)
