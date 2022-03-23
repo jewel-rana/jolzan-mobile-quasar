@@ -7,7 +7,7 @@ export default function () {
       partners: [],
       suggestions: []
     },
-    loggedin: false,
+    loggedIn: false,
     loginModal: false,
     token: localStorage.getItem("token") || "",
     user: {},
@@ -16,9 +16,9 @@ export default function () {
       trip_from: "",
       trip_to: "",
       trip_date: new Date().toISOString().substr(0, 10),
-      trip_return_date: "",
+      trip_return_date: "2022/03/23",
       floor: 2,
-      type: 1,
+      type: 'launch',
       launch_name: ""
     },
     help: {

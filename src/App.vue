@@ -3,7 +3,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import {mapState, mapGetters} from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 export default defineComponent({
   name: 'App',
   created() {
@@ -14,7 +14,8 @@ export default defineComponent({
       this.$store.commit('SET_USER_DATA', {token: JSON.parse( localStorage.getItem('token') ), user: userData, success: true })
     }
   },
-  ...mapState(['user', 'loggedin', 'searchForm', 'noticeCount', 'cart']),
-  ...mapGetters(['getOptionByKey'])
+  ...mapState('general', ['user', 'loggedIn', 'noticeCount', 'cart']),
+  ...mapActions('general', ['initSite']),
+  ...mapGetters('general', ['getOptionByKey'])
 })
 </script>

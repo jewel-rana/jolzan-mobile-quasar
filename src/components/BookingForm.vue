@@ -5,16 +5,16 @@
       @submit="formSubmit"
     >
       <div class="q-gutter-sm">
-        <q-radio v-model="type" val="launch" label="Launch"/>
-        <q-radio v-model="type" val="bus" label="Bus"/>
-        <q-radio v-model="type" val="air" label="Air"/>
+        <q-radio v-model="search.type" val="launch" label="Launch"/>
+        <q-radio v-model="search.type" val="bus" label="Bus"/>
+        <q-radio v-model="search.type" val="air" label="Air"/>
       </div>
       <div class="row items-start">
         <div class="row">
           <div class="col">
             <q-select
               filled
-              v-model="from"
+              v-model="form.trip_from.value"
               use-input
               input-debounce="0"
               label="From"
@@ -35,7 +35,7 @@
           <div class="col">
             <q-select
               filled
-              v-model="to"
+              v-model="form.trip_to.value"
               use-input
               input-debounce="0"
               label="To"
@@ -57,7 +57,8 @@
 
         <div class="row">
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="from_date" label="Journey date" mask="date" @click="$refs.qDateProxy.show()">
+            <q-input class="q-ma-sm" filled v-model="form.trip_date.value" label="Journey date" mask="date"
+                     @click="$refs.qDateProxy.show()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
@@ -65,7 +66,7 @@
                       v-model="from_date"
                       @input="closeFromDate">
                       <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat />
+                        <q-btn v-close-popup label="Close" color="primary" flat/>
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -74,14 +75,15 @@
             </q-input>
           </div>
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="to_date" label="Return date" mask="date" @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
+            <q-input class="q-ma-sm" filled v-model="search.trip_return_date" label="Return date" mask="date"
+                     @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy2" cover transition-show="scale" transition-hide="scale">
                     <q-date
                       v-model="to_date">
                       <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat />
+                        <q-btn v-close-popup label="Close" color="primary" flat/>
                       </div>
                     </q-date>
                   </q-popup-proxy>
@@ -99,36 +101,39 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { mapGetters,  mapActions} from 'vuex'
+import {ref} from 'vue'
+import {mapGetters, mapActions, mapState} from 'vuex'
+
 const stringOptions = [
   'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
 ]
 export default {
-  setup () {
+  setup() {
     const options = ref(stringOptions)
 
     return {
       form: {
         type: ref('launch'),
-        from: ref(null),
-        to: ref(null),
-        from_date: ref("2022/01/02"),
-        to_date: ref("2022/01/02"),
+        trip_from: ref(null),
+        trip_to: ref(null),
+        trip_date: ref("2022/01/02"),
+        trip_return_date: ref("2022/01/02"),
       },
       options: ref(stringOptions),
     }
   },
   methods: {
-    formSubmit()
-    {
+    formSubmit({commit}, payload) {
       console.log(this.$store)
-      this.searchTrip(this.form)
+      this.searchTrip(this.form, payload)
     },
     closeFromDate() {
       this.$refs.qStartProxy.hide();
-    },
-    ...mapActions('general', ['searchTrip'])
+    }
+  },
+  computed: {
+    ...mapActions('general', ['searchTrip']),
+    ...mapState('general', ['search'])
   }
 }
 </script>
