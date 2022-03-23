@@ -17,6 +17,61 @@
               <div class="cabin-number">202</div>
               <span class="cabin-price">৳ 500</span>
             </div>
+            <div class="cabin cabin-disable">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
+            <div class="cabin">
+              <span class="topLap" >AC</span>
+              <div class="cabin-number">202</div>
+              <span class="cabin-price">৳ 500</span>
+            </div>
             <div class="cabin">
               <span class="topLap" >AC</span>
               <div class="cabin-number">202</div>
@@ -55,6 +110,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   /* background: url("../assets/img/cabin_layout.png"); */
   background-repeat: no-repeat;
   background-size: 100% 75%;
+  align-items: center;
 }
 .layoutRowCol {
   width: 102px;
@@ -65,6 +121,10 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .layoutRowCol:first-child {
   border-left: 0;
+  background-color: #f2f2f2;
+}
+.layoutRowCol:last-child {
+  background-color: #f2f2f2;
 }
 .cabinLayoutContainer .nav-link {
   padding: 8px;
@@ -121,7 +181,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .cabin-layout .cabins .cabin.cabin-disable, .cabin-layout .cabins .seat.cabin-disable {
   background: #d0d0d0;
-  cursor: not-allowed;
+  cursor: not-allowed !important;
 }
 .cabin-layout .cabins .cabin.cabin-active, .cabin-layout .cabins .seat.cabin-active {
   background: #7cd753;

@@ -25,12 +25,12 @@
 
         <q-tab-panels v-model="tab">
           <q-tab-panel name="mails">
-            <div class="row">
+            <div class="row" id="sticky">
               <div class="col q-pa-sm">
                 <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"/>
               </div>
               <div class="col q-pa-sm">
-                <q-select standout="bg-teal text-white" v-model="type" :options="options" label="type"/>
+                <q-select standout="bg-teal text-white" v-model="type" :options="options" label="Type"/>
               </div>
             </div>
             <itemlayout></itemlayout>
@@ -86,6 +86,7 @@ export default {
 <style scoped>
 .q-card {
   border-radius: 0;
+  box-shadow: inherit;
 }
 
 .q-card__section--vert {
