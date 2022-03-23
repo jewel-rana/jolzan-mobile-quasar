@@ -3,8 +3,8 @@
     <q-card class="my-card">
       <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" height="140px">
         <div class="absolute-bottom text-h6">
-          MV KUAKATA 2 <br/>
-          <small>Dhaka to Barisal</small>
+          Test example <br/>
+          <small>From - To</small>
         </div>
       </q-img>
 
@@ -17,8 +17,8 @@
           indicator-color="primary"
           narrow-indicator
         >
-          <q-tab name="mails" label="Cabin"/>
-          <q-tab name="alarms" label="Seat"/>
+          <q-tab name="mails" label="Tab 1"/>
+          <q-tab name="alarms" label="Tab 2"/>
         </q-tabs>
 
         <q-separator/>
@@ -30,11 +30,10 @@
                 <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"/>
               </div>
               <div class="col q-pa-sm">
-                <q-select standout="bg-teal text-white" v-model="type" :options="options" label="Cabin type"/>
+                <q-select standout="bg-teal text-white" v-model="type" :options="options" label="type"/>
               </div>
             </div>
-            <div class="text-h6">Mails</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <itemlayout></itemlayout>
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
@@ -53,8 +52,10 @@
 </template>
 <script>
 import {ref} from 'vue'
+import Itemlayout from "components/Itemlayout";
 
 export default {
+  components: {Itemlayout},
   setup() {
     return {
       tab: ref('mails'),
