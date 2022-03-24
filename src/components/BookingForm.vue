@@ -18,8 +18,8 @@
               use-input
               input-debounce="0"
               label="From"
-              :options="options"
-              @filter="optionsFiltered(options, 'label')"
+              :options="optionsFiltered(options, 'label')"
+              @filter="filterFn"
               behavior="menu"
               class="q-pa-sm"
             >
@@ -39,7 +39,7 @@
               use-input
               input-debounce="0"
               label="To"
-              :options="options"
+              :options="optionsFiltered(options, 'label')"
               behavior="menu"
               class="q-pa-sm"
             >
@@ -101,6 +101,39 @@
 
 <script>
 import {mapGetters, mapActions, mapState} from 'vuex'
+const objOptions = [
+  {
+    label: 'Google',
+    value: 'Google',
+    description: 'Search engine',
+    category: '1'
+  },
+  {
+    label: 'Facebook',
+    value: 'Facebook',
+    description: 'Social media',
+    category: '1'
+  },
+  {
+    label: 'Twitter',
+    value: 'Twitter',
+    description: 'Quick updates',
+    category: '2'
+  },
+  {
+    label: 'Apple',
+    value: 'Apple',
+    description: 'iStuff',
+    category: '2'
+  },
+  {
+    label: 'Oracle',
+    value: 'Oracle',
+    disable: true,
+    description: 'Databases',
+    category: '3'
+  }
+];
 export default {
   setup() {
     return {
@@ -115,12 +148,29 @@ export default {
     closeFromDate() {
       this.$refs.qStartProxy.hide();
     },
-    filterFn (val, update) {
+    filterFn (val, optionsFiltered) {
+      console.log(val)
       this.search = val
-      update()
+      console.log(this.search)
+      optionsFiltered()
     }
   },
   computed: {
+    options()
+    {
+      return objOptions
+    },
+    optionsFiltered () {
+      alert('ok')
+      return (options, prop) => {
+        const needle = this.search.toLocaleLowerCase()
+        const fn = prop === void 0
+          ? opt => opt.toLocaleLowerCase().indexOf(needle) > -1
+          : opt => opt[prop].toLocaleLowerCase().indexOf(needle) > -1
+
+        return needle.length === 0 ? [{label: 'dhaka', value: 1}] : options.filter(fn)
+      }
+    },
     trip_type: {
       get(){
         return this.$store.state.general.search.type
@@ -160,15 +210,6 @@ export default {
       set(value){
         this.$store.commit('general/UPDATE_FORM_DATA', {key: 'trip_return_date', value: value})
       }
-    },
-    options() {
-      return [
-        {label: 'Dhaka', value: 1},
-        {label: 'Barishal', value: 2}
-      ]
-    },
-    optionsFiltered () {
-      return this.options
     }
   }
 }
