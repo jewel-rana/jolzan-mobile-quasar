@@ -252,6 +252,7 @@ export default {
     localStorage.removeItem('search_results')
   },
   SET_TRIP_ITEM(state, payload) {
+    console.log(payload)
     state.trip = payload.data
 
     if (state.cart) {
@@ -269,7 +270,7 @@ export default {
         for (var i in cabins) {
           for (var j in cabins[i]) {
             for (var c in cartItems) {
-              if (cartItems[c].cabin_id == cabins[i][j].cabin_id && cartItems[c].trip_id == cabins[i][j].trip_id) {
+              if (cartItems[c].item_id == cabins[i][j].item_id) {
                 cabins[i][j].cabin_class = 'cabin-selected'
                 cabins[i][j].status = 2
               }
@@ -284,7 +285,7 @@ export default {
       if (seats) {
         for (var i in seats) {
           for (var j in seats[i]) {
-            if (cartItems[c].cabin_id == cabins[i][j].cabin_id && cartItems[c].trip_id == cabins[i][j].trip_id) {
+            if (cartItems[c].item_id == cabins[i][j].item_id) {
               seats[i][j].cabin_class = 'cabin-selected'
               seats[i][j].status = 2
             }
@@ -292,12 +293,14 @@ export default {
         }
         state.trip.seats = seats
       }
+
+      localStorage.removeItem('trip')
+      localStorage.setItem('trip', JSON.stringify(state.trip))
     }
   },
   CLEAR_TRIP_DATA(state) {
-    state.trip.cabins = null
-    state.trip.seats = null
-    state.trip.decks = null
+    console.log(state)
+    state.trip = null
   },
   SWITCH_TRIP(state) {
     const tmp = state.search.trip_from;
@@ -311,8 +314,9 @@ export default {
   },
   ADD_TO_CART(state, payload) {
     // state.cart_item = payload
+    console.log(payload)
     if (payload.success) {
-      const itemExist = state.cart.find(i => i.cabin_id === payload.item.cabin_id && i.trip_id === payload.item.trip_id)
+      const itemExist = state.cart.find(i => i.item_id === payload.item.item_id)
       if (!itemExist) {
         state.cart.push(payload.item)
         const cart = localStorage.getItem('cart')
@@ -320,22 +324,24 @@ export default {
           localStorage.removeItem('cart')
         }
         localStorage.setItem('cart', JSON.stringify(state.cart))
-        if (payload.item.cabin_type == 'cabin') {
-          var cabins = state.trip.cabins;
-          for (var i in cabins) {
-            for (var j in cabins[i]) {
-              if (cabins[i][j].cabin_id == payload.item.cabin_id) {
+        if (payload.item.type == 'cabin') {
+          let cabins = state.trip.cabins;
+          console.log(cabins)
+          for (let i in cabins) {
+            for (let j in cabins[i]) {
+              console.log(cabins[i][j])
+              if (cabins[i][j].item_id == payload.item.item_id) {
                 cabins[i][j].cabin_class = 'cabin-selected'
                 cabins[i][j].status = 2
               }
             }
           }
           state.trip.cabins = cabins
-        } else if (payload.item.cabin_type == 'seat') {
-          var seats = state.trip.seats;
-          for (var i in seats) {
-            for (var j in seats[i]) {
-              if (seats[i][j].cabin_id == payload.item.cabin_id) {
+        } else if (payload.item.type == 'seat') {
+          let seats = state.trip.seats;
+          for (let i in seats) {
+            for (let j in seats[i]) {
+              if (seats[i][j].item_id == payload.item.item_id) {
                 seats[i][j].cabin_class = 'cabin-selected'
                 seats[i][j].status = 2
               }

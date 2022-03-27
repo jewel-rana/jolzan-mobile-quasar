@@ -18,7 +18,7 @@
               use-input
               input-debounce="0"
               label="From"
-              :options="optionsFiltered(options, 'label')"
+              :options="options"
               @filter="filterFn"
               behavior="menu"
               class="q-pa-sm"
@@ -39,7 +39,8 @@
               use-input
               input-debounce="0"
               label="To"
-              :options="optionsFiltered(options, 'label')"
+              :options="options"
+              @filter="filterFn"
               behavior="menu"
               class="q-pa-sm"
             >
@@ -100,44 +101,34 @@
 </template>
 
 <script>
-import {mapGetters, mapActions, mapState} from 'vuex'
-const objOptions = [
+let objOptions = [
   {
-    label: 'Google',
-    value: 'Google',
-    description: 'Search engine',
-    category: '1'
+    label: 'Dhaka',
+    value: 'dhaka'
   },
   {
-    label: 'Facebook',
-    value: 'Facebook',
-    description: 'Social media',
-    category: '1'
+    label: 'Barisal',
+    value: 'barisal'
   },
   {
-    label: 'Twitter',
-    value: 'Twitter',
-    description: 'Quick updates',
-    category: '2'
+    label: 'Elisha',
+    value: 'elisha'
   },
   {
-    label: 'Apple',
-    value: 'Apple',
-    description: 'iStuff',
-    category: '2'
+    label: 'Charfashion',
+    value: 'charfashion'
   },
   {
-    label: 'Oracle',
-    value: 'Oracle',
-    disable: true,
-    description: 'Databases',
-    category: '3'
+    label: 'Bhola',
+    value: 5
   }
 ];
 export default {
   setup() {
     return {
-      search: ''
+      search: '',
+      options: objOptions,
+      model: ''
     }
   },
   methods: {
@@ -148,27 +139,29 @@ export default {
     closeFromDate() {
       this.$refs.qStartProxy.hide();
     },
-    filterFn (val, optionsFiltered) {
-      console.log(val)
-      this.search = val
-      console.log(this.search)
-      optionsFiltered()
+    filterFn (val, update) {
+      if (val === '') {
+        update(() => {
+          this.options = objOptions
+        })
+        return
+      }
+
+      update(() => {
+        let needle = val.toLowerCase()
+        this.options = objOptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
     }
   },
   computed: {
-    options()
-    {
-      return objOptions
-    },
     optionsFiltered () {
-      alert('ok')
       return (options, prop) => {
         const needle = this.search.toLocaleLowerCase()
         const fn = prop === void 0
           ? opt => opt.toLocaleLowerCase().indexOf(needle) > -1
           : opt => opt[prop].toLocaleLowerCase().indexOf(needle) > -1
 
-        return needle.length === 0 ? [{label: 'dhaka', value: 1}] : options.filter(fn)
+        return needle.length === 0 ? options : options.filter(fn)
       }
     },
     trip_type: {

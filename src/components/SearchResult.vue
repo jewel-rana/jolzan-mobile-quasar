@@ -3,19 +3,19 @@
       <q-list>
         <q-item>
           <q-item-section top thumbnail class="q-ml-none">
-            <img src="https://cdn.quasar.dev/img/mountains.jpg">
+            <img :src="item.vehicle_photo || 'https://cdn.quasar.dev/img/mountains.jpg'">
           </q-item-section>
 
           <q-item-section>
-            <q-item-label style="font-size: 17px; color: dodgerblue"><strong>MV Kuakata 2</strong></q-item-label>
-            <q-item-label><q-icon name="route" size="18px"></q-icon><strong>Dhaka - Barisal</strong></q-item-label>
-            <q-item-label caption><q-icon name="event" size="18px"></q-icon> Friday 12 @7:30 pm</q-item-label>
+            <q-item-label style="font-size: 17px; color: dodgerblue"><strong>{{ item.vehicle_name}}</strong></q-item-label>
+            <q-item-label><q-icon name="route" size="18px"></q-icon><strong>{{ item.route_name }}</strong></q-item-label>
+            <q-item-label caption><q-icon name="event" size="18px"></q-icon> {{ item.leaving_at }}</q-item-label>
           </q-item-section>
 
           <q-item-section side top class="q-pa-sm">
             <q-item-label>Available</q-item-label>
-            <q-item-label class="q-pr-sm"><q-icon name="bed" size="16px"></q-icon> Cabin 12</q-item-label>
-            <q-item-label class="q-pr-sm"><q-icon name="chair" size="16px"></q-icon> Seat 12</q-item-label>
+            <q-item-label class="q-pr-sm"><q-icon name="bed" size="16px"></q-icon> Cabin {{ item.cabin_available }}</q-item-label>
+            <q-item-label class="q-pr-sm"><q-icon name="chair" size="16px"></q-icon> Seat {{ item.seat_available}}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -55,6 +55,12 @@
 <!--    </q-card>-->
   </div>
 </template>
+<script>
+import {mapState, mapActions, mapGetters} from 'vuex'
+export default {
+  props: ['item']
+}
+</script>
 <style scoped>
 .q-item {
   padding: 0;

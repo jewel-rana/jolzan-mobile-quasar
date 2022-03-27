@@ -128,10 +128,12 @@ export function checkPNR({commit}, payload) {
     })
     .catch(error => {})
 }
-export function searchTrip({commit}, payload) {
-  console.log(payload)
+export function searchTrip({state, commit, rootState}) {
+  console.log(state)
   commit("CLEAR_SEARCH_DATA")
-  return Api.search(payload)
+  let tripFrom = state.search.trip_from ? state.search.trip_from.value : ''
+  let tripTo = state.search.trip_to ? state.search.trip_to.value : ''
+  return Api.search({trip_from: tripFrom, trip_to: tripTo, trip_date: state.search.trip_date})
     .then(response => {
       console.log(response.data)
       commit("SEARCH_RESULTS", response.data)

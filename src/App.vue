@@ -4,8 +4,12 @@
 <script>
 import { defineComponent } from 'vue';
 import {mapState, mapGetters, mapActions} from 'vuex';
+import { useQuasar } from 'quasar'
 export default defineComponent({
   name: 'App',
+  setup(){
+    const $q = useQuasar()
+  },
   created() {
     this.$store.dispatch('general/initSite')
     const userString = localStorage.getItem('user')

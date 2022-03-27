@@ -9,7 +9,8 @@ const apiClient = axios.create({
   crossdomain: true,
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "application/x-www-form-urlencoded",
+    'Access-Control-Allow-Origin': '*'
   },
   paramsSerializer(params) {
     const searchParams = new URLSearchParams();
