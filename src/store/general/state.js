@@ -108,6 +108,7 @@ export default function () {
     availableRoutes: {},
     trip: {},
     cart: [],
+    customer_token: "",
     payment: {
       type: 'mobilebank',
       account_no: '',

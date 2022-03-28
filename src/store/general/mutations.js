@@ -446,22 +446,22 @@ export default {
   },
   REMOVE_CART_ITEM(state, payload) {
     const item = state.cart[payload]
-    if (item.cabin_type == 'cabin') {
-      var cabins = state.trip.cabins;
-      for (var i in cabins) {
-        for (var j in cabins[i]) {
-          if (cabins[i][j].cabin_id == item.cabin_id && cabins[i][j].trip_id == item.trip_id) {
+    if (item.type == 'cabin') {
+      let cabins = state.trip.cabins;
+      for (let i in cabins) {
+        for (let j in cabins[i]) {
+          if (cabins[i][j].item_id == item.item_id) {
             cabins[i][j].cabin_class = 'cabin-active'
             cabins[i][j].status = 1
           }
         }
       }
       state.trip.cabins = cabins
-    } else if (item.cabin_type == 'seat') {
+    } else if (item.type == 'seat') {
       var seats = state.trip.seats;
       for (var i in seats) {
         for (var j in seats[i]) {
-          if (seats[i][j].cabin_id == item.cabin_id && seats[i][j].trip_id == item.trip_id) {
+          if (seats[i][j].item_id == item.item_id) {
             seats[i][j].cabin_class = 'cabin-active'
             seats[i][j].status = 1
           }

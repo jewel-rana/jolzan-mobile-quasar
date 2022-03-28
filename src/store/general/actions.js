@@ -170,7 +170,7 @@ export function changePassengerMobile({commit}, payload) {
   commit("CHANGE_PASSENGER_MOBILE", payload)
 }
 export function removeItemFromCart({commit}, payload) {
-  if( payload.item.cabin_type != 'deck' ) {
+  if( payload.item.type != 'deck' ) {
     return Api.removCart(payload)
       .then(response => {
         if( response.data.success ) {

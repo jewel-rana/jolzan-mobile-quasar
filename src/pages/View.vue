@@ -86,6 +86,21 @@ export default {
   methods: {
     floorChange(){
       alert('ok')
+    },
+    cabinStatus(cabin) {
+      let status = "cabin-active"
+      switch (cabin.status) {
+        case '0' :
+          status = "cabin-active"
+          break
+        case '1' :
+          status = "cabin-disable"
+          break;
+      }
+      return status
+    },
+    filterCabinByType(property = 'cabin', type) {
+      this.$store.dispatch('general/FilterByType', {property: property, type: type})
     }
   },
   computed: {
