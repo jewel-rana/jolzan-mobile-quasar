@@ -17,6 +17,10 @@ export default defineComponent({
       const userData = JSON.parse( userString )
       this.$store.commit('general/SET_USER_DATA', {token: JSON.parse( localStorage.getItem('token') ), user: userData, success: true })
     }
+    const cartItems = localStorage.getItem('cart')
+    if (cartItems) {
+      this.$store.commit("general/LOAD_CART_ITEMS", JSON.parse(cartItems))
+    }
   },
   ...mapState('general', ['user', 'loggedIn', 'noticeCount', 'cart']),
   ...mapActions('general', ['initSite']),

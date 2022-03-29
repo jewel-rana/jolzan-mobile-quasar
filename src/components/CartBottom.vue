@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="q-mt-lg">
     <q-table
       title=""
-      :rows="rows"
+      :rows="getRows"
       :columns="columns"
       row-key="name"
       hide-header
@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import {mapState} from "vuex";
+import {mapGetters, mapState} from "vuex";
 const columns = [
   {
     name: 'name',
@@ -27,31 +27,42 @@ const columns = [
     required: true,
     label: '',
     align: 'right',
-    field: row => row.name,
+    field: row => row.amount,
     format: val => `${val}`,
     sortable: false
   },
-]
-const rows = [
-  {
-    name: 'Total',
-    amount: 500
-  },
-  {
-    name: 'Total',
-    amount: 'Hello'
-  }
 ]
 
 export default {
   setup () {
     return {
-      columns,
-      rows: rows
+      columns
     }
   },
   computed: {
-    ...mapState('general', ['cart'])
+    getRows() {
+      let rows = []
+      return [
+        {
+          name: 'Sub-total',
+          amount: this.getSubTotal
+        },
+        {
+          name: 'Vat',
+          amount: this.getVatTotal
+        },
+        {
+          name: 'Service charge',
+          amount: this.getServiceCharge
+        },
+        {
+          name: 'Total',
+          amount: this.getTotal
+        }
+      ]
+    },
+    ...mapState('general', ['cart']),
+    ...mapGetters('general', ['getSubTotal', 'getVatTotal', 'getServiceCharge', 'getTotal'])
   }
 }
 </script>

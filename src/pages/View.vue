@@ -60,12 +60,12 @@
 </template>
 <script>
 import {ref} from 'vue'
-import Itemlayout from "components/Itemlayout";
+import ItemLayout from "components/Itemlayout";
 import {mapState} from "vuex";
 import CartSection from "components/CartSection"
 
 export default {
-  components: {Itemlayout, CartSection},
+  components: {ItemLayout, CartSection},
   setup() {
     return {
       tab: ref('mails')
