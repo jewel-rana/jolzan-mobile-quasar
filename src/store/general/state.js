@@ -13,13 +13,15 @@ export default function () {
     user: {},
     page: {},
     search: {
-      trip_from: "",
-      trip_to: "",
-      trip_date: new Date().toISOString().substr(0, 10),
+      trip_from: null,
+      trip_to: null,
+      trip_date: new Date().toISOString().split('T')[0],
       trip_return_date: "2022/03/23",
-      floor: 2,
+      floor: {label: '2nd Floor', value: 2},
       type: 'launch',
-      launch_name: ""
+      launch_name: "",
+      cabin_type: null,
+      seat_type: null
     },
     help: {
       name: "",
@@ -106,6 +108,7 @@ export default function () {
     availableRoutes: {},
     trip: {},
     cart: [],
+    customer_token: "",
     payment: {
       type: 'mobilebank',
       account_no: '',

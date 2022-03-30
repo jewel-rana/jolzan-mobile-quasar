@@ -2,92 +2,62 @@
   <div class="cabin-layout">
     <div class="cabins">
         <div class="overflow-auto" id="cabinLayoutContainer">
-          <div class="layoutRowCol">
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-          </div>
-          <div class="layoutRowCol">
-          </div>
-          <div class="layoutRowCol">
-            <div class="cabin cabin-active">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin cabin-disable">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
-            </div>
-            <div class="cabin">
-              <span class="topLap" >AC</span>
-              <div class="cabin-number">202</div>
-              <span class="cabin-price">৳ 500</span>
+          <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
+            <div class="cabin" v-for="(data, indx) in item" :class="data.cabin_class" :key="indx" @click="addToCard($event, data)">
+              <div class="topLap" >AC</div>
+              <div class="cabin-number">{{ data.cabin_no }}</div>
+              <div class="cabin-price">৳ {{ data.fare }}</div>
             </div>
           </div>
         </div>
       </div>
   </div>
 </template>
-
+<script>
+export default {
+  props: ['items'],
+  created()
+  {
+    console.log(this.items)
+  },
+  methods: {
+    addToCard(event, cabin)
+    {
+      console.log(cabin)
+      if (cabin.status == 1 && cabin.cabin_class == 'cabin-active') {
+        this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
+          .then(() => {
+            console.log('item has been added to cart')
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
+    },
+    addToCartDeck()
+    {
+      this.$store.dispatch("general/AddDeckTicketToCart")
+    },
+    cabinStatus(cabin)
+    {
+      var status = "cabin-active"
+      switch (cabin.status) {
+        case '0' :
+          status = "cabin-active"
+          break
+        case '1' :
+          status = "cabin-disable"
+          break;
+      }
+      return status
+    },
+    filterCabinByType(property = 'cabin', type)
+    {
+      this.$store.dispatch('general/FilterByType', {property: property, type: type})
+    }
+  }
+}
+</script>
 
 <style scoped>
 body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
@@ -183,14 +153,11 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background: #d0d0d0;
   cursor: not-allowed !important;
 }
-.cabin-layout .cabins .cabin.cabin-active, .cabin-layout .cabins .seat.cabin-active {
-  background: #7cd753;
-}
 .cabin-active .cabin-price {
   background-color: #1bc616;
 }
 .cabin-layout .cabins .cabin.cabin-selected, .cabin-layout .cabins .seat.cabin-selected {
-  background: #1e9877;
+  background: #7cd753;
 }
 .cabin-layout .cabins .cabin.cabin-checked, .cabin-layout .cabins .seat.cabin-checked {
   color: #fff;
@@ -204,9 +171,10 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   border-top-left-radius: 10px;
 }
 .cabin-layout .cabins .cabin .topLap, #availableCabins .cabin .topLap {
-  position: absolute;
   top: 0;
   right: 0;
+  left: auto;
+  width: auto;
   background: yellow;
   color: #000;
   border: 1px solid #F0EFEF;
@@ -220,7 +188,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .cabin-layout .cabins .cabin .cabin-number, .cabin-layout .cabins .seat .cabin-number, #availableCabins .cabin .cabin-number {
   font-size: 13pt;
-  padding: 10px 0 20px 0;
+  padding: 0px 0 20px 0;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -239,5 +207,11 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   text-align: center;
   font-weight: bold;
   line-height: 24px;
+}
+.cabin.empty {
+  background: none;
+}
+.cabin.empty > .cabin-price, .cabin.empty > .topLap {
+  display: none;
 }
 </style>

@@ -5,16 +5,16 @@
       @submit="formSubmit"
     >
       <div class="q-gutter-sm">
-        <q-radio v-model="search.type" val="launch" label="Launch"/>
-        <q-radio v-model="search.type" val="bus" label="Bus"/>
-        <q-radio v-model="search.type" val="air" label="Air"/>
+        <q-radio v-model="trip_type" val="launch" label="Launch"/>
+        <q-radio v-model="trip_type" val="bus" label="Bus"/>
+        <q-radio v-model="trip_type" val="air" label="Air"/>
       </div>
       <div class="row items-start">
         <div class="row">
           <div class="col">
             <q-select
               filled
-              v-model="form.trip_from.value"
+              v-model="trip_from"
               use-input
               input-debounce="0"
               label="From"
@@ -35,7 +35,7 @@
           <div class="col">
             <q-select
               filled
-              v-model="form.trip_to.value"
+              v-model="trip_to"
               use-input
               input-debounce="0"
               label="To"
@@ -57,13 +57,13 @@
 
         <div class="row">
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="form.trip_date.value" label="Journey date" mask="date"
+            <q-input class="q-ma-sm" filled v-model="trip_date" label="Journey date" mask="date"
                      @click="$refs.qDateProxy.show()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
                     <q-date
-                      v-model="from_date"
+                      v-model="trip_date"
                       @input="closeFromDate">
                       <div class="row items-center justify-end">
                         <q-btn v-close-popup label="Close" color="primary" flat/>
@@ -75,13 +75,13 @@
             </q-input>
           </div>
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="search.trip_return_date" label="Return date" mask="date"
+            <q-input class="q-ma-sm" filled v-model="trip_return_date" label="Return date" mask="date"
                      @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy2" cover transition-show="scale" transition-hide="scale">
                     <q-date
-                      v-model="to_date">
+                      v-model="trip_return_date">
                       <div class="row items-center justify-end">
                         <q-btn v-close-popup label="Close" color="primary" flat/>
                       </div>
@@ -101,39 +101,109 @@
 </template>
 
 <script>
-import {ref} from 'vue'
-import {mapGetters, mapActions, mapState} from 'vuex'
-
-const stringOptions = [
-  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-]
+let objOptions = [
+  {
+    label: 'Dhaka',
+    value: 'dhaka'
+  },
+  {
+    label: 'Barisal',
+    value: 'barisal'
+  },
+  {
+    label: 'Elisha',
+    value: 'elisha'
+  },
+  {
+    label: 'Charfashion',
+    value: 'charfashion'
+  },
+  {
+    label: 'Bhola',
+    value: 5
+  }
+];
 export default {
   setup() {
-    const options = ref(stringOptions)
-
     return {
-      form: {
-        type: ref('launch'),
-        trip_from: ref(null),
-        trip_to: ref(null),
-        trip_date: ref("2022/01/02"),
-        trip_return_date: ref("2022/01/02"),
-      },
-      options: ref(stringOptions),
+      search: '',
+      options: objOptions,
+      model: ''
     }
   },
   methods: {
     formSubmit({commit}, payload) {
       console.log(this.$store)
-      this.searchTrip(this.form, payload)
+      this.$store.dispatch('general/searchTrip')
     },
     closeFromDate() {
       this.$refs.qStartProxy.hide();
+    },
+    filterFn (val, update) {
+      if (val === '') {
+        update(() => {
+          this.options = objOptions
+        })
+        return
+      }
+
+      update(() => {
+        let needle = val.toLowerCase()
+        this.options = objOptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
     }
   },
   computed: {
-    ...mapActions('general', ['searchTrip']),
-    ...mapState('general', ['search'])
+    optionsFiltered () {
+      return (options, prop) => {
+        const needle = this.search.toLocaleLowerCase()
+        const fn = prop === void 0
+          ? opt => opt.toLocaleLowerCase().indexOf(needle) > -1
+          : opt => opt[prop].toLocaleLowerCase().indexOf(needle) > -1
+
+        return needle.length === 0 ? options : options.filter(fn)
+      }
+    },
+    trip_type: {
+      get(){
+        return this.$store.state.general.search.type
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'type', value: value})
+      }
+    },
+    trip_from: {
+      get(){
+        return this.$store.state.general.search.trip_from
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'trip_from', value: value})
+      }
+    },
+    trip_to: {
+      get(){
+        return this.$store.state.general.search.trip_to
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'trip_to', value: value})
+      }
+    },
+    trip_date: {
+      get(){
+        return this.$store.state.general.search.trip_date
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'trip_date', value: value})
+      }
+    },
+    trip_return_date: {
+      get(){
+        return this.$store.state.general.search.trip_return_date
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'trip_return_date', value: value})
+      }
+    }
   }
 }
 </script>
