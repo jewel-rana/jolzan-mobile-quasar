@@ -63,9 +63,8 @@ export default function () {
     order: {
       id: "",
       transaction_id: "",
-      step: 'check',
       coupon: "",
-      title: "Check",
+      title: "Cart",
       terms_accept: 0
     },
     coupon: {

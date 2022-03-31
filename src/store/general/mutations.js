@@ -444,6 +444,19 @@ export default {
   PROCEED_TO_TERMS(state) {
     state.order.step = 'terms'
   },
+  HANDLE_CONFIRM(state) {
+    switch (state.order.step) {
+      case 'cart':
+        state.order.step = 'passenger'
+        break;
+      case 'passenger':
+        state.order.step = 'terms'
+        break;
+      case 'terms':
+        state.order.step = 'payment'
+        break;
+    }
+  },
   REMOVE_CART_ITEM(state, payload) {
     const item = state.cart[payload]
     if (item.type == 'cabin') {
@@ -479,17 +492,8 @@ export default {
       localStorage.removeItem('cart')
     }
     localStorage.setItem('cart', JSON.stringify(state.cart))
-    if (state.loggedin) {
-      state.order.step = 'confirm'
-    } else {
-      state.order.step = 'check'
-    }
-  },
-  CHECKOUT_INITIATE(state) {
-    if (state.loggedin) {
-      state.order.step = 'confirm'
-    } else {
-      state.order.step = 'check'
+    if (!state.loggedin) {
+      state.order.step = 'login'
     }
   },
   APPLY_COUPON(state, payload) {

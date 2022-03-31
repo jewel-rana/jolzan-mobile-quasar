@@ -6,12 +6,19 @@
   </div>
 </template>
 <script>
+import {mapState} from "vuex";
+
 export default {
   props: ['step'],
   methods: {
     handleConfirm(e, step) {
-      alert(step)
+      this.$store.commit('general/HANDLE_CONFIRM')
+      console.log(this.order)
+      this.$router.push('/' + this.order.step)
     }
+  },
+  computed: {
+    ...mapState('general', ['order'])
   }
 }
 </script>

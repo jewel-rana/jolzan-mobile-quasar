@@ -49,7 +49,7 @@ export default {
     confirmCart(event) {
       // this.$root.$emit("bv::show::modal", "order-confirm");
       // this.$store.commit('general/CHECKOUT_INITIATE')
-      this.$router.push('/order')
+      this.$router.push('/cart')
     },
     changeBoardingPoint(event, index) {
       this.$store.dispatch("changeBoardingPoint", {id: event.target.value, index: index})
