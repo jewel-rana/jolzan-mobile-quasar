@@ -91,6 +91,9 @@ export default {
       this.$store.dispatch("general/changePassengerMobile", {name: event.target.value, index: index})
     }
   },
+  created() {
+    console.log(this.item)
+  },
   computed: {
     passengerType: {
       get(itemId) {

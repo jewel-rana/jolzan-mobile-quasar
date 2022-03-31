@@ -26,7 +26,7 @@
 import {ref} from "vue";
 import {mapState, mapGetters} from "vuex";
 import NoResult from "components/NoResult";
-import CartItem from "components/cartItem";
+import CartItem from "components/CartItem";
 
 export default {
   components: {NoResult, CartItem},
@@ -49,7 +49,7 @@ export default {
     confirmCart(event) {
       // this.$root.$emit("bv::show::modal", "order-confirm");
       // this.$store.commit('general/CHECKOUT_INITIATE')
-      this.$router.push('/order')
+      this.$router.push('/cart')
     },
     changeBoardingPoint(event, index) {
       this.$store.dispatch("changeBoardingPoint", {id: event.target.value, index: index})

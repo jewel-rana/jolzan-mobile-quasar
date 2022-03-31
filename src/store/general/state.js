@@ -8,7 +8,7 @@ export default function () {
       suggestions: []
     },
     loggedIn: false,
-    loginModal: false,
+    notLoggedIn: false,
     token: localStorage.getItem("token") || "",
     user: {},
     page: {},
@@ -37,8 +37,9 @@ export default function () {
       password: "",
       confirm_password: "",
       otp: "",
-      title: "Log in",
-      resendTimer: 60
+      title: "Check",
+      resendTimer: 60,
+      step: 'check'
     },
     cancellation: {
       title: 'Enter PNR number',
@@ -63,9 +64,8 @@ export default function () {
     order: {
       id: "",
       transaction_id: "",
-      step: 'check',
       coupon: "",
-      title: "Check",
+      title: "Cart",
       terms_accept: 0
     },
     coupon: {

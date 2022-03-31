@@ -10,8 +10,10 @@ const routes = [
       { path: '/support', component: () => import('pages/Support.vue') },
       { path: '/more', component: () => import('pages/More.vue') },
       { path: '/booking/:id', component: () => import('pages/View.vue') },
-      { path: '/order', component: () => import('pages/Order.vue') },
-      { path: '/passenger', component: () => import('pages/PassengerInfo.vue') }
+      { path: '/cart', component: () => import('pages/Order.vue') },
+      { path: '/passenger', component: () => import('pages/PassengerInfo.vue') },
+      { path: '/terms', component: () => import('pages/PassengerInfo.vue') },
+      { path: '/payment', component: () => import('pages/PassengerInfo.vue') }
     ]
   },
 
