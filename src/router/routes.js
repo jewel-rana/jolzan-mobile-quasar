@@ -12,7 +12,7 @@ const routes = [
       { path: '/booking/:id', component: () => import('pages/View.vue') },
       { path: '/cart', component: () => import('pages/Order.vue') },
       { path: '/passenger', component: () => import('pages/PassengerInfo.vue') },
-      { path: '/confirm', component: () => import('pages/PassengerInfo.vue') },
+      { path: '/terms', component: () => import('pages/PassengerInfo.vue') },
       { path: '/payment', component: () => import('pages/PassengerInfo.vue') }
     ]
   },

@@ -15,7 +15,7 @@
 
 <script>
 import {mapState} from "vuex";
-import CartItem from "components/cartItem";
+import CartItem from "components/CartItem";
 import CartBottom from "components/CartBottom";
 import NoResult from "components/NoResult";
 import ConfirmButton from "components/cart/ConfirmButton"

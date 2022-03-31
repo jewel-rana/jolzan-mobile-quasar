@@ -1,3 +1,4 @@
+import Axios from 'axios'
 export default {
   UPDATE_FORM_DATA (state, payload) {
     switch (payload.key) {
@@ -66,9 +67,10 @@ export default {
       state.seat_types = payload.data.seat_types
       state.cabin_types = payload.data.cabin_types
       if (state.loggedin) {
-        state.order.step = 'confirm'
+        state.order.step = 'cart'
       } else {
-        state.order.step = 'check'
+        state.login.step = 'check'
+        state.order.step = 'cart'
       }
       state.coupon.status = false
       state.coupon.total = 0
@@ -82,11 +84,13 @@ export default {
     state.suggestions = suggests
   },
   SET_USER_DATA(state, payload) {
-    state.loggedin = payload.success
     if (payload.success) {
+      state.loggedIn = true
       state.token = payload.token
       state.user = payload.user
-      state.order.step = 'confirm'
+      state.login.step = 'check'
+      state.order.step = 'cart'
+      state.notLoggedIn = false
       state.order.title = 'Confirm order'
       state.cancellation.step = 'check'
       state.cancellation.title = 'Enter PNR number'
@@ -199,7 +203,7 @@ export default {
   LOGIN_PROCEDURE(state, payload) {
     state.loginResponse = payload
     if (payload.success) {
-      state.order.step = payload.step
+      state.login.step = payload.step
       state.responseError.message = ""
       state.login.title = (payload.step == 'otp') ? "Verify" : 'Login';
       state.order.title = (payload.step == 'otp') ? "Verify" : 'Login';
@@ -444,6 +448,22 @@ export default {
   PROCEED_TO_TERMS(state) {
     state.order.step = 'terms'
   },
+  HANDLE_LOGIN_FORM(state, payload) {
+    switch (payload.key) {
+      case 'mobile':
+      state.login.mobile = payload.value
+        break;
+      case 'password':
+        state.login.password = payload.value
+        break;
+      case 'email':
+        state.login.email = payload.value
+        break;
+      case 'name':
+        state.login.name = payload.value
+        break;
+    }
+  },
   HANDLE_CONFIRM(state) {
     switch (state.order.step) {
       case 'cart':
@@ -456,6 +476,8 @@ export default {
         state.order.step = 'payment'
         break;
     }
+
+    state.notLoggedIn = !state.loggedIn
   },
   REMOVE_CART_ITEM(state, payload) {
     const item = state.cart[payload]

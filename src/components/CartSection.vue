@@ -26,7 +26,7 @@
 import {ref} from "vue";
 import {mapState, mapGetters} from "vuex";
 import NoResult from "components/NoResult";
-import CartItem from "components/cartItem";
+import CartItem from "components/CartItem";
 
 export default {
   components: {NoResult, CartItem},

@@ -33,7 +33,7 @@
                 <q-select standout="bg-teal text-white" v-model="cabin_type" :options="cabinTypes" label="Type"/>
               </div>
             </div>
-            <itemlayout :items="trip.cabins"></itemlayout>
+            <item-layout :items="trip.cabins"></item-layout>
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
@@ -45,7 +45,7 @@
                 <q-select standout="bg-teal text-white" v-model="seat_type" :options="seatTypes" label="Type"/>
               </div>
             </div>
-            <itemlayout :items="trip.seats"></itemlayout>
+            <item-layout :items="trip.seats"></item-layout>
           </q-tab-panel>
 
           <q-tab-panel name="movies">
@@ -60,7 +60,7 @@
 </template>
 <script>
 import {ref} from 'vue'
-import ItemLayout from "components/Itemlayout";
+import ItemLayout from "components/ItemLayout";
 import {mapState} from "vuex";
 import CartSection from "components/CartSection"
 

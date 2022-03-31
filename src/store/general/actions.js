@@ -60,9 +60,9 @@ export default {
       .catch(error => {
       })
   },
-  login({commit}, credentials) {
+  login({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.Login(credentials)
+    return Api.Login(state.login)
       .then(response => {
           commit('SET_USER_DATA', response.data)
         }
@@ -101,9 +101,9 @@ export default {
       .catch(error => {
       })
   },
-  loginCheck({commit}, credentials) {
+  loginCheck({state, commit}, credentials) {
     commit('RESET_MESSAGE')
-    return Api.Check(credentials)
+    return Api.Check(state.login)
       .then(response => {
           commit('LOGIN_PROCEDURE', response.data)
         }

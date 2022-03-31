@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="q-mt-lg">
     <div class="justify-center vertical-middle">
       <q-btn color="primary" class="full-width" @click="handleConfirm($event, step)">Confirm</q-btn>
     </div>
