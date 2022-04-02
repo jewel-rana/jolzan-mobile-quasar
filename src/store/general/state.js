@@ -39,7 +39,8 @@ export default function () {
       otp: "",
       title: "Check",
       resendTimer: 60,
-      step: 'check'
+      step: 'check',
+      type: 'login'
     },
     cancellation: {
       title: 'Enter PNR number',

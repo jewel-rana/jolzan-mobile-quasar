@@ -21,7 +21,7 @@
       <q-item-section top side>
         <div class="text-grey-8 q-gutter-xs">
           <q-btn size="12px" flat dense round icon="delete"
-                 @click="removeCartItem(index)"/>
+                 @click="removeCartItem(index)" v-if="cartRemovable"/>
         </div>
       </q-item-section>
     </q-item>
@@ -95,6 +95,13 @@ export default {
     console.log(this.item)
   },
   computed: {
+    cartRemovable() {
+      let status = true
+      if(this.order.step !== 'cart') {
+        status = false
+      }
+      return status
+    },
     passengerType: {
       get(itemId) {
         console.log(itemId)
@@ -104,7 +111,7 @@ export default {
         console.log(itemId)
       }
     },
-    ...mapState('general', ['cart', 'customer_token'])
+    ...mapState('general', ['cart', 'customer_token', 'order'])
   }
 }
 </script>

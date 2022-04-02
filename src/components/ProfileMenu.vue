@@ -2,32 +2,33 @@
   <div>
     <q-btn flat rounded :label="user.name">
       <q-avatar class="q-pl-md">
-        <img src="https://cdn.quasar.dev/img/avatar.png">
+        <img :src="user.photo">
       </q-avatar>
       <q-menu>
         <div class="row no-wrap q-pa-md">
-          <div class="column">
+          <div class="column" v-if="1 === 2">
             <div class="text-h6 q-mb-md">Settings</div>
-            <q-toggle v-model="mobileData" label="Use Mobile Data" />
-            <q-toggle v-model="bluetooth" label="Bluetooth" />
+            <q-toggle v-model="mobileData" label="Use Mobile Data"/>
+            <q-toggle v-model="bluetooth" label="Bluetooth"/>
           </div>
 
-          <q-separator vertical inset class="q-mx-lg" />
+          <q-separator vertical inset class="q-mx-lg" v-if="1===2"/>
 
           <div class="column items-center">
             <q-avatar size="72px">
-              <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+              <img :src="user.photo">
             </q-avatar>
 
-            <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
-
-            <q-btn
-              color="primary"
-              label="Logout"
-              push
-              size="sm"
-              v-close-popup
-            />
+            <div class="text-subtitle1 q-mt-md q-mb-xs">{{ user.name }}</div>
+            <div class="q-pa-md q-gutter-sm">
+              <q-btn
+                class="glossy full-width" rounded color="deep-orange"
+                label="Logout"
+                icon="logout"
+                push
+                @click="logout"
+              />
+            </div>
           </div>
         </div>
       </q-menu>
@@ -39,6 +40,14 @@
 import {mapState} from "vuex";
 
 export default {
+  methods: {
+    logout() {
+      this.$store.dispatch('general/logout')
+        .then((response) => {
+          this.$router.push('/')
+        })
+    }
+  },
   computed: {
     ...mapState('general', ['user'])
   }

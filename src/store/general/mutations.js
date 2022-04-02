@@ -22,10 +22,8 @@ export default {
   SET_NOTICE_COUNTER(state, payload) {
     state.noticeCount = payload
   },
-  SET_RESEND_TIMER(state) {
-    if (state.loginResponse.resendTimer > 0) {
-      state.loginResponse.resendTimer = state.loginResponse.resendTimer - 1
-    }
+  SET_RESEND_TIMER(state, timout) {
+      state.login.resendTimer = timout
   },
   DOWNLOAD_LINK_SENT(state, payload) {
     state.responseError.success = payload.success
@@ -86,11 +84,10 @@ export default {
   SET_USER_DATA(state, payload) {
     if (payload.success) {
       state.loggedIn = true
+      state.notLoggedIn = false
       state.token = payload.token
       state.user = payload.user
       state.login.step = 'check'
-      state.order.step = 'cart'
-      state.notLoggedIn = false
       state.order.title = 'Confirm order'
       state.cancellation.step = 'check'
       state.cancellation.title = 'Enter PNR number'
@@ -180,7 +177,8 @@ export default {
     state.booking = payload
   },
   FORGOT_STEP(state) {
-    state.order.step = 'forgot'
+    state.login.step = 'forgot'
+    state.login.type = 'forgot'
     state.login.title = 'Forgot password'
   },
   BACK_TO_LOGIN(state) {
@@ -190,9 +188,10 @@ export default {
   BACK_TO_CHECK(state) {
     state.order.step = 'check'
   },
+
   FORGOT_RESPONSE(state, payload) {
     if (payload.success) {
-      state.order.step = payload.step
+      state.login.step = payload.step
     } else {
       state.responseError.message = payload.message
     }
@@ -212,9 +211,10 @@ export default {
     }
   },
   LOGIN_VERIFY(state, payload) {
+    state.login.step = payload.step
     if (payload.success) {
-      state.order.step = payload.step
       state.loginResponse.otp_verified = true
+      state.login.title = 'Register'
     } else {
       state.responseError.message = payload.message
     }
@@ -453,15 +453,21 @@ export default {
       case 'mobile':
       state.login.mobile = payload.value
         break;
-      case 'password':
-        state.login.password = payload.value
-        break;
       case 'email':
         state.login.email = payload.value
         break;
       case 'name':
         state.login.name = payload.value
         break;
+      case 'otp':
+        state.login.otp = payload.value
+        break;
+      case 'password':
+        state.login.password = payload.value
+        break;
+      case 'confirm_password':
+        state.login.confirm_password = payload.value
+        break
     }
   },
   HANDLE_CONFIRM(state) {
@@ -478,6 +484,19 @@ export default {
     }
 
     state.notLoggedIn = !state.loggedIn
+  },
+  HANDLE_LOGIN_BACK(state) {
+    switch (state.login.step) {
+      case 'login':
+        state.login.step = 'check'
+        break
+      case 'register':
+        state.login.step = 'otp'
+        break
+      default:
+        state.login.step = 'check'
+        break
+    }
   },
   REMOVE_CART_ITEM(state, payload) {
     const item = state.cart[payload]
@@ -631,7 +650,7 @@ export default {
     }
   },
   CLEAR_STEP(state) {
-    state.order.step = 'confirm'
+    state.order.step = 'cart'
   },
   CANCELLATION_DATA(state, payload) {
     state.testDate = payload

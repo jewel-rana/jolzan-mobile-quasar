@@ -12,13 +12,18 @@ export default {
   props: ['step'],
   methods: {
     handleConfirm(e, step) {
-      this.$store.commit('general/HANDLE_CONFIRM')
-      console.log(this.order)
-      this.$router.push('/' + this.order.step)
+      if(this.order.step !== 'chart' && this.cart.length === 0) {
+        this.$store.commit('general/CLEAR_STEP')
+        this.$router.push('/booking')
+      } else {
+        this.$store.commit('general/HANDLE_CONFIRM')
+        console.log(this.order)
+        this.$router.push('/' + this.order.step)
+      }
     }
   },
   computed: {
-    ...mapState('general', ['order'])
+    ...mapState('general', ['order', 'cart'])
   }
 }
 </script>

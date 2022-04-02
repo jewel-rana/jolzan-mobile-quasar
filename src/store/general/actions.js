@@ -70,27 +70,27 @@ export default {
       .catch(error => {
       })
   },
-  Forgot({commit}, payload) {
+  Forgot({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.Forgot(payload)
+    return Api.Forgot(state.login)
       .then(response => {
         commit('FORGOT_RESPONSE', response.data)
       })
       .catch(error => {
       })
   },
-  ResendOtpCode({commit}, payload) {
+  ResendOtpCode({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.ResendCode(payload)
+    return Api.ResendCode(state.login)
       .then(response => {
         commit('RESEND_RESPONSE', response.data)
       })
       .catch(error => {
       })
   },
-  ResetPassword({commit}, payload) {
+  ResetPassword({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.Reset(payload)
+    return Api.Reset(state.login)
       .then(response => {
         if (response.data.success === true) {
           commit('SET_USER_DATA', response.data)
@@ -111,9 +111,9 @@ export default {
       .catch(error => {
       })
   },
-  Verify({commit}, payload) {
+  Verify({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.Verify(payload)
+    return Api.Verify(state.login)
       .then(response => {
           commit('LOGIN_VERIFY', response.data)
         }
@@ -121,9 +121,9 @@ export default {
       .catch(error => {
       })
   },
-  Register({commit}, payload) {
+  Register({state, commit}) {
     commit('RESET_MESSAGE')
-    return Api.Register(payload)
+    return Api.Register(state.login)
       .then(response => {
           commit('SET_USER_DATA', response.data)
         }
