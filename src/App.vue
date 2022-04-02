@@ -5,7 +5,7 @@
 <script>
 import {defineComponent} from 'vue';
 import {mapState, mapGetters, mapActions} from 'vuex';
-import {useQuasar} from 'quasar'
+import {QSpinnerFacebook, useQuasar} from 'quasar'
 import LoginForm from "components/LoginForm.vue"
 
 export default defineComponent({
@@ -17,6 +17,13 @@ export default defineComponent({
     const $q = useQuasar()
   },
   created() {
+    this.$q.loading.show({
+      spinner: QSpinnerFacebook
+    })
+
+    this.$q.loading.hide()
+
+    // $q.loading.hide()
     this.$store.dispatch('general/initSite')
     const userString = localStorage.getItem('user')
     if (userString) {

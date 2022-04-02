@@ -13,7 +13,7 @@ import {mapState} from "vuex";
 import {useQuasar} from "quasar";
 export default {
   setup(){
-    const $q = useQuasar()
+
   },
   components: {
     BookingForm,
@@ -22,8 +22,10 @@ export default {
   },
   methods: {
     goToBooking(item) {
+      this.$parent.$q.loading.show()
       this.$store.dispatch("general/viewTrip", {id: item.trip_id, floor: item.default_floor, cabin_type: 0, seat_type: 0})
         .then(() => {
+          this.$parent.$q.loading.hide()
           this.$router.push('/booking/' + item.trip_id)
         })
       .catch((error) =>  {

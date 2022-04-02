@@ -134,7 +134,11 @@ export default {
   methods: {
     formSubmit({commit}, payload) {
       console.log(this.$store)
+      this.$parent.$q.loading.show()
       this.$store.dispatch('general/searchTrip')
+      .then((response) => {
+        this.$parent.$q.loading.hide()
+      })
     },
     closeFromDate() {
       this.$refs.qStartProxy.hide();
