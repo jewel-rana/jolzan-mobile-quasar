@@ -89,6 +89,9 @@ module.exports = configure(function (ctx) {
           spinnerColor: 'primary',
           spinnerSize: 90,
           backgroundColor: 'dark'
+        },
+        notify: {
+          position: 'top-right'
         }
       },
 
@@ -103,7 +106,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Loading']
+      plugins: ['Loading', 'Notify']
     },
 
     // animations: 'all', // --- includes all animations

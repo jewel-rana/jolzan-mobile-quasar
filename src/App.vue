@@ -17,13 +17,6 @@ export default defineComponent({
     const $q = useQuasar()
   },
   created() {
-    this.$q.loading.show({
-      spinner: QSpinnerFacebook
-    })
-
-    this.$q.loading.hide()
-
-    // $q.loading.hide()
     this.$store.dispatch('general/initSite')
     const userString = localStorage.getItem('user')
     if (userString) {
@@ -37,6 +30,14 @@ export default defineComponent({
     const cartItems = localStorage.getItem('cart')
     if (cartItems) {
       this.$store.commit("general/LOAD_CART_ITEMS", JSON.parse(cartItems))
+    }
+  },
+  methods: {
+    notifyToast(type, msg) {
+      this.$q.notify({
+        type: type,
+        message: msg
+      })
     }
   },
   ...mapState('general', ['user', 'loggedIn', 'noticeCount', 'cart']),
