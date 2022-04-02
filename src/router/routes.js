@@ -4,16 +4,16 @@ const routes = [
     path: '/',
     component: () => import('layouts/layout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      { path: '/booking', component: () => import('pages/Booking.vue') },
-      { path: '/trips', component: () => import('pages/Trips.vue') },
-      { path: '/support', component: () => import('pages/Support.vue') },
-      { path: '/more', component: () => import('pages/More.vue') },
-      { path: '/booking/:id', component: () => import('pages/View.vue') },
-      { path: '/cart', component: () => import('pages/Order.vue') },
-      { path: '/passenger', component: () => import('pages/PassengerInfo.vue') },
-      { path: '/terms', component: () => import('pages/PassengerInfo.vue') },
-      { path: '/payment', component: () => import('pages/PassengerInfo.vue') }
+      { path: '', component: () => import('pages/Index.vue'), name: 'Home' },
+      { path: '/booking', component: () => import('pages/Booking.vue'), name: 'Booking' },
+      { path: '/trips', component: () => import('pages/Trips.vue'), name: 'My Trips' },
+      { path: '/support', component: () => import('pages/Support.vue'), name: 'Support' },
+      { path: '/more', component: () => import('pages/More.vue'), name: 'More' },
+      { path: '/booking/:id', component: () => import('pages/View.vue'), name: 'View trip' },
+      { path: '/cart', component: () => import('pages/Order.vue'), name: 'Cart' },
+      { path: '/passenger', component: () => import('pages/PassengerInfo.vue'), name: 'Passenger info' },
+      { path: '/terms', component: () => import('pages/PassengerInfo.vue'), name: 'Terms & Conditions' },
+      { path: '/payment', component: () => import('pages/PassengerInfo.vue'), name: 'Payment' }
     ]
   },
 

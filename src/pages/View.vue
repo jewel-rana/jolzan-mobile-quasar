@@ -1,12 +1,12 @@
 <template>
   <div>
     <q-card class="my-card">
-      <q-img :src="trip.vehicle_photo || ''" height="140px">
-        <div class="absolute-bottom text-h6">
-          {{ trip.vehicle_name }} <br/>
-          <small>{{ trip.route_name }}</small>
-        </div>
-      </q-img>
+        <q-img :src="trip.vehicle_photo || ''" height="140px">
+          <div class="absolute-bottom text-h6">
+            {{ trip.vehicle_name }} <br/>
+            <small>{{ trip.route_name }}</small>
+          </div>
+        </q-img>
 
       <q-card-section>
         <q-tabs
@@ -27,7 +27,8 @@
           <q-tab-panel name="mails">
             <div class="row">
               <div class="col q-pa-sm">
-                <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor" @change="floorChange"/>
+                <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"
+                          @change="floorChange"/>
               </div>
               <div class="col q-pa-sm">
                 <q-select standout="bg-teal text-white" v-model="cabin_type" :options="cabinTypes" label="Type"/>
@@ -77,14 +78,19 @@ export default {
     if (trip) {
       this.$store.commit('general/SET_TRIP_ITEM', {data: JSON.parse(trip)})
     } else {
-      this.$store.dispatch("general/viewTrip", {id: this.$route.params.id, floor: this.$store.state.general.search.floor.value, cabin_type: this.$store.state.general.search.cabin_type.value, seat_type: this.$store.state.general.search.seat_type.value})
+      this.$store.dispatch("general/viewTrip", {
+        id: this.$route.params.id,
+        floor: this.$store.state.general.search.floor.value,
+        cabin_type: this.$store.state.general.search.cabin_type.value,
+        seat_type: this.$store.state.general.search.seat_type.value
+      })
         .then(() => {
           this.$router.push('/booking/' + this.$route.params.id)
         })
     }
   },
   methods: {
-    floorChange(){
+    floorChange() {
       alert('ok')
     },
     cabinStatus(cabin) {

@@ -2,7 +2,6 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn round color="default" icon="chevron_left" @click="goToBack" v-if="1===1"/>
         <q-toolbar-title>
           MyFirstApp
           <!--          <img-->
@@ -12,6 +11,12 @@
           <!--          >-->
         </q-toolbar-title>
         <profile-menu v-if="loggedIn"></profile-menu>
+      </q-toolbar>
+      <q-toolbar class="bg-white text-primary" v-if="isNotHome">
+        <q-btn round flat color="primary" icon="chevron_left" @click="goToBack"/>
+        <q-toolbar-title>
+          {{ pageTitle }}
+        </q-toolbar-title>
       </q-toolbar>
       <!--      <q-tabs align="right">-->
       <!--        <q-route-tab to="/page1" label="Page One"/>-->
@@ -116,6 +121,12 @@ export default defineComponent({
     }
   },
   computed: {
+    isNotHome() {
+      return (this.$route.path !== "/")
+    },
+    pageTitle(){
+      return this.$route.name
+    },
     ...mapState('general', ['loggedIn'])
   }
 })
