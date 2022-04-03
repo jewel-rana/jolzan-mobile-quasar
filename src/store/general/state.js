@@ -1,5 +1,9 @@
 export default function () {
   return {
+    alert: {
+      status: false,
+      message: "",
+    },
     testDate: {},
     siteData: {
       options: {},

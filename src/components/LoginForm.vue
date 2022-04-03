@@ -6,6 +6,7 @@
         <q-card-section class="row items-center bg-primary">
           <div class="text-h6 text-white">{{ login.title }}</div>
         </q-card-section>
+        <alert></alert>
         <q-card-section v-if="login.step === 'check'">
 
           <div class="q-gutter-y-md column" id="loginCheck">
@@ -125,8 +126,10 @@
 </template>
 <script>
 import {mapState} from "vuex";
+import Alert from "components/elements/Alert";
 
 export default {
+  components: {Alert},
   setup(){
     return {
       resendTimeout: 60
