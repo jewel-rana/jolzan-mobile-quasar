@@ -150,7 +150,7 @@ export default {
       "order/confirm",
       qs.stringify({
         items: payload.items,
-        customer_id: payload.user.id,
+        customer_id: user.id,
         coupon: payload.coupon,
         platform: 'web'
       })

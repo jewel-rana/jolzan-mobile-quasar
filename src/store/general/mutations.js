@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Api from "src/services/ApiService";
 export default {
   DISMISS_ALERT(state) {
     state.alert.status = false
@@ -81,6 +82,11 @@ export default {
       }
       state.coupon.status = false
       state.coupon.total = 0
+
+      let token = localStorage.getItem('token')
+      if(token) {
+        Axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      }
     }
   },
   SET_SUGGESTIONS(state, payload) {
@@ -103,7 +109,7 @@ export default {
       localStorage.setItem('user', JSON.stringify(payload.user))
       localStorage.setItem('token', JSON.stringify(payload.token))
       localStorage.setItem('loggedin', JSON.stringify(payload.success))
-      Axios.defaults.headers.common['Authorization'] = `Bearer ${
+      Axios.defaults.headers.common.Authorization = `Bearer ${
         payload.token
       }`
     }
@@ -500,7 +506,20 @@ export default {
         state.order.step = 'terms'
         break;
       case 'terms':
-        state.order.step = 'payment'
+        Api.confirmOrder({items: state.cart, coupon: state.coupon},  state.user)
+          .then((response) => {
+            this.state.alert.status = !response.data.success
+            this.state.alert.message = response.data.message
+            this.state.alert.success = response.data.success
+            if(response.data.success) {
+              state.order.step = 'payment'
+            }
+          })
+          .catch((error) => {
+            this.state.alert.status = true
+            this.state.alert.message = 'Your order cannot be processed!'
+            this.state.alert.success = false
+          })
         break;
     }
 

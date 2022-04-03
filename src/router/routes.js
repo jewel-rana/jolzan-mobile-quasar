@@ -12,8 +12,8 @@ const routes = [
       { path: '/booking/:id', component: () => import('pages/View.vue'), name: 'View trip' },
       { path: '/cart', component: () => import('pages/Order.vue'), name: 'Cart' },
       { path: '/passenger', component: () => import('pages/PassengerInfo.vue'), name: 'Passenger info' },
-      { path: '/terms', component: () => import('pages/PassengerInfo.vue'), name: 'Terms & Conditions' },
-      { path: '/payment', component: () => import('pages/PassengerInfo.vue'), name: 'Payment' }
+      { path: '/terms', component: () => import('pages/Terms.vue'), name: 'Accept Terms & Conditions' },
+      { path: '/payment', component: () => import('pages/Payment.vue'), name: 'Payment' }
     ]
   },
 
