@@ -3,6 +3,11 @@ export default {
   DISMISS_ALERT(state) {
     state.alert.status = false
   },
+  DISMISS_LOGIN_FORM(state) {
+    state.notLoggedIn = false
+    state.order.step = 'cart'
+    state.login.step = 'check'
+  },
   UPDATE_FORM_DATA (state, payload) {
     switch (payload.key) {
       case 'trip_from':

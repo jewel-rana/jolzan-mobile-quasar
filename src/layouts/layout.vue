@@ -77,7 +77,7 @@ const navigations = [
     to: '/booking'
   },
   {
-    level: "My Trips",
+    level: "Trips",
     icon: 'home',
     to: '/trips'
   },
