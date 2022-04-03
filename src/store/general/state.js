@@ -3,6 +3,7 @@ export default function () {
     alert: {
       status: false,
       message: "",
+      success: false
     },
     testDate: {},
     siteData: {

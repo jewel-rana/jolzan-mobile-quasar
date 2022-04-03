@@ -31,6 +31,7 @@ export default {
   DOWNLOAD_LINK_SENT(state, payload) {
     state.alert.status = !payload.success
     state.alert.message = payload.message
+    state.alert.success = payload.success
   },
   TERMS_ACCEPTED(state) {
     state.order.terms_accept = 1
@@ -103,6 +104,7 @@ export default {
     }
     state.alert.message = payload.message
     state.alert.status = !payload.success
+    state.alert.success = payload.success
   },
   UPDATE_NAME(state, payload) {
     state.user.name = payload.name
@@ -139,6 +141,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.status = payload.success
   },
   MY_BOOKINGS(state, payload) {
@@ -199,10 +202,12 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   RESET_PASSWORD(state, payload) {
     state.alert.message = payload.message
+    state.alert.success = payload.success
   },
   LOGIN_PROCEDURE(state, payload) {
     state.loginResponse = payload
@@ -210,9 +215,9 @@ export default {
       state.login.step = payload.step
       state.login.title = (payload.step == 'otp') ? "Verify" : 'Login';
       state.order.title = (payload.step == 'otp') ? "Verify" : 'Login';
-    } else {
-      state.alert.status = true
     }
+    state.alert.status = true
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   LOGIN_VERIFY(state, payload) {
@@ -223,6 +228,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   RESET_MESSAGE(state) {
@@ -233,6 +239,7 @@ export default {
     if(!payload.success) {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   CLEAR_USER_DATA(state) {
@@ -555,6 +562,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   SET_PASSENGER(state) {
@@ -644,6 +652,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   PAYMENT_SUCCESS(state, payload) {
@@ -656,6 +665,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   CLEAR_STEP(state) {
@@ -671,6 +681,7 @@ export default {
       state.alert.status = true
       state.cancellation.booking_id = 0
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   CANCELLATION_DATA_FROM_LIST(state, object) {
@@ -716,6 +727,7 @@ export default {
     } else {
       state.alert.status = true
     }
+    state.alert.success = payload.success
     state.alert.message = payload.message
   },
   REMOVE_NOTIFICATION(state, payload) {
@@ -725,7 +737,8 @@ export default {
   },
   EXPERT_HELP(state, payload) {
     state.alert.message = payload.message
-    state.alert.status = payload.success
+    state.alert.status = !payload.success
+    state.alert.success = payload.success
     if (payload.success == true) {
       state.help.name = ""
       state.help.email = ""

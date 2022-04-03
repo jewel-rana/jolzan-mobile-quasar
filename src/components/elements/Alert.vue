@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md q-gutter-sm" v-if="alert.status">
-    <q-banner inline-actions rounded class="bg-orange text-white">
+    <q-banner inline-actions rounded class="text-white" :class="alert.success ? 'bg-info' : 'bg-orange'">
       {{ alert.message || 'You have an error' }}
 
       <template v-slot:action>
