@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-gutter q-pa-md">
     <cart-bottom v-if="cart.length"></cart-bottom>
-    <q-card class="q-mt-lg">
+    <q-card class="q-mt-lg" v-if="cart.length">
       <q-card-section class="q-pb-none">
         <div class="text-blue-5 q-pb-none">Accept out terms & conditions</div>
       </q-card-section>

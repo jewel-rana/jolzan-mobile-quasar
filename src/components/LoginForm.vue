@@ -116,10 +116,10 @@
         </q-card-section>
 
         <q-card-actions align="right" class="bg-white text-teal">
-          <q-btn flat align="left" class="text-primary btn-fixed-width" clickable @click="forgotPassword" v-if="login.step === 'login'">Forgot password?</q-btn>
-          <q-btn align="left" flat class="btn-fixed-width" color="gray" :label="`Resend OTP (` + login.resendTimer + `)`" v-if="login.step === 'otp' && login.resendTimer > 0" disable/>
-          <q-btn align="left" flat class="btn-fixed-width" color="primary" label="Resend OTP" @click="resendOtp" v-if="login.step === 'otp' && login.resendTimer === 0"/>
-          <q-btn flat color="white" text-color="primary" label="Back" icon="back" v-if="login.step !== 'check'" @click="handleLoginBack" />
+          <q-btn flat color="white" text-color="primary" label="" icon="keyboard_double_arrow_left" v-if="login.step !== 'check'" @click="handleLoginBack" />
+          <q-btn flat class="text-primary" clickable @click="forgotPassword" v-if="login.step === 'login'">Forgot password?</q-btn>
+          <q-btn flat color="gray" :label="`Resend (` + login.resendTimer + `)`" v-if="login.step === 'otp' && login.resendTimer > 0" disable/>
+          <q-btn flat color="primary" label="Resend OTP" @click="resendOtp" v-if="login.step === 'otp' && login.resendTimer === 0"/>
           <q-btn flat color="teal" label="Confirm" @click="handleLoginForm"/>
         </q-card-actions>
       </q-card>

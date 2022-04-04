@@ -3,12 +3,12 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          MyFirstApp
-          <!--          <img-->
-          <!--            alt="Jolzan"-->
-          <!--            src="~assets/logo-white.png"-->
-          <!--            style="width: auto; height: 66px"-->
-          <!--          >-->
+                    <img
+                      alt="Jolzan"
+                      src="~assets/logo-white.png"
+                      style="width: auto; height: 46px"
+                      title="Jolzan"
+                    >
         </q-toolbar-title>
         <profile-menu></profile-menu>
       </q-toolbar>
@@ -18,11 +18,6 @@
           {{ pageTitle }}
         </q-toolbar-title>
       </q-toolbar>
-      <!--      <q-tabs align="right">-->
-      <!--        <q-route-tab to="/page1" label="Page One"/>-->
-      <!--        <q-route-tab to="/page2" label="Page Two"/>-->
-      <!--        <q-tab label="Jewel Rana"/>-->
-      <!--      </q-tabs>-->
     </q-header>
 
     <q-footer elevated>
@@ -74,12 +69,12 @@ const navigations = [
   },
   {
     level: "Booking",
-    icon: 'home',
+    icon: 'search',
     to: '/booking'
   },
   {
     level: "Trips",
-    icon: 'home',
+    icon: 'connecting_airports',
     to: '/trips'
   }
 ];
@@ -117,14 +112,19 @@ export default defineComponent({
         actions: [
           {
             label: 'Support',
-            icon: 'whatsapp',
+            icon: 'support_agent',
             id: 'support'
           },
           {},
           {
             label: 'About us',
-            img: 'https://cdn.quasar.dev/img/logo_keep_128px.png',
+            icon: 'info',
             id: 'about'
+          },,
+          {
+            label: 'Our Service',
+            icon: 'design_services',
+            id: 'services'
           },
           {
             label: 'Privacy policy',
@@ -136,6 +136,11 @@ export default defineComponent({
             icon: 'ac_unit',
             id: 'terms'
           },
+          {
+            label: 'FAQ',
+            icon: 'quiz',
+            id: 'faq'
+          },
           {},
           {
             label: 'Settings',
@@ -146,6 +151,29 @@ export default defineComponent({
         ]
       }).onOk(action => {
         console.log('Action chosen:', action.id)
+        switch (action.id) {
+          case 'support':
+            this.$router.push('/support')
+            break
+          case 'about':
+            this.$router.push('/about-us')
+            break
+          case 'services':
+            this.$router.push('/services')
+            break
+          case 'privacy':
+            this.$router.push('/privacy-policy')
+            break
+          case 'terms':
+            this.$router.push('/terms-and-conditions')
+            break
+          case 'faq':
+            this.$router.push('/faq')
+            break
+          case 'settings':
+            this.$router.push('/settings')
+            break
+        }
       }).onCancel(() => {
         // console.log('Dismissed')
       }).onDismiss(() => {

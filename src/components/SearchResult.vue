@@ -8,14 +8,14 @@
 
           <q-item-section>
             <q-item-label style="font-size: 17px; color: dodgerblue"><strong>{{ item.vehicle_name}}</strong></q-item-label>
-            <q-item-label><q-icon name="route" size="18px"></q-icon><strong>{{ item.route_name }}</strong></q-item-label>
+            <q-item-label><q-icon name="route" size="15px"></q-icon><strong>{{ item.route_name }}</strong></q-item-label>
             <q-item-label caption><q-icon name="event" size="18px"></q-icon> {{ item.leaving_at }}</q-item-label>
           </q-item-section>
 
           <q-item-section side top class="q-pa-sm">
-            <q-item-label>Available</q-item-label>
-            <q-item-label class="q-pr-sm"><q-icon name="bed" size="16px"></q-icon> Cabin {{ item.cabin_available }}</q-item-label>
-            <q-item-label class="q-pr-sm"><q-icon name="chair" size="16px"></q-icon> Seat {{ item.seat_available}}</q-item-label>
+            <q-item-label>Now</q-item-label>
+            <q-item-label class="q-pr-sm"><q-icon name="bed" size="16px"></q-icon> {{ item.cabin_available }}</q-item-label>
+            <q-item-label class="q-pr-sm"><q-icon name="chair" size="16px"></q-icon> {{ item.seat_available}}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -75,5 +75,15 @@ export default {
 }
 .q-item__section--main ~ .q-item__section--side {
   align-items: inherit;
+}
+.q-item__section--side {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.q-item__section--thumbnail img {
+  width: auto;
+  max-width: 80px;
+  height: auto;
+  min-height: 70px;
 }
 </style>

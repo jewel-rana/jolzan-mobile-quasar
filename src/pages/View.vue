@@ -74,7 +74,7 @@ export default {
   },
   created() {
     let cartItems = localStorage.getItem('cart')
-    if(cartItems.length) {
+    if(cartItems) {
       this.$store.commit('general/SYNCHRONIZE_WITH_CART_ITEMS', cartItems)
     }
     const trip = localStorage.getItem('trip');

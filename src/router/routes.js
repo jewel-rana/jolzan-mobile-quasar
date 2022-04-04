@@ -14,7 +14,13 @@ const routes = [
       { path: '/passenger', component: () => import('pages/PassengerInfo.vue'), name: 'Passenger info' },
       { path: '/terms', component: () => import('pages/Terms.vue'), name: 'Accept Terms & Conditions' },
       { path: '/payment', component: () => import('pages/Payment.vue'), name: 'Payment' },
-      { path: '/booking-cancel', component: () => import('pages/CancelBooking.vue'), name: 'Booking Cancel'}
+      { path: '/booking-cancel', component: () => import('pages/CancelBooking.vue'), name: 'Booking Cancel'},
+      { path: '/about-us', component: () => import('pages/UnderConstruction.vue'), name: 'About us'},
+      { path: '/services', component: () => import('pages/UnderConstruction.vue'), name: 'Our Services'},
+      { path: '/privacy-policy', component: () => import('pages/UnderConstruction.vue'), name: 'Privacy policy'},
+      { path: '/terms-and-conditions', component: () => import('pages/UnderConstruction.vue'), name: 'Terms & Conditions'},
+      { path: '/faq', component: () => import('pages/UnderConstruction.vue'), name: 'FAQ'},
+      { path: '/settings', component: () => import('pages/UnderConstruction.vue'), name: 'Settings'}
     ]
   },
 

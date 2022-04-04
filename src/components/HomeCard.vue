@@ -5,7 +5,7 @@
           <q-card class="my-card active cursor-pointer" @click="goToBooking('launch')">
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="home"></q-icon>
+                <q-icon name="img:icons/ship4.jpg"></q-icon>
               </div>
               <div class="text-subtitle2">Launch</div>
             </q-card-section>
@@ -15,7 +15,7 @@
           <q-card class="my-card disable">
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="home"></q-icon>
+                <q-icon name="directions_bus_filled"></q-icon>
               </div>
               <div class="text-subtitle2">Bus</div>
             </q-card-section>
@@ -25,7 +25,7 @@
           <q-card class="my-card disable" >
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="home"></q-icon>
+                <q-icon name="two_wheeler"></q-icon>
               </div>
               <div class="text-subtitle2">Bike</div>
             </q-card-section>
@@ -47,7 +47,7 @@
         <q-card class="my-card disable">
           <q-card-section class="text-center">
             <div class="text-h6">
-              <q-icon name="home"></q-icon>
+              <q-icon name="flight_takeoff"></q-icon>
             </div>
             <div class="text-subtitle2 text-center">Air</div>
           </q-card-section>
