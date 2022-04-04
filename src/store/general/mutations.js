@@ -1,4 +1,3 @@
-import Axios from 'axios'
 import Api from "src/services/ApiService";
 export default {
   SET_SEARCH_TYPE(state, payload) {
@@ -88,7 +87,7 @@ export default {
 
       let token = localStorage.getItem('token')
       if(token) {
-        Axios.defaults.headers.common.Authorization = `Bearer ${token}`
+        state.token = token
       }
     }
   },
@@ -112,9 +111,6 @@ export default {
       localStorage.setItem('user', JSON.stringify(payload.user))
       localStorage.setItem('token', JSON.stringify(payload.token))
       localStorage.setItem('loggedin', JSON.stringify(payload.success))
-      Axios.defaults.headers.common.Authorization = `Bearer ${
-        payload.token
-      }`
     }
     state.alert.message = payload.message
     state.alert.status = !payload.success
@@ -262,6 +258,8 @@ export default {
     localStorage.removeItem('loggedin')
     localStorage.removeItem('cart')
     location.reload()
+    state.loggedIn = false
+    this.state.notLoggedIn = true
   },
   SEARCH_RESULTS(state, payload) {
     state.searchResults = payload.data
@@ -511,22 +509,27 @@ export default {
       case 'terms':
         Api.confirmOrder({items: state.cart, coupon: state.coupon},  state.user)
           .then((response) => {
-            this.state.alert.status = !response.data.success
-            this.state.alert.message = response.data.message
-            this.state.alert.success = response.data.success
+            state.alert.status = !response.data.success
+            state.alert.message = response.data.message
+            state.alert.success = response.data.success
             if(response.data.success) {
               state.order.step = 'payment'
+              state.order.id = response.data.order_id
+              state.order.transaction_id = response.data.trans_id
             }
           })
           .catch((error) => {
-            this.state.alert.status = true
-            this.state.alert.message = 'Your order cannot be processed!'
-            this.state.alert.success = false
+            state.alert.status = true
+            state.alert.message = 'Your order cannot be processed!'
+            state.alert.success = false
           })
         break;
     }
 
     state.notLoggedIn = !state.loggedIn
+  },
+  OPEN_LOGIN_FORM(state) {
+    this.state.notLoggedIn = false
   },
   HANDLE_LOGIN_BACK(state) {
     switch (state.login.step) {

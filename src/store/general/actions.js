@@ -1,4 +1,15 @@
 import Api from '../../services/ApiService.js'
+import store from "src/store";
+
+// Api.interceptors.request.use((config) => {
+//   const token = store.getters['general/token'];
+//
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//
+//   return config;
+// });
 export default {
   sendDownloadLink({commit}, payload) {
     return Api.DownloadLink(payload)
@@ -65,6 +76,7 @@ export default {
     return Api.Login(state.login)
       .then(response => {
           commit('SET_USER_DATA', response.data)
+        Api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
         }
       )
       .catch(error => {

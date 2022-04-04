@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "src/store";
 
 const qs = require("querystring");
 const apiClient = axios.create({
@@ -27,7 +28,6 @@ const apiClient = axios.create({
     return searchParams.toString();
   }
 });
-
 apiClient.interceptors.request.use(function (config) {
   return config;
 }, function (error) {
@@ -37,8 +37,15 @@ apiClient.interceptors.request.use(function (config) {
 apiClient.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
+  // if(error.response.status === 401) store.dispatch('general/logout')
   return Promise.reject(error);
 });
+
+if (localStorage.getItem('token')) {
+  apiClient.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').replaceAll('"', '')
+} else {
+  apiClient.defaults.headers.common['Authorization'] = ''
+}
 
 export default {
   DownloadLink(payload) {
