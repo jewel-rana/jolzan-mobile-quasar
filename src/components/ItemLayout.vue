@@ -89,6 +89,9 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   flex-direction: row;
   border-left: 1px solid #f2f2f2;
 }
+.layoutRowCol.empty {
+  background: #f9f9f9;
+}
 .layoutRowCol:first-child {
   border-left: 0;
   background-color: #f2f2f2;
@@ -137,10 +140,10 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   margin: 0 auto 30px;
   border: 0px solid #F0EFEF;
   padding: 0px;
-  background: #6c757d;
+  background: #69b3f4;
   position: relative;
   cursor: pointer !important;
-  border-radius: 10px;
+  border-radius: 4px;
   -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
@@ -168,7 +171,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   left: 0;
   padding: 0 5px;
   background: #46b796;
-  border-top-left-radius: 10px;
+  border-top-left-radius: 4px;
 }
 .cabin-layout .cabins .cabin .topLap, #availableCabins .cabin .topLap {
   top: 0;
@@ -182,13 +185,14 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   border-top: 0;
   padding: 0px 3px;
   font-size: 10px;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 4px;
   font-weight: bold;
   line-height: 18px;
+  position: absolute;
 }
 .cabin-layout .cabins .cabin .cabin-number, .cabin-layout .cabins .seat .cabin-number, #availableCabins .cabin .cabin-number {
   font-size: 13pt;
-  padding: 0px 0 20px 0;
+  padding: 10px 0 20px 0;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -199,11 +203,11 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   bottom: 0;
   right: 0;
   left: 0;
-  background: #219876;
+  background: #2c79dd;
   color: #fff;
-  font-size: 14pt;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  font-size: 12pt;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   text-align: center;
   font-weight: bold;
   line-height: 24px;

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <q-page>
     <q-card class="my-card">
-        <q-img :src="trip.vehicle_photo || ''" height="140px">
+        <q-img :src="trip.vehicle_photo || '/images/default-banner.jpg'" height="140px">
           <div class="absolute-bottom text-h6">
             {{ trip.vehicle_name }} <br/>
             <small>{{ trip.route_name }}</small>
@@ -57,7 +57,7 @@
       </q-card-section>
     </q-card>
     <cart-section></cart-section>
-  </div>
+  </q-page>
 </template>
 <script>
 import {ref} from 'vue'
@@ -140,6 +140,10 @@ export default {
 }
 </script>
 <style scoped>
+.q-img__content > div {
+  padding: 5px 15px;
+  background: rgba(24, 104, 174, 0.62);
+}
 .q-card {
   border-radius: 0;
   box-shadow: inherit;

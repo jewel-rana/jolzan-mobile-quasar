@@ -15,7 +15,13 @@ export default {
   created() {
     if(!this.order.id) {
       this.$router.push('/cart')
+    } else {
+      this.$parent.$q.notify({
+        type: this.alert.success ? 'positive' : 'negative',
+        message: this.alert.message
+      })
     }
+
   },
   methods: {
     goToPayment() {
@@ -24,7 +30,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('general', ['order'])
+    ...mapState('general', ['order', 'alert'])
   }
 }
 </script>
