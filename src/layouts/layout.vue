@@ -82,11 +82,6 @@ const navigations = [
     to: '/trips'
   },
   {
-    level: "Support",
-    icon: 'home',
-    to: '/support'
-  },
-  {
     level: "More",
     icon: 'list',
     to: '/more'

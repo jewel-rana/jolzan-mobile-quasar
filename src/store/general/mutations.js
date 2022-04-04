@@ -1,5 +1,8 @@
 import Axios from 'axios'
 export default {
+  SET_SEARCH_TYPE(state, payload) {
+    state.search.type = payload.type
+  },
   UPDATE_FORM_DATA (state, payload) {
     switch (payload.key) {
       case 'trip_from':
