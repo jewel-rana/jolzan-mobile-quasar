@@ -36,6 +36,7 @@
       >
         <q-route-tab v-for="nav in navigations" :to="nav.to" :name="nav.to" :key="nav.level" :icon="nav.icon"
                      :label="nav.level" exact-active-class="tab-active"/>
+        <q-tab clickable name="More" key="99" icon="list" label="More" @click="showBottomSheet" />
       </q-tabs>
     </q-footer>
 
@@ -80,11 +81,6 @@ const navigations = [
     level: "Trips",
     icon: 'home',
     to: '/trips'
-  },
-  {
-    level: "More",
-    icon: 'list',
-    to: '/more'
   }
 ];
 
@@ -113,7 +109,50 @@ export default defineComponent({
   methods: {
     goToBack() {
       return this.$router.go(-1)
+    },
+    showBottomSheet(grid) {
+      this.$parent.$q.bottomSheet({
+        message: 'More links',
+        grid,
+        actions: [
+          {
+            label: 'Support',
+            icon: 'whatsapp',
+            id: 'support'
+          },
+          {},
+          {
+            label: 'About us',
+            img: 'https://cdn.quasar.dev/img/logo_keep_128px.png',
+            id: 'about'
+          },
+          {
+            label: 'Privacy policy',
+            icon: 'policy',
+            id: 'policy'
+          },
+          {
+            label: 'Terms & Condition',
+            icon: 'ac_unit',
+            id: 'terms'
+          },
+          {},
+          {
+            label: 'Settings',
+            icon: 'settings',
+            id: 'settings'
+          },
+          {},
+        ]
+      }).onOk(action => {
+        console.log('Action chosen:', action.id)
+      }).onCancel(() => {
+        // console.log('Dismissed')
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
     }
+
   },
   computed: {
     isNotHome() {
