@@ -498,34 +498,10 @@ export default {
         break
     }
   },
-  HANDLE_CONFIRM(state) {
-    switch (state.order.step) {
-      case 'cart':
-        state.order.step = 'passenger'
-        break;
-      case 'passenger':
-        state.order.step = 'terms'
-        break;
-      case 'terms':
-        Api.confirmOrder({items: state.cart, coupon: state.coupon},  state.user)
-          .then((response) => {
-            state.alert.status = !response.data.success
-            state.alert.message = response.data.message
-            state.alert.success = response.data.success
-            if(response.data.success) {
-              state.order.step = 'payment'
-              state.order.id = response.data.order_id
-              state.order.transaction_id = response.data.trans_id
-            }
-          })
-          .catch((error) => {
-            state.alert.status = true
-            state.alert.message = 'Your order cannot be processed!'
-            state.alert.success = false
-          })
-        break;
+  HANDLE_CONFIRM(state, step) {
+    if(state.loggedIn) {
+      state.order.step = step
     }
-
     state.notLoggedIn = !state.loggedIn
   },
   OPEN_LOGIN_FORM(state) {
@@ -667,8 +643,8 @@ export default {
     if (payload.success) {
       state.order.id = payload.order_id
       state.order.transaction_id = payload.trans_id
-      // state.order.step = 'payment'
-      // state.order.title = "Choose payment method"
+      state.order.step = 'payment'
+      state.order.title = "Choose payment method"
       let order = localStorage.getItem('order')
       if (order) {
         localStorage.removeItem('order')
