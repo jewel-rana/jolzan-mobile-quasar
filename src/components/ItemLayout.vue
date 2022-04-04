@@ -5,6 +5,8 @@
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
             <div class="cabin" v-for="(data, indx) in item" :class="data.cabin_class" :key="indx" @click="addToCard($event, data)">
               <div class="topLap" >AC</div>
+              <div class="checked-mark" v-if="data.cabin_class === 'cabin-selected'"><q-icon name="check" size="18px"/></div>
+<!--              <div class="checked-mark"><q-icon name="img:favicon.ico" /></div>-->
               <div class="cabin-number">{{ data.cabin_no }}</div>
               <div class="cabin-price">৳ {{ data.fare }}</div>
             </div>
@@ -153,14 +155,14 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background: #c2cac1;
 }
 .cabin-layout .cabins .cabin.cabin-disable, .cabin-layout .cabins .seat.cabin-disable {
-  background: #d0d0d0;
+  background: #e1e1e1;
   cursor: not-allowed !important;
 }
 .cabin-active .cabin-price {
   background-color: #1bc616;
 }
 .cabin-layout .cabins .cabin.cabin-selected, .cabin-layout .cabins .seat.cabin-selected {
-  background: #7cd753;
+  background: #0743b5;
 }
 .cabin-layout .cabins .cabin.cabin-checked, .cabin-layout .cabins .seat.cabin-checked {
   color: #fff;
@@ -172,6 +174,27 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   padding: 0 5px;
   background: #46b796;
   border-top-left-radius: 4px;
+}
+.checked-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #ffffffa6;
+  z-index: 99;
+}
+.checked-mark:hover {
+  background: none;
+}
+.checked-mark .q-icon {
+  background: #85ca7f;
+  padding: 2px;
+  color: white;
+  border-bottom-right-radius: 15px;
+}
+.cabin.cabin-selected:hover, .seat.cabin-selected:hover{
+  background: none;
 }
 .cabin-layout .cabins .cabin .topLap, #availableCabins .cabin .topLap {
   top: 0;
@@ -217,5 +240,8 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .cabin.empty > .cabin-price, .cabin.empty > .topLap {
   display: none;
+}
+.cabin.cabin-disable .cabin-price {
+  background: #b5cae6;
 }
 </style>
