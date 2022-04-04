@@ -50,6 +50,8 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
 .absolute-bottom.custom-caption {
   background: #1976d2a3;
