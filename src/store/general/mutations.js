@@ -1,10 +1,9 @@
 import Axios from 'axios'
 import Api from "src/services/ApiService";
 export default {
-<<<<<<< HEAD
   SET_SEARCH_TYPE(state, payload) {
     state.search.type = payload.type
-=======
+  },
   DISMISS_ALERT(state) {
     state.alert.status = false
   },
@@ -12,7 +11,6 @@ export default {
     state.notLoggedIn = false
     state.order.step = 'cart'
     state.login.step = 'check'
->>>>>>> 6ea30dcdc3c0eac3862aa761f58b7e98d36cda9d
   },
   UPDATE_FORM_DATA (state, payload) {
     switch (payload.key) {
