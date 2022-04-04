@@ -562,8 +562,8 @@ export default {
       localStorage.removeItem('cart')
     }
     localStorage.setItem('cart', JSON.stringify(state.cart))
-    if (!state.loggedin) {
-      state.order.step = 'login'
+    if (!state.loggedIn) {
+      state.login.step = 'check'
     }
   },
   APPLY_COUPON(state, payload) {

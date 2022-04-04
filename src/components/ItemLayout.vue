@@ -185,7 +185,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   bottom: 0;
   right: 0;
   background: #ffffffa6;
-  z-index: 99;
+  z-index: 1;
 }
 .checked-mark:hover {
   background: none;

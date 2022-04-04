@@ -1,7 +1,11 @@
 <template>
   <div>
     <div id="cartSection">
-      <q-btn color="primary" class="full-width" @click="displayCartContent">Cart ({{ cart.length }})</q-btn>
+      <div class="cartPopup cursor-pointer" clickable  @click="displayCartContent">
+        <q-icon name="expand_less" size="32px" v-if="!cartContent"></q-icon>
+        <q-icon name="keyboard_arrow_down" size="32px" v-else></q-icon>
+      </div>
+      <q-btn flat color="primary" size="md" id="cartExpandButton" icon="shopping_cart" class="full-width" @click="displayCartContent">Cart ({{ cart.length }})</q-btn>
       <div id="cartContent" v-if="cartContent">
         <q-list bordered separator v-if="cart.length">
           <cart-item v-for="(item, index) in cart" :item="item" :index="index"></cart-item>
@@ -12,10 +16,11 @@
             v-if="cart.length"
             type="submit"
             :loading="submitting"
-            class="full-width"
-            color="teal"
+            class="q-ma-md"
+            color="primary"
+            size="md"
             @click="confirmCart($event)"
-          >Confirm order ({{ cartTotal }})
+          >Confirm booking ({{ cartTotal }})
           </q-btn>
         </div>
       </div>
@@ -70,6 +75,18 @@ export default {
 }
 </script>
 <style scoped>
+.cartPopup {
+  width: 54px;
+  padding: 0 12px;
+  margin: 0 0 0 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: #1976d2;
+  color: #fff;
+}
+#cartExpandButton {
+  border-top: 3px solid #1976d2;
+}
 #cartSection {
   position: fixed;
   bottom: 56px;
@@ -78,5 +95,6 @@ export default {
   top: auto;
   height: auto;
   background: #ffffff;
+  z-index: 99;
 }
 </style>
