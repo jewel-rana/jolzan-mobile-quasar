@@ -1,5 +1,11 @@
 import Api from "src/services/ApiService";
 export default {
+  DISPLAY_CART_CONTENT(state, status) {
+    state.cartContent = status
+  },
+  SYNCHRONIZE_WITH_CART_ITEMS(state, payload) {
+    let trip = state.trip
+  },
   SET_SEARCH_TYPE(state, payload) {
     state.search.type = payload.type
   },
@@ -348,6 +354,7 @@ export default {
     // state.cart_item = payload
     console.log(payload)
     if (payload.success) {
+      state.cartContent = true
       const itemExist = state.cart.find(i => i.item_id === payload.item.item_id)
       if (!itemExist) {
         state.cart.push(payload.item)
