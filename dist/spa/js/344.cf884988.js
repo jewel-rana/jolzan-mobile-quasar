@@ -1,1 +1,0 @@
-"use strict";(self["webpackChunkjolzan"]=self["webpackChunkjolzan"]||[]).push([[344],{3344:(n,e,a)=>{a.r(e),a.d(e,{default:()=>f});var r=a(3673);function s(n,e){const a=(0,r.up)("q-page");return(0,r.wg)(),(0,r.j4)(a)}var t=a(4260),u=a(4379),c=a(7518),o=a.n(c);const p={},l=(0,t.Z)(p,[["render",s]]),f=l;o()(p,"components",{QPage:u.Z})}}]);
