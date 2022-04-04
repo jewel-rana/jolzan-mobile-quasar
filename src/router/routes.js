@@ -13,7 +13,8 @@ const routes = [
       { path: '/cart', component: () => import('pages/Order.vue'), name: 'Cart' },
       { path: '/passenger', component: () => import('pages/PassengerInfo.vue'), name: 'Passenger info' },
       { path: '/terms', component: () => import('pages/Terms.vue'), name: 'Accept Terms & Conditions' },
-      { path: '/payment', component: () => import('pages/Payment.vue'), name: 'Payment' }
+      { path: '/payment', component: () => import('pages/Payment.vue'), name: 'Payment' },
+      { path: '/booking-cancel', component: () => import('pages/CancelBooking.vue'), name: 'Booking Cancel'}
     ]
   },
 
