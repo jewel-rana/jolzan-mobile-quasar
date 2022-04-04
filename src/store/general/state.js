@@ -1,5 +1,6 @@
 export default function () {
   return {
+    cartContent: false,
     alert: {
       status: false,
       message: "",

@@ -1,4 +1,7 @@
 export default {
+  token(state) {
+    return state.token || ''
+  },
   getSubTotal(state)
   {
     return 500

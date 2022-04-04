@@ -1,6 +1,7 @@
 <template>
   <div>
-    <q-btn flat rounded :label="user.name">
+    <q-btn flat rounded icon="login" label="Log in" v-if="!loggedIn" @click="openLoginDialogue"></q-btn>
+    <q-btn flat rounded :label="user.name" v-else>
       <q-avatar class="q-pl-md">
         <img :src="user.photo">
       </q-avatar>
@@ -41,6 +42,10 @@ import {mapState} from "vuex";
 
 export default {
   methods: {
+    openLoginDialogue(){
+      alert('ok')
+      this.$store.commit('general/OPEN_LOGIN_FORM')
+    },
     logout() {
       this.$store.dispatch('general/logout')
         .then((response) => {
@@ -49,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('general', ['user'])
+    ...mapState('general', ['user', 'loggedIn'])
   }
 }
 </script>

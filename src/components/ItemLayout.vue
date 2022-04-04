@@ -5,6 +5,8 @@
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
             <div class="cabin" v-for="(data, indx) in item" :class="data.cabin_class" :key="indx" @click="addToCard($event, data)">
               <div class="topLap" >AC</div>
+              <div class="checked-mark" v-if="data.cabin_class === 'cabin-selected'"><q-icon name="check" size="18px"/></div>
+<!--              <div class="checked-mark"><q-icon name="img:favicon.ico" /></div>-->
               <div class="cabin-number">{{ data.cabin_no }}</div>
               <div class="cabin-price">৳ {{ data.fare }}</div>
             </div>
@@ -27,7 +29,10 @@ export default {
       if (cabin.status == 1 && cabin.cabin_class == 'cabin-active') {
         this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
           .then(() => {
-            console.log('item has been added to cart')
+            this.$parent.$q.notify({
+              type: 'positive',
+              message: 'item has been added to cart'
+            })
           })
           .catch(error => {
             console.log(error)
@@ -89,6 +94,9 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   flex-direction: row;
   border-left: 1px solid #f2f2f2;
 }
+.layoutRowCol.empty {
+  background: #f9f9f9;
+}
 .layoutRowCol:first-child {
   border-left: 0;
   background-color: #f2f2f2;
@@ -137,10 +145,10 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   margin: 0 auto 30px;
   border: 0px solid #F0EFEF;
   padding: 0px;
-  background: #6c757d;
+  background: #69b3f4;
   position: relative;
   cursor: pointer !important;
-  border-radius: 10px;
+  border-radius: 4px;
   -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
@@ -150,14 +158,14 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background: #c2cac1;
 }
 .cabin-layout .cabins .cabin.cabin-disable, .cabin-layout .cabins .seat.cabin-disable {
-  background: #d0d0d0;
+  background: #e1e1e1;
   cursor: not-allowed !important;
 }
 .cabin-active .cabin-price {
   background-color: #1bc616;
 }
 .cabin-layout .cabins .cabin.cabin-selected, .cabin-layout .cabins .seat.cabin-selected {
-  background: #7cd753;
+  background: #0743b5;
 }
 .cabin-layout .cabins .cabin.cabin-checked, .cabin-layout .cabins .seat.cabin-checked {
   color: #fff;
@@ -168,7 +176,28 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   left: 0;
   padding: 0 5px;
   background: #46b796;
-  border-top-left-radius: 10px;
+  border-top-left-radius: 4px;
+}
+.checked-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #ffffffa6;
+  z-index: 99;
+}
+.checked-mark:hover {
+  background: none;
+}
+.checked-mark .q-icon {
+  background: #85ca7f;
+  padding: 2px;
+  color: white;
+  border-bottom-right-radius: 15px;
+}
+.cabin.cabin-selected:hover, .seat.cabin-selected:hover{
+  background: none;
 }
 .cabin-layout .cabins .cabin .topLap, #availableCabins .cabin .topLap {
   top: 0;
@@ -182,13 +211,14 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   border-top: 0;
   padding: 0px 3px;
   font-size: 10px;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 4px;
   font-weight: bold;
   line-height: 18px;
+  position: absolute;
 }
 .cabin-layout .cabins .cabin .cabin-number, .cabin-layout .cabins .seat .cabin-number, #availableCabins .cabin .cabin-number {
   font-size: 13pt;
-  padding: 0px 0 20px 0;
+  padding: 10px 0 20px 0;
   text-align: center;
   color: #fff;
   font-weight: bold;
@@ -199,11 +229,11 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   bottom: 0;
   right: 0;
   left: 0;
-  background: #219876;
+  background: #2c79dd;
   color: #fff;
-  font-size: 14pt;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  font-size: 12pt;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   text-align: center;
   font-weight: bold;
   line-height: 24px;
@@ -213,5 +243,8 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .cabin.empty > .cabin-price, .cabin.empty > .topLap {
   display: none;
+}
+.cabin.cabin-disable .cabin-price {
+  background: #b5cae6;
 }
 </style>

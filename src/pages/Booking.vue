@@ -26,10 +26,6 @@ export default {
       this.$store.dispatch("general/viewTrip", {id: item.trip_id, floor: item.default_floor, cabin_type: 0, seat_type: 0})
         .then(() => {
           this.$parent.$q.loading.hide()
-          this.$parent.$q.notify({
-            type: 'positive',
-            message: 'This is a "positive" type notification.'
-          })
           this.$router.push('/booking/' + item.trip_id)
         })
       .catch((error) =>  {

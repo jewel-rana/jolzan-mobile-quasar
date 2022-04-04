@@ -1,6 +1,11 @@
-import Axios from 'axios'
 import Api from "src/services/ApiService";
 export default {
+  DISPLAY_CART_CONTENT(state, status) {
+    state.cartContent = status
+  },
+  SYNCHRONIZE_WITH_CART_ITEMS(state, payload) {
+    let trip = state.trip
+  },
   SET_SEARCH_TYPE(state, payload) {
     state.search.type = payload.type
   },
@@ -88,7 +93,7 @@ export default {
 
       let token = localStorage.getItem('token')
       if(token) {
-        Axios.defaults.headers.common.Authorization = `Bearer ${token}`
+        state.token = token
       }
     }
   },
@@ -112,9 +117,6 @@ export default {
       localStorage.setItem('user', JSON.stringify(payload.user))
       localStorage.setItem('token', JSON.stringify(payload.token))
       localStorage.setItem('loggedin', JSON.stringify(payload.success))
-      Axios.defaults.headers.common.Authorization = `Bearer ${
-        payload.token
-      }`
     }
     state.alert.message = payload.message
     state.alert.status = !payload.success
@@ -262,6 +264,8 @@ export default {
     localStorage.removeItem('loggedin')
     localStorage.removeItem('cart')
     location.reload()
+    state.loggedIn = false
+    this.state.notLoggedIn = true
   },
   SEARCH_RESULTS(state, payload) {
     state.searchResults = payload.data
@@ -350,6 +354,7 @@ export default {
     // state.cart_item = payload
     console.log(payload)
     if (payload.success) {
+      state.cartContent = true
       const itemExist = state.cart.find(i => i.item_id === payload.item.item_id)
       if (!itemExist) {
         state.cart.push(payload.item)
@@ -500,33 +505,14 @@ export default {
         break
     }
   },
-  HANDLE_CONFIRM(state) {
-    switch (state.order.step) {
-      case 'cart':
-        state.order.step = 'passenger'
-        break;
-      case 'passenger':
-        state.order.step = 'terms'
-        break;
-      case 'terms':
-        Api.confirmOrder({items: state.cart, coupon: state.coupon},  state.user)
-          .then((response) => {
-            this.state.alert.status = !response.data.success
-            this.state.alert.message = response.data.message
-            this.state.alert.success = response.data.success
-            if(response.data.success) {
-              state.order.step = 'payment'
-            }
-          })
-          .catch((error) => {
-            this.state.alert.status = true
-            this.state.alert.message = 'Your order cannot be processed!'
-            this.state.alert.success = false
-          })
-        break;
+  HANDLE_CONFIRM(state, step) {
+    if(state.loggedIn) {
+      state.order.step = step
     }
-
     state.notLoggedIn = !state.loggedIn
+  },
+  OPEN_LOGIN_FORM(state) {
+    this.state.notLoggedIn = false
   },
   HANDLE_LOGIN_BACK(state) {
     switch (state.login.step) {
@@ -664,8 +650,8 @@ export default {
     if (payload.success) {
       state.order.id = payload.order_id
       state.order.transaction_id = payload.trans_id
-      // state.order.step = 'payment'
-      // state.order.title = "Choose payment method"
+      state.order.step = 'payment'
+      state.order.title = "Choose payment method"
       let order = localStorage.getItem('order')
       if (order) {
         localStorage.removeItem('order')

@@ -10,7 +10,7 @@
           <!--            style="width: auto; height: 66px"-->
           <!--          >-->
         </q-toolbar-title>
-        <profile-menu v-if="loggedIn"></profile-menu>
+        <profile-menu></profile-menu>
       </q-toolbar>
       <q-toolbar class="bg-white text-primary" v-if="isNotHome">
         <q-btn round flat color="primary" icon="chevron_left" @click="goToBack"/>

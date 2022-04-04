@@ -9,7 +9,7 @@
       <q-item-section top>
         <q-item-label lines="1">
           <span class="text-weight-medium">{{ item.vehicle_name }} </span>
-          <span class="text-grey-8"> {{ item.route_name }}</span>
+          <span class="text-grey-8 q-pl-md"> {{ item.route_name }}</span>
         </q-item-label>
         <q-item-label lines="1">{{ item.cabin_no }}</q-item-label>
       </q-item-section>

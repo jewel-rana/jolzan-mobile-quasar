@@ -30,11 +30,6 @@ import CartItem from "components/CartItem";
 
 export default {
   components: {NoResult, CartItem},
-  setup() {
-    return {
-      cartContent: ref(false)
-    }
-  },
   created() {
     const cartItems = localStorage.getItem('cart')
     if (cartItems) {
@@ -43,7 +38,7 @@ export default {
   },
   methods: {
     displayCartContent() {
-      this.cartContent = !this.cartContent
+      this.$store.commit('general/DISPLAY_CART_CONTENT', !this.cartContent)
       console.log(this.cartContent)
     },
     confirmCart(event) {
@@ -69,7 +64,7 @@ export default {
       }
       return total.toFixed(2)
     },
-    ...mapState('general', ['cart', 'customer_token']),
+    ...mapState('general', ['cart', 'customer_token', 'cartContent']),
     ...mapGetters(['getOptionByKey'])
   }
 }
