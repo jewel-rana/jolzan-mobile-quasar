@@ -1,7 +1,18 @@
 import Axios from 'axios'
+import Api from "src/services/ApiService";
 export default {
+<<<<<<< HEAD
   SET_SEARCH_TYPE(state, payload) {
     state.search.type = payload.type
+=======
+  DISMISS_ALERT(state) {
+    state.alert.status = false
+  },
+  DISMISS_LOGIN_FORM(state) {
+    state.notLoggedIn = false
+    state.order.step = 'cart'
+    state.login.step = 'check'
+>>>>>>> 6ea30dcdc3c0eac3862aa761f58b7e98d36cda9d
   },
   UPDATE_FORM_DATA (state, payload) {
     switch (payload.key) {
@@ -29,8 +40,9 @@ export default {
       state.login.resendTimer = timout
   },
   DOWNLOAD_LINK_SENT(state, payload) {
-    state.responseError.success = payload.success
-    state.responseError.message = payload.message
+    state.alert.status = !payload.success
+    state.alert.message = payload.message
+    state.alert.success = payload.success
   },
   TERMS_ACCEPTED(state) {
     state.order.terms_accept = 1
@@ -75,6 +87,11 @@ export default {
       }
       state.coupon.status = false
       state.coupon.total = 0
+
+      let token = localStorage.getItem('token')
+      if(token) {
+        Axios.defaults.headers.common.Authorization = `Bearer ${token}`
+      }
     }
   },
   SET_SUGGESTIONS(state, payload) {
@@ -97,11 +114,13 @@ export default {
       localStorage.setItem('user', JSON.stringify(payload.user))
       localStorage.setItem('token', JSON.stringify(payload.token))
       localStorage.setItem('loggedin', JSON.stringify(payload.success))
-      Axios.defaults.headers.common['Authorization'] = `Bearer ${
+      Axios.defaults.headers.common.Authorization = `Bearer ${
         payload.token
       }`
     }
-    state.responseError.message = payload.message
+    state.alert.message = payload.message
+    state.alert.status = !payload.success
+    state.alert.success = payload.success
   },
   UPDATE_NAME(state, payload) {
     state.user.name = payload.name
@@ -136,9 +155,10 @@ export default {
       }
       localStorage.setItem('user', JSON.stringify(state.user))
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
-    state.responseError.success = payload.success
+    state.alert.success = payload.success
+    state.alert.status = payload.success
   },
   MY_BOOKINGS(state, payload) {
     state.bookings = payload
@@ -196,38 +216,47 @@ export default {
     if (payload.success) {
       state.login.step = payload.step
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   RESET_PASSWORD(state, payload) {
-    state.responseError.message = payload.message
+    state.alert.message = payload.message
+    state.alert.success = payload.success
   },
   LOGIN_PROCEDURE(state, payload) {
     state.loginResponse = payload
     if (payload.success) {
       state.login.step = payload.step
-      state.responseError.message = ""
       state.login.title = (payload.step == 'otp') ? "Verify" : 'Login';
       state.order.title = (payload.step == 'otp') ? "Verify" : 'Login';
-    } else {
-      state.responseError.message = payload.message
     }
+    state.alert.status = true
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   LOGIN_VERIFY(state, payload) {
-    state.login.step = payload.step
     if (payload.success) {
+      state.login.step = payload.step
       state.loginResponse.otp_verified = true
       state.login.title = 'Register'
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   RESET_MESSAGE(state) {
-    state.responseError.message = ""
-    state.responseError.success = false
+    state.alert.message = ""
+    state.alert.status = false
   },
   RESEND_RESPONSE(state, payload) {
-    state.responseError.message = payload.message
+    if(!payload.success) {
+      state.alert.status = true
+    }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   CLEAR_USER_DATA(state) {
     localStorage.removeItem('user')
@@ -482,7 +511,20 @@ export default {
         state.order.step = 'terms'
         break;
       case 'terms':
-        state.order.step = 'payment'
+        Api.confirmOrder({items: state.cart, coupon: state.coupon},  state.user)
+          .then((response) => {
+            this.state.alert.status = !response.data.success
+            this.state.alert.message = response.data.message
+            this.state.alert.success = response.data.success
+            if(response.data.success) {
+              state.order.step = 'payment'
+            }
+          })
+          .catch((error) => {
+            this.state.alert.status = true
+            this.state.alert.message = 'Your order cannot be processed!'
+            this.state.alert.success = false
+          })
         break;
     }
 
@@ -546,12 +588,11 @@ export default {
     if (payload.success) {
       state.coupon.total = payload.discount
       state.coupon.status = true
-      if (parseInt(payload.discount) == 0) {
-        state.responseError.message = payload.message
-      }
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   SET_PASSENGER(state) {
     state.order.step = 'passenger'
@@ -638,8 +679,10 @@ export default {
         localStorage.removeItem('cart')
       }
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   PAYMENT_SUCCESS(state, payload) {
     if (payload.success) {
@@ -649,8 +692,10 @@ export default {
       state.order.title = "Confirm order"
       localStorage.removeItem('cart')
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   CLEAR_STEP(state) {
     state.order.step = 'cart'
@@ -662,9 +707,11 @@ export default {
       state.cancellation.step = 'details'
       state.cancellation.booking_id = payload.item.id
     } else {
-      state.responseError.message = payload.message
+      state.alert.status = true
       state.cancellation.booking_id = 0
     }
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   CANCELLATION_DATA_FROM_LIST(state, object) {
     state.cancellation.bookingObj = object
@@ -706,8 +753,11 @@ export default {
       state.cancellation.png = ""
       state.cancellation.bookingObj = {}
       state.cancellation.status = 1
+    } else {
+      state.alert.status = true
     }
-    state.responseError.message = payload.message
+    state.alert.success = payload.success
+    state.alert.message = payload.message
   },
   REMOVE_NOTIFICATION(state, payload) {
     // let notice = state.notifications.find(item => item.id === payload)
@@ -715,8 +765,9 @@ export default {
     state.notifications.splice(payload.index, 1);
   },
   EXPERT_HELP(state, payload) {
-    state.responseError.message = payload.message
-    state.responseError.success = payload.success
+    state.alert.message = payload.message
+    state.alert.status = !payload.success
+    state.alert.success = payload.success
     if (payload.success == true) {
       state.help.name = ""
       state.help.email = ""

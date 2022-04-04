@@ -5,7 +5,10 @@
 
         <q-card-section class="row items-center bg-primary">
           <div class="text-h6 text-white">{{ login.title }}</div>
+          <q-space></q-space>
+          <q-btn icon="close" color="white" flat round dense v-close-popup @click="closeDialogue" />
         </q-card-section>
+        <alert></alert>
         <q-card-section v-if="login.step === 'check'">
 
           <div class="q-gutter-y-md column" id="loginCheck">
@@ -125,14 +128,19 @@
 </template>
 <script>
 import {mapState} from "vuex";
+import Alert from "components/elements/Alert";
 
 export default {
+  components: {Alert},
   setup(){
     return {
       resendTimeout: 60
     }
   },
   methods: {
+    closeDialogue() {
+      this.$store.commit('general/DISMISS_LOGIN_FORM')
+    },
     forgotPassword() {
       this.$store.commit('general/FORGOT_STEP')
     },
