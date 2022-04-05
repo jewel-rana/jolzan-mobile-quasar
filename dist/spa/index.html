@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><base href=/ ><title>My first app</title><meta charset=utf-8><meta name=description content="Jolzan app using quasar and vuejs"><meta name=format-detection content="telephone=no"><meta name=msapplication-tap-highlight content=no><meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width"><link rel=icon type=image/png sizes=128x128 href=icons/favicon-128x128.png><link rel=icon type=image/png sizes=96x96 href=icons/favicon-96x96.png><link rel=icon type=image/png sizes=32x32 href=icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=icons/favicon-16x16.png><link rel=icon type=image/ico href=favicon.ico><style>.loader {
+      width: 6.250em;
+      height: 6.250em;
+      margin: 50px auto 0;
+      position: relative;
+      animation: rotate 2.4s linear infinite;
+    }
+
+    .loader .dot {
+      width: 2.4em;
+      height: 2.4em;
+      margin: auto;
+      border-radius: 100%;
+      position: absolute;
+    }
+
+    .loader .dot:nth-child(1) {
+      background: #ff4444;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      animation: dotsY 2.4s linear infinite;
+    }
+
+    .loader .dot:nth-child(2) {
+      background: #ffbb33;
+      left: 0;
+      right: 0;
+      top: 0;
+      animation: dotsX 2.4s linear infinite;
+    }
+
+    .loader .dot:nth-child(3) {
+      background: #99cc00;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      animation: dotsY 2.4s linear infinite;
+    }
+
+    .loader .dot:nth-child(4) {
+      background: #33b5e5;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      animation: dotsX 2.4s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+      10% {
+        width: 6.250em;
+        height: 6.250em;
+      }
+      66% {
+        width: 2.4em;
+        height: 2.4em;
+      }
+      100% {
+        transform: rotate(360deg);
+        width: 6.250em;
+        height: 6.250em;
+      }
+    }
+
+    @keyframes dotsY {
+      66% {
+        opacity: .1;
+        width: 2.4em;
+      }
+      77% {
+        opacity: 1;
+        width: 0;
+      }
+    }
+
+    @keyframes dotsX {
+      66% {
+        opacity: .1;
+        height: 2.4em;
+      }
+      77% {
+        opacity: 1;
+        height: 0;
+      }
+    }</style><script defer src=/js/vendor.e2212f50.js></script><script defer src=/js/app.1843f992.js></script><link href=/css/vendor.d31b0592.css rel=stylesheet><link href=/css/app.31d6cfe0.css rel=stylesheet></head><body><div id=q-app></div></body></html>
