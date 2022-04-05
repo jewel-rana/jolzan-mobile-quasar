@@ -20,21 +20,6 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer elevated>
-      <q-tabs
-        v-model="tab"
-        dense
-        clickable
-        align="justify"
-        class="bg-primary text-white shadow-2"
-        :breakpoint="0"
-      >
-        <q-route-tab v-for="nav in navigations" :to="nav.to" :name="nav.to" :key="nav.level" :icon="nav.icon"
-                     :label="nav.level" exact-active-class="tab-active"/>
-        <q-tab clickable name="More" key="99" icon="list" label="More" @click="showBottomSheet" />
-      </q-tabs>
-    </q-footer>
-
     <q-drawer
       v-model="leftDrawerOpen"
       :breakpoint="667"
@@ -54,6 +39,21 @@
     <q-page-container>
       <router-view/>
     </q-page-container>
+
+    <q-footer elevated v-if="$parent.$q.screen.lt.sm">
+      <q-tabs
+        v-model="tab"
+        dense
+        clickable
+        align="justify"
+        class="bg-primary text-white shadow-2"
+        :breakpoint="0"
+      >
+        <q-route-tab v-for="nav in navigations" :to="nav.to" :name="nav.to" :key="nav.level" :icon="nav.icon"
+                     :label="nav.level" exact-active-class="tab-active"/>
+        <q-tab clickable name="More" key="99" icon="list" label="More" @click="showBottomSheet" />
+      </q-tabs>
+    </q-footer>
   </q-layout>
 </template>
 

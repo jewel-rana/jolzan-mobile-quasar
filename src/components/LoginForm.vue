@@ -146,17 +146,22 @@ export default {
     },
     resendOtp(){
       if(this.login.resendTimer === 0) {
+        this.$parent.$q.loading.show()
         this.$store.dispatch('general/ResendOtpCode')
         .then((response) => {
+          this.$parent.$q.loading.hide()
           this.startOtpCounter()
+          this.$parent.$q.notify({type: 'positive', 'message': 'Re-send OTP Success'})
         })
       }
     },
     handleLoginForm(event) {
       switch (this.login.step) {
         case 'check':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/loginCheck')
             .then((response) => {
+              this.$parent.$q.loading.hide()
               if(this.login.step === 'otp') {
                 this.startOtpCounter()
               }
@@ -166,19 +171,39 @@ export default {
           this.$store.dispatch('general/login')
           break
         case 'otp':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/Verify')
+          .then((response) => {
+            this.$parent.$q.loading.hide()
+          })
           break
         case 'register':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/Register')
+            .then((response) => {
+              this.$parent.$q.loading.hide()
+            })
           break
         case 'forgot':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/Forgot')
+            .then((response) => {
+              this.$parent.$q.loading.hide()
+            })
           break
         case 'forgot_otp':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/Verify')
+            .then((response) => {
+              this.$parent.$q.loading.hide()
+            })
           break
         case 'reset':
+          this.$parent.$q.loading.show()
           this.$store.dispatch('general/ResetPassword')
+            .then((response) => {
+              this.$parent.$q.loading.hide()
+            })
           break
       }
     },

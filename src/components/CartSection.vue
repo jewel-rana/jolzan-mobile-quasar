@@ -90,8 +90,7 @@ export default {
 #cartExpandButton {
 }
 #cartSection {
-  position: fixed;
-  bottom: 56px;
+  position: absolute;
   left: auto;
   right: 0;
   top: auto;
@@ -106,6 +105,7 @@ export default {
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
+  bottom: 56px;
 }
 .cartSectionDeskTop {
   border-top-left-radius: 15px;
