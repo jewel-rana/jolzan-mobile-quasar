@@ -20,7 +20,7 @@
             color="primary"
             size="md"
             @click="confirmCart($event)"
-          >Confirm booking ({{ cartTotal }})
+          >Checkout
           </q-btn>
         </div>
       </div>

@@ -4,7 +4,7 @@
       {{ alert.message || 'You have an error' }}
 
       <template v-slot:action>
-        <q-btn flat label="Dismiss" @click="dismissAlert" />
+        <q-btn flat icon="close" @click="dismissAlert" />
       </template>
     </q-banner>
   </div>

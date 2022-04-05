@@ -2,25 +2,27 @@
   <div>
     <q-item :key="index">
       <q-item-section avatar top>
-        <q-icon v-if="item.type === 'cabin'" name="bed" color="black" size="34px"/>
-        <q-icon v-if="item.type === 'seat'" name="chair" color="black" size="34px"/>
+        <q-icon v-if="item.type === 'cabin'" name="bed" color="black" size="26px"/>
+        <q-icon v-if="item.type === 'seat'" name="chair" color="black" size="26px"/>
+        <q-item-label lines="1"><small>{{ item.cabin_no }}</small></q-item-label>
       </q-item-section>
 
       <q-item-section top>
         <q-item-label lines="1">
           <span class="text-weight-medium">{{ item.vehicle_name }} </span>
-          <span class="text-grey-8 q-pl-md"> {{ item.route_name }}</span>
         </q-item-label>
-        <q-item-label lines="1">{{ item.cabin_no }}</q-item-label>
+        <q-item-label>
+          <span class="text-grey-8 text-bold"> {{ item.route_name }}</span>
+        </q-item-label>
       </q-item-section>
 
       <q-item-section top class="col-2">
         <q-item-label>{{ item.fare }}/-</q-item-label>
       </q-item-section>
 
-      <q-item-section top side>
-        <div class="text-grey-8 q-gutter-xs">
-          <q-btn size="12px" flat dense round icon="delete"
+      <q-item-section top side class="q-pl-xs">
+        <div class="text-grey-8">
+          <q-btn size="12px" flat dense round icon="close" color="red"
                  @click="removeCartItem(index)" v-if="cartRemovable"/>
         </div>
       </q-item-section>
