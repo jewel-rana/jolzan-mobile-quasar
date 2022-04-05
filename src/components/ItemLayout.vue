@@ -27,8 +27,10 @@ export default {
     {
       console.log(cabin)
       if (cabin.status == 1 && cabin.cabin_class == 'cabin-active') {
+        this.$parent.$q.loading.show()
         this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
           .then(() => {
+            this.$parent.$q.loading.show()
             this.$parent.$q.notify({
               type: 'positive',
               message: 'item has been added to cart'

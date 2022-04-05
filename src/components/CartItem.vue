@@ -65,8 +65,10 @@ export default {
     removeCartItem(index) {
       console.log(index)
       const item = this.cart[index]
+      this.$parent.$q.loading.show()
       this.$store.dispatch("general/removeItemFromCart", {item: item, index: index, token: this.customer_token})
         .then(() => {
+          this.$parent.$q.loading.hide()
           if (!this.cart) {
           }
         })
