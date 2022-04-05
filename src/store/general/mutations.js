@@ -117,6 +117,7 @@ export default {
       localStorage.setItem('user', JSON.stringify(payload.user))
       localStorage.setItem('token', JSON.stringify(payload.token))
       localStorage.setItem('loggedin', JSON.stringify(payload.success))
+      this.dispatch('general/initAuthorization', payload.token);
     }
     state.alert.message = payload.message
     state.alert.status = !payload.success

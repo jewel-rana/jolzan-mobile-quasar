@@ -1,7 +1,7 @@
 import axios from "axios";
-import store from "src/store";
 
 const qs = require("querystring");
+
 const apiClient = axios.create({
   // baseURL: "http://merchant.jolzatra.com/api/v2/",
   baseURL: "https://merchant.jolzan.com/api/v2/",
@@ -34,20 +34,20 @@ apiClient.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-apiClient.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  // if(error.response.status === 401) store.dispatch('general/logout')
-  return Promise.reject(error);
-});
-
-if (localStorage.getItem('token')) {
-  apiClient.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').replaceAll('"', '')
-} else {
-  apiClient.defaults.headers.common['Authorization'] = ''
-}
+// if (localStorage.getItem('token')) {
+//   console.log("Token Found: " + localStorage.getItem('token'))
+//   apiClient.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').replaceAll('"', '')
+// } else {
+//   console.log("Token Not found")
+//   apiClient.defaults.headers.common['Authorization'] = ''
+// }
 
 export default {
+  initAuthorization(token) {
+    console.log("Token found: " + token)
+    apiClient.defaults.headers.Authorization = `Bearer ` + token
+    console.log(apiClient.defaults)
+  },
   DownloadLink(payload) {
     return apiClient.post("/download/link", qs.stringify(payload))
   },

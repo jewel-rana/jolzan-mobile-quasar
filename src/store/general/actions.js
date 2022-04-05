@@ -1,16 +1,9 @@
 import Api from '../../services/ApiService.js'
-import store from "src/store";
 
-// Api.interceptors.request.use((config) => {
-//   const token = store.getters['general/token'];
-//
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//
-//   return config;
-// });
 export default {
+  initAuthorization({commit}, token) {
+    Api.initAuthorization(token)
+  },
   sendDownloadLink({commit}, payload) {
     return Api.DownloadLink(payload)
       .then(response => {
@@ -76,7 +69,7 @@ export default {
     return Api.Login(state.login)
       .then(response => {
           commit('SET_USER_DATA', response.data)
-        Api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
+          Api.initAuthorization(response.data.token)
         }
       )
       .catch(error => {
@@ -105,6 +98,8 @@ export default {
     return Api.Reset(state.login)
       .then(response => {
         if (response.data.success === true) {
+          console.log(response.data)
+          Api.initAuthorization(response.data.token)
           commit('SET_USER_DATA', response.data)
         } else {
           commit('RESET_PASSWORD', response.data)
@@ -138,6 +133,7 @@ export default {
     return Api.Register(state.login)
       .then(response => {
           commit('SET_USER_DATA', response.data)
+          Api.initAuthorization(response.data.token)
         }
       )
       .catch(error => {
