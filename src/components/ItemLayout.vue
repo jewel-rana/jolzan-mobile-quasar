@@ -30,7 +30,7 @@ export default {
         this.$parent.$q.loading.show()
         this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
           .then(() => {
-            this.$parent.$q.loading.show()
+            this.$parent.$q.loading.hide()
             this.$parent.$q.notify({
               type: 'positive',
               message: 'item has been added to cart'

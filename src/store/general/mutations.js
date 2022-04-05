@@ -1,4 +1,3 @@
-import Api from "src/services/ApiService";
 export default {
   DISPLAY_CART_CONTENT(state, status) {
     state.cartContent = status
@@ -148,7 +147,7 @@ export default {
     localStorage.setItem('user', JSON.stringify(state.user))
   },
   UPDATE_PROFILE_PICTURE(state, payload) {
-    if (payload.success == true) {
+    if (payload.success === true) {
       state.user.photo = payload.avatar
       let user = localStorage.getItem('user')
       if (user) {
@@ -230,8 +229,8 @@ export default {
     state.loginResponse = payload
     if (payload.success) {
       state.login.step = payload.step
-      state.login.title = (payload.step == 'otp') ? "Verify" : 'Login';
-      state.order.title = (payload.step == 'otp') ? "Verify" : 'Login';
+      state.login.title = (payload.step === 'otp') ? "Verify" : 'Login';
+      state.order.title = (payload.step === 'otp') ? "Verify" : 'Login';
     }
     state.alert.status = true
     state.alert.success = payload.success
@@ -309,7 +308,7 @@ export default {
         for (var i in cabins) {
           for (var j in cabins[i]) {
             for (var c in cartItems) {
-              if (cartItems[c].item_id == cabins[i][j].item_id) {
+              if (cartItems[c].item_id === cabins[i][j].item_id) {
                 cabins[i][j].cabin_class = 'cabin-selected'
                 cabins[i][j].status = 2
               }
@@ -324,7 +323,7 @@ export default {
       if (seats) {
         for (var i in seats) {
           for (var j in seats[i]) {
-            if (cartItems[c].item_id == cabins[i][j].item_id) {
+            if (cartItems[c].item_id === cabins[i][j].item_id) {
               seats[i][j].cabin_class = 'cabin-selected'
               seats[i][j].status = 2
             }
@@ -347,7 +346,7 @@ export default {
     state.search.trip_to = tmp
   },
   TRIP_MODE_SWITCH(state, payload) {
-    if (payload.mode == 1) {
+    if (payload.mode === 1) {
       state.search.trip_return_date = ""
     }
   },
@@ -364,24 +363,24 @@ export default {
           localStorage.removeItem('cart')
         }
         localStorage.setItem('cart', JSON.stringify(state.cart))
-        if (payload.item.type == 'cabin') {
+        if (payload.item.type === 'cabin') {
           let cabins = state.trip.cabins;
           console.log(cabins)
           for (let i in cabins) {
             for (let j in cabins[i]) {
               console.log(cabins[i][j])
-              if (cabins[i][j].item_id == payload.item.item_id) {
+              if (cabins[i][j].item_id === payload.item.item_id) {
                 cabins[i][j].cabin_class = 'cabin-selected'
                 cabins[i][j].status = 2
               }
             }
           }
           state.trip.cabins = cabins
-        } else if (payload.item.type == 'seat') {
+        } else if (payload.item.type === 'seat') {
           let seats = state.trip.seats;
           for (let i in seats) {
             for (let j in seats[i]) {
-              if (seats[i][j].item_id == payload.item.item_id) {
+              if (seats[i][j].item_id === payload.item.item_id) {
                 seats[i][j].cabin_class = 'cabin-selected'
                 seats[i][j].status = 2
               }
@@ -440,8 +439,7 @@ export default {
   },
   CHANGE_BOARDING_POINT(state, payload) {
     let cartItem = state.cart[payload.index]
-    let item = cartItem.stoppages.find(i => i.id == payload.id)
-    cartItem.boardingPoint = item
+    cartItem.boardingPoint = cartItem.stoppages.find(i => i.id === payload.id)
     let cartItems = state.cart;
     cartItems[payload.index] = cartItem;
     state.cart = cartItems
@@ -513,7 +511,7 @@ export default {
     state.notLoggedIn = !state.loggedIn
   },
   OPEN_LOGIN_FORM(state) {
-    this.state.notLoggedIn = false
+    state.notLoggedIn = true
   },
   HANDLE_LOGIN_BACK(state) {
     switch (state.login.step) {
@@ -530,22 +528,22 @@ export default {
   },
   REMOVE_CART_ITEM(state, payload) {
     const item = state.cart[payload]
-    if (item.type == 'cabin') {
+    if (item.type === 'cabin') {
       let cabins = state.trip.cabins;
       for (let i in cabins) {
         for (let j in cabins[i]) {
-          if (cabins[i][j].item_id == item.item_id) {
+          if (cabins[i][j].item_id === item.item_id) {
             cabins[i][j].cabin_class = 'cabin-active'
             cabins[i][j].status = 1
           }
         }
       }
       state.trip.cabins = cabins
-    } else if (item.type == 'seat') {
+    } else if (item.type === 'seat') {
       var seats = state.trip.seats;
       for (var i in seats) {
         for (var j in seats[i]) {
-          if (seats[i][j].item_id == item.item_id) {
+          if (seats[i][j].item_id === item.item_id) {
             seats[i][j].cabin_class = 'cabin-active'
             seats[i][j].status = 1
           }
@@ -587,21 +585,21 @@ export default {
     state.payment.type = payload
   },
   FILTER_BY_TYPE(state, payload) {
-    if (payload.property == 'cabin') {
+    if (payload.property === 'cabin') {
       var cabins = state.trip.cabins
       for (var i in cabins) {
         for (var j in cabins[i]) {
-          if (payload.type == 0) {
-            if (cabins[i][j].status == 1) {
+          if (payload.type === 0) {
+            if (cabins[i][j].status === 1) {
               cabins[i][j].cabin_class = 'cabin-active'
             }
           } else {
-            if (cabins[i][j].cabin_type_id != payload.type) {
-              if (cabins[i][j].status == 1) {
+            if (cabins[i][j].cabin_type_id !== payload.type) {
+              if (cabins[i][j].status === 1) {
                 cabins[i][j].cabin_class = 'cabin-disable'
               }
             } else {
-              if (cabins[i][j].status == 1) {
+              if (cabins[i][j].status === 1) {
                 cabins[i][j].cabin_class = 'cabin-active'
               }
             }
@@ -609,21 +607,21 @@ export default {
         }
       }
       state.trip.cabins = cabins
-    } else if (payload.property == 'seat') {
+    } else if (payload.property === 'seat') {
       var seats = state.trip.seats
       for (var i in seats) {
         for (var j in seats[i]) {
-          if (payload.type == 0) {
-            if (seats[i][j].status == 1) {
+          if (payload.type === 0) {
+            if (seats[i][j].status === 1) {
               seats[i][j].cabin_class = 'cabin-active'
             }
           } else {
-            if (seats[i][j].cabin_type_id != payload.type) {
-              if (seats[i][j].status == 1) {
+            if (seats[i][j].cabin_type_id !== payload.type) {
+              if (seats[i][j].status === 1) {
                 seats[i][j].cabin_class = 'cabin-disable'
               }
             } else {
-              if (seats[i][j].status == 1) {
+              if (seats[i][j].status === 1) {
                 seats[i][j].cabin_class = 'cabin-active'
               }
             }
@@ -753,7 +751,7 @@ export default {
     state.alert.message = payload.message
     state.alert.status = !payload.success
     state.alert.success = payload.success
-    if (payload.success == true) {
+    if (payload.success === true) {
       state.help.name = ""
       state.help.email = ""
       state.help.subject = ""

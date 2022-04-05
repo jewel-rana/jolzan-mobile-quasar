@@ -78,7 +78,7 @@ export default {
 .cartPopup {
   width: 54px;
   padding: 0 12px;
-  margin: 0 0 0 15px;
+  margin: -32px 0 0 15px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background: #1976d2;
@@ -95,6 +95,6 @@ export default {
   top: auto;
   height: auto;
   background: #ffffff;
-  z-index: 99;
+  z-index: 9999;
 }
 </style>

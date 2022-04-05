@@ -43,7 +43,6 @@ import {mapState} from "vuex";
 export default {
   methods: {
     openLoginDialogue(){
-      alert('ok')
       this.$store.commit('general/OPEN_LOGIN_FORM')
     },
     logout() {
