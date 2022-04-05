@@ -247,6 +247,9 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   display: none;
 }
 .cabin.cabin-disable .cabin-price {
-  background: #b5cae6;
+  background: #c9d6e8 !important;
+}
+.cabin-disable .topLap {
+  background: #f4f4c6 !important;
 }
 </style>

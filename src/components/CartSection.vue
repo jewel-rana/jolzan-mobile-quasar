@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="cartSection">
+    <div id="cartSection" :class="cartSectionDeviceClass">
       <div class="cartPopup cursor-pointer" clickable  @click="displayCartContent">
         <q-icon name="expand_less" size="32px" v-if="!cartContent"></q-icon>
         <q-icon name="keyboard_arrow_down" size="32px" v-else></q-icon>
@@ -69,6 +69,9 @@ export default {
       }
       return total.toFixed(2)
     },
+    cartSectionDeviceClass() {
+      return  this.$q.screen.lt.md  ? 'cartSectionMobile' : 'cartSectionDeskTop'
+    },
     ...mapState('general', ['cart', 'customer_token', 'cartContent']),
     ...mapGetters(['getOptionByKey'])
   }
@@ -89,13 +92,25 @@ export default {
 #cartSection {
   position: fixed;
   bottom: 56px;
-  left: 0;
+  left: auto;
   right: 0;
   top: auto;
   height: auto;
-  border: 3px solid #1976d2;
-  border-bottom: 0;
+  border-top: 3px solid #1976d2;
   background: #ffffff;
   z-index: 1001;
+}
+.cartSectionMobile {
+  left: 0;
+  width: 100%;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+.cartSectionDeskTop {
+  border-top-left-radius: 15px;
+  min-width: 460px;
+  max-width: 560px;
+  border-left: 3px solid #1976d2;
 }
 </style>

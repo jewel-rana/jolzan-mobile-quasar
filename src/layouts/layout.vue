@@ -2,11 +2,11 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title class="q-pt-sm">
                     <img
                       alt="Jolzan"
                       src="~assets/logo-white.png"
-                      style="width: auto; height: 46px"
+                      style="width: auto; height: 36px"
                       title="Jolzan"
                     >
         </q-toolbar-title>
@@ -74,7 +74,7 @@ const navigations = [
   },
   {
     level: "Trips",
-    icon: 'connecting_airports',
+    icon: 'route',
     to: '/trips'
   }
 ];

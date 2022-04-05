@@ -5,7 +5,7 @@
           <q-card class="my-card active cursor-pointer" @click="goToBooking('launch')">
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="img:icons/ship4.jpg"></q-icon>
+                <q-icon name="img:icons/ship.png"></q-icon>
               </div>
               <div class="text-subtitle2">Launch</div>
             </q-card-section>
@@ -37,7 +37,7 @@
         <q-card class="my-card disable">
           <q-card-section>
             <div class="text-h6">
-              <q-icon name="home"></q-icon>
+              <q-icon name="train"></q-icon>
             </div>
             <div class="text-subtitle2">Train</div>
           </q-card-section>
@@ -57,7 +57,7 @@
         <q-card class="my-card disable">
           <q-card-section>
             <div class="text-h6">
-              <q-icon name="home"></q-icon>
+              <q-icon name="local_shipping"></q-icon>
             </div>
             <div class="text-subtitle2">Truck</div>
           </q-card-section>
@@ -88,7 +88,7 @@ export default {
   border-radius: 0;
 }
 .q-card.my-card.active {
-  background: #1976d2;
+  background: #0e65bb; /*#1976d2; */
   color: #fff;
 }
 .q-card.my-card.active:hover {
