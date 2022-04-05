@@ -82,6 +82,18 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
+      brand: {
+        primary: '#34a5dd',
+        secondary: '#26A69A',
+        accent: '#9C27B0',
+
+        dark: '#1d1d1d',
+
+        positive: '#21BA45',
+        negative: '#C10015',
+        info: '#31CCEC',
+        warning: '#F2C037'
+      },
       config: {
         loading: {
           delay: 400,
@@ -148,13 +160,14 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `My First App`,
-        short_name: `My App`,
-        description: `My first app using quasar and vuejs`,
+        name: `Jolzan`,
+        short_name: `Jolzan`,
+        description: `Jolzan booking ticket`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#34a5dd',
+
         icons: [
           {
             src: 'icons/icon-128x128.png',

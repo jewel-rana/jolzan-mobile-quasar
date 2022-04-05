@@ -45,3 +45,17 @@ export default defineComponent({
   ...mapGetters('general', ['getOptionByKey'])
 })
 </script>
+
+<style>
+:root {
+  --q-primary: #08437D;
+  --q-secondary: #0C9568;
+  --q-accent: #9C27B0;
+  --q-positive: #21BA45;
+  --q-negative: #C10015;
+  --q-info: #31CCEC;
+  --q-warning: #F2C037;
+  --q-dark: #1d1d1d;
+  --q-dark-page: #121212;
+}
+</style>

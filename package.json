@@ -2,7 +2,7 @@
   "name": "jolzan",
   "version": "0.0.1",
   "description": "Jolzan app using quasar and vuejs",
-  "productName": "My first app",
+  "productName": "Jolzan",
   "author": "Jewel Rana <jewelrana.dev@gmail.com>",
   "private": true,
   "scripts": {

@@ -85,7 +85,6 @@ export default {
   color: #fff;
 }
 #cartExpandButton {
-  border-top: 3px solid #1976d2;
 }
 #cartSection {
   position: fixed;
@@ -94,7 +93,9 @@ export default {
   right: 0;
   top: auto;
   height: auto;
+  border: 3px solid #1976d2;
+  border-bottom: 0;
   background: #ffffff;
-  z-index: 9999;
+  z-index: 1001;
 }
 </style>
