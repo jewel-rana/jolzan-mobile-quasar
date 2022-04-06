@@ -17,7 +17,7 @@ export default function () {
     notLoggedIn: false,
     token: localStorage.getItem("token") || "",
     user: {},
-    page: {},
+    pages: {},
     search: {
       trip_from: null,
       trip_to: null,

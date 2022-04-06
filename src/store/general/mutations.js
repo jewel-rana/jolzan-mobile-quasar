@@ -178,7 +178,7 @@ export default {
     state.bookings.recent = recent
   },
   SET_PAGE(state, payload) {
-    state.page = payload.data
+    state.pages = payload.data
   },
   MY_CANCELLATIONS(state, payload) {
     state.cancellations = payload
