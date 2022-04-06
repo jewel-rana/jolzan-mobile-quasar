@@ -9,3 +9,13 @@
     </div>
   </q-page>
 </template>
+
+<script>
+import {mapState} from "vuex";
+
+export default {
+  computed: {
+    ...mapState('general', ['loggedIn'])
+  }
+}
+</script>
