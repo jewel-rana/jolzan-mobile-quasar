@@ -485,6 +485,22 @@ export default {
   PROCEED_TO_TERMS(state) {
     state.order.step = 'terms'
   },
+  HANDLE_SETTINGS(state, payload) {
+    switch (payload.key) {
+      case 'dark_mode':
+        state.settings.darkMode = payload.value
+        break;
+      case 'account_active':
+        state.settings.accountActive = payload.value
+        break;
+      case 'push_notification':
+        state.settings.pushNotification = payload.value
+        break;
+      case 'language':
+        state.settings.language = payload.value
+        break;
+    }
+  },
   HANDLE_LOGIN_FORM(state, payload) {
     switch (payload.key) {
       case 'mobile':

@@ -3,22 +3,28 @@
     <div class="q-pa-md q-gutter-y-sm column">
       <q-toggle
         :label="`Dark mode ${darkMode}`"
+        false-value="Disabled"
+        true-value="Enabled"
         v-model="darkMode"
+      />
+      <q-toggle
+        :label="`Bangla ${language}`"
+        false-value="Disabled"
+        true-value="Enabled"
+        v-model="language"
       />
 
       <q-toggle
-        label="Account active"
-        color="pink"
-        false-value="Disagreed"
-        true-value="Agreed"
+        :label="`Account ${accountActive}`"
+        false-value="Disabled"
+        true-value="Enabled"
         v-model="accountActive"
       />
 
       <q-toggle
-        :false-value="13"
         :label="`Push notification ${pushNotification}`"
-        :true-value="42"
-        color="green"
+        false-value="Disabled"
+        true-value="Enabled"
         v-model="pushNotification"
       />
     </div>
@@ -27,32 +33,44 @@
 
 <script>
 
+import {mapState} from "vuex";
+
 export default {
   computed: {
     darkMode: {
       get() {
-        return false
+        return this.settings.darkMode
       },
       set(value) {
-        console.log('Dark mode')
+        this.$store.commit('general/HANDLE_SETTINGS', {key: 'dark_mode', value: value})
       }
     },
     accountActive: {
       get() {
-        return true
+        return this.settings.accountActive
       },
       set(value) {
-        console.log('Account Active')
+        this.$store.commit('general/HANDLE_SETTINGS', {key: 'account_active', value: value})
       }
     },
     pushNotification: {
       get() {
-        return true
+        return this.settings.pushNotification
       },
       set(value) {
-        console.log('push notification')
+        this.$store.commit('general/HANDLE_SETTINGS', {key: 'push_notification', value: value})
       }
-    }
+    },
+    language: {
+      get() {
+        return this.settings.language
+      },
+      set(value) {
+        this.$store.commit('general/HANDLE_SETTINGS', {key: 'language', value: value})
+      }
+    },
+    ...mapState('general', ['settings'])
   }
+
 }
 </script>

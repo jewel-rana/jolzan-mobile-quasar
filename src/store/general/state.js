@@ -1,6 +1,12 @@
 export default function () {
   return {
     cartContent: false,
+    settings: {
+      darkMode: 'Disabled',
+      pushNotification: 'Enabled',
+      accountActive: 'Enabled',
+      language: 'Disabled'
+    },
     alert: {
       status: false,
       message: "",
