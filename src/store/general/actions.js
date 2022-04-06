@@ -54,7 +54,8 @@ export default {
   setSiteData({commit}, payload) {
     commit('INIT', payload)
   },
-  getPage({commit}, payload) {
+  getPage({state, commit}, payload) {
+    commit('CLEAR_PAGE')
     return Api.getPage(payload)
       .then(response => {
         if (response.data.success === true) {
@@ -350,16 +351,6 @@ export default {
       .then(response => {
         if (response.data.success) {
           commit('SHOW_BOOKING', response.data.booking)
-        }
-      })
-      .catch(error => {
-      })
-  },
-  myJourny({commit}, payload) {
-    return Api.getMyJourney(payload)
-      .then(response => {
-        if (response.data.success) {
-          commit('SHOW_JOURNEY', response.data.booking)
         }
       })
       .catch(error => {

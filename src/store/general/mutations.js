@@ -177,8 +177,11 @@ export default {
     state.bookings.history = payload.data.history
     state.bookings.recent = recent
   },
+  CLEAR_PAGE(state) {
+    state.pages = {}
+  },
   SET_PAGE(state, payload) {
-    state.page = payload.data
+    state.pages = payload.data
   },
   MY_CANCELLATIONS(state, payload) {
     state.cancellations = payload
@@ -481,6 +484,22 @@ export default {
   },
   PROCEED_TO_TERMS(state) {
     state.order.step = 'terms'
+  },
+  HANDLE_SETTINGS(state, payload) {
+    switch (payload.key) {
+      case 'dark_mode':
+        state.settings.darkMode = payload.value
+        break;
+      case 'account_active':
+        state.settings.accountActive = payload.value
+        break;
+      case 'push_notification':
+        state.settings.pushNotification = payload.value
+        break;
+      case 'language':
+        state.settings.language = payload.value
+        break;
+    }
   },
   HANDLE_LOGIN_FORM(state, payload) {
     switch (payload.key) {

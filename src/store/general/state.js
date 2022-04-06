@@ -1,6 +1,12 @@
 export default function () {
   return {
     cartContent: false,
+    settings: {
+      darkMode: 'Disabled',
+      pushNotification: 'Enabled',
+      accountActive: 'Enabled',
+      language: 'Disabled'
+    },
     alert: {
       status: false,
       message: "",
@@ -17,7 +23,7 @@ export default function () {
     notLoggedIn: false,
     token: localStorage.getItem("token") || "",
     user: {},
-    page: {},
+    pages: {},
     search: {
       trip_from: null,
       trip_to: null,
@@ -101,6 +107,9 @@ export default function () {
     },
     activities: {
       data: []
+    },
+    myTrips: {
+      data: {}
     },
     notifications: {},
     noticeCount: 0,
