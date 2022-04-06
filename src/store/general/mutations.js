@@ -177,6 +177,9 @@ export default {
     state.bookings.history = payload.data.history
     state.bookings.recent = recent
   },
+  CLEAR_PAGE(state) {
+    state.pages = {}
+  },
   SET_PAGE(state, payload) {
     state.pages = payload.data
   },

@@ -9,12 +9,12 @@ import {mapState} from "vuex";
 
 export default {
   created() {
-    let page = this.page || localStorage.getItem('page')
-    if(page) {
-      this.$store.commit('general/SET_PAGE', page)
-    } else {
-      this.$store.dispatch('general/getPage', 'about-us')
-    }
+    this.$parent.$q.loading.show()
+    this.$parent.$q.loading.show()
+    this.$store.dispatch('general/getPage', 'about-us')
+      .then((response) => {
+        this.$parent.$q.loading.hide()
+      })
   },
   computed: {
     ...mapState('general', ['loggedIn', 'pages'])

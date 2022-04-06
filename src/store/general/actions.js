@@ -54,7 +54,8 @@ export default {
   setSiteData({commit}, payload) {
     commit('INIT', payload)
   },
-  getPage({commit}, payload) {
+  getPage({state, commit}, payload) {
+    commit('CLEAR_PAGE')
     return Api.getPage(payload)
       .then(response => {
         if (response.data.success === true) {

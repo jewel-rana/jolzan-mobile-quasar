@@ -19,7 +19,7 @@ const routes = [
       { path: '/services', component: () => import('pages/Services.vue'), name: 'Our Services'},
       { path: '/privacy-policy', component: () => import('pages/PrivacyPolicy.vue'), name: 'Privacy policy'},
       { path: '/terms-and-conditions', component: () => import('pages/TermsAndConditions.vue'), name: 'Terms & Conditions'},
-      { path: '/faq', component: () => import('pages/UnderConstruction.vue'), name: 'FAQ'},
+      { path: '/faq', component: () => import('pages/Faq.vue'), name: 'FAQ'},
       { path: '/settings', component: () => import('pages/UnderConstruction.vue'), name: 'Settings'}
     ]
   },
