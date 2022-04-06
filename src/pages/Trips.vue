@@ -2,7 +2,7 @@
   <q-page>
     <q-infinite-scroll @load="onLoad" :offset="80" class="q-pa-xs">
       <q-list>
-        <trip-item></trip-item>
+        <trip-item v-if="loggedIn"></trip-item>
       </q-list>
       <template v-slot:loading v-if="1===2">
         <div class="row justify-center q-my-md">
@@ -10,7 +10,7 @@
         </div>
       </template>
     </q-infinite-scroll>
-    <div class="absolute-center" v-if="loggedIn">
+    <div class="absolute-center" v-if="!loggedIn">
       <div class="text-primary text-h6">Log in please</div>
       <q-btn class="full-width bg-primary text-white q-mt-lg" @click="goToLogin">Log in</q-btn>
     </div>

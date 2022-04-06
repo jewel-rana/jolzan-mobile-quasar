@@ -26,6 +26,7 @@ export default {
   methods: {
     goToPayment() {
       console.log(this.order)
+      this.$parent.$q.loading.show
       window.location.href = Constants.BACKEND_URL + "/checkout/paynow/" + this.order.id
     }
   },

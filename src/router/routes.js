@@ -20,7 +20,9 @@ const routes = [
       { path: '/privacy-policy', component: () => import('pages/PrivacyPolicy.vue'), name: 'Privacy policy'},
       { path: '/terms-and-conditions', component: () => import('pages/TermsAndConditions.vue'), name: 'Terms & Conditions'},
       { path: '/faq', component: () => import('pages/UnderConstruction.vue'), name: 'FAQ'},
-      { path: '/settings', component: () => import('pages/Settings.vue'), name: 'Settings'}
+      { path: '/settings', component: () => import('pages/Settings.vue'), name: 'Settings'},
+      { path: '/how-to-buy-tickets', component: () => import('pages/HowToBuyTickets.vue'), name: 'How to buy tickets'},
+      { path: '/refund-policy', component: () => import('pages/CancelAndRefundPolicy.vue'), name: 'Cancel & Refund Policy'}
     ]
   },
 

@@ -9,11 +9,11 @@ import {mapState} from "vuex";
 
 export default {
   created() {
-    this.$parent.$q.loading.show()
-    this.$store.dispatch('general/getPage', 'our-services')
-      .then((response) => {
-        this.$parent.$q.loading.hide()
-      })
+      this.$parent.$q.loading.show()
+      this.$store.dispatch('general/getPage', 'refund-policy')
+        .then((response) => {
+          this.$parent.$q.loading.hide()
+        })
   },
   computed: {
     ...mapState('general', ['loggedIn', 'pages'])

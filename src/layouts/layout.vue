@@ -137,6 +137,16 @@ export default defineComponent({
             id: 'terms'
           },
           {
+            label: 'Cancel & Refund Policy',
+            icon: 'cancel_presentation',
+            id: 'refund_policy'
+          },
+          {
+            label: 'How to Buy Tickets',
+            icon: 'how_to_vote',
+            id: 'how_to'
+          },
+          {
             label: 'FAQ',
             icon: 'quiz',
             id: 'faq'
@@ -161,7 +171,7 @@ export default defineComponent({
           case 'services':
             this.$router.push('/services')
             break
-          case 'privacy':
+          case 'policy':
             this.$router.push('/privacy-policy')
             break
           case 'terms':
@@ -172,6 +182,12 @@ export default defineComponent({
             break
           case 'settings':
             this.$router.push('/settings')
+            break
+          case 'refund_policy':
+            this.$router.push('/refund-policy')
+            break
+          case 'how_to':
+            this.$router.push('/how-to-buy-tickets')
             break
         }
       }).onCancel(() => {

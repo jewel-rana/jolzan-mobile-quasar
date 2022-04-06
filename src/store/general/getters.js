@@ -26,9 +26,9 @@ export default {
   getUser(state) {
     return state.user
   },
-  getOptionByKey(state, key) {
+  getOptionByKey(state, key, default_val) {
     let options = state.siteData.options
-    return options[key];
+    return options[key] || default_val;
   },
   partners(state) {
     return state.siteData.partners
