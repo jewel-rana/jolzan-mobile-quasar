@@ -102,6 +102,9 @@ export default function () {
     activities: {
       data: []
     },
+    myTrips: {
+      data: {}
+    },
     notifications: {},
     noticeCount: 0,
     booking: {},

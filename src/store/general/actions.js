@@ -356,16 +356,6 @@ export default {
       .catch(error => {
       })
   },
-  myJourny({commit}, payload) {
-    return Api.getMyJourney(payload)
-      .then(response => {
-        if (response.data.success) {
-          commit('SHOW_JOURNEY', response.data.booking)
-        }
-      })
-      .catch(error => {
-      })
-  },
   updateProfile({commit}, payload) {
     return Api.updateProfile(payload)
       .then(response => {
