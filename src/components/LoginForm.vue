@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog class="bg-white" v-model="notLoggedIn" persistent transition-show="scale" transition-hide="scale" full-width>
+    <q-dialog class="bg-light-blue-1" v-model="notLoggedIn" persistent transition-show="scale" transition-hide="scale" full-width>
       <q-card class="bg-white">
 
         <q-card-section class="row items-center bg-primary">

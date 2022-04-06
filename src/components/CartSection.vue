@@ -90,7 +90,7 @@ export default {
 #cartExpandButton {
 }
 #cartSection {
-  position: absolute;
+  position: fixed;
   left: auto;
   right: 0;
   top: auto;

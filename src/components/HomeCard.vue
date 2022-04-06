@@ -5,7 +5,7 @@
           <q-card class="my-card active cursor-pointer" @click="goToBooking('launch')">
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="img:icons/ship.png"></q-icon>
+                <q-icon name="directions_boat_filled"></q-icon>
               </div>
               <div class="text-subtitle2">Launch</div>
             </q-card-section>
