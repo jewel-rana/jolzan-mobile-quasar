@@ -42,6 +42,7 @@ export default {
         return this.settings.darkMode
       },
       set(value) {
+        this.$parent.$q.dark.set(value === 'Enabled')
         this.$store.commit('general/HANDLE_SETTINGS', {key: 'dark_mode', value: value})
       }
     },
