@@ -1,15 +1,5 @@
 <template>
   <q-page>
-<<<<<<< HEAD
-    <div class="q-pt-md q-pb-md">
-      <q-list v-if="bookings.data.length">
-        <trip-item></trip-item>
-      </q-list>
-      <div class="absolute-center" v-else>
-        <div class="text-teal text-h7">Sorry! you are not logged in</div>
-        <q-btn flat color="primary" class="full-width q-mt-lg" @click="goToLogin">Log in now</q-btn>
-      </div>
-=======
     <q-infinite-scroll @load="onLoad" :offset="80" class="q-pa-xs">
       <q-list>
         <trip-item></trip-item>
@@ -23,7 +13,6 @@
     <div class="absolute-center" v-if="loggedIn">
       <div class="text-primary text-h6">Log in please</div>
       <q-btn class="full-width bg-primary text-white q-mt-lg" @click="goToLogin">Log in</q-btn>
->>>>>>> b0ef229a2f58284deab22a641a32b1b5dee98530
     </div>
   </q-page>
 </template>
@@ -32,10 +21,6 @@ import TripItem from "components/TripItem";
 import {mapState} from "vuex";
 export default {
   components: {TripItem},
-<<<<<<< HEAD
-  methods: {
-    goToLogin(){
-=======
   setup() {
     function onLoad (index, done) {
       setTimeout(() => {
@@ -58,16 +43,11 @@ export default {
   },
   methods: {
     goToLogin() {
->>>>>>> b0ef229a2f58284deab22a641a32b1b5dee98530
       this.$store.commit('general/OPEN_LOGIN_FORM')
     }
   },
   computed: {
-<<<<<<< HEAD
-    ...mapState('general', ['bookings'])
-=======
     ...mapState('general', ['myTrips', 'loggedIn'])
->>>>>>> b0ef229a2f58284deab22a641a32b1b5dee98530
   }
 }
 </script>
