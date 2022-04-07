@@ -3,7 +3,7 @@
     <div class="cabins">
         <div class="overflow-auto" id="cabinLayoutContainer">
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
-            <div class="cabin" v-for="(data, indx) in item" :class="data.cabin_class" :key="indx" @click="addToCard($event, data)">
+            <div class="cabin" v-for="(data, indx) in item" :class="cabinClass(data)" :key="indx" @click="addToCard($event, data)">
               <div class="topLap" >AC</div>
               <div class="checked-mark" v-if="data.cabin_class === 'cabin-selected'"><q-icon name="check" size="18px"/></div>
 <!--              <div class="checked-mark"><q-icon name="img:favicon.ico" /></div>-->
@@ -44,6 +44,9 @@ export default {
     addToCartDeck()
     {
       this.$store.dispatch("general/AddDeckTicketToCart")
+    },
+    cabinClass(cabin) {
+      return cabin.cabin_class || 'empty'
     },
     cabinStatus(cabin)
     {
@@ -216,7 +219,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   border-top-right-radius: 4px;
   font-weight: bold;
   line-height: 18px;
-  position: absolute;
+  position: relative;
 }
 .cabin-layout .cabins .cabin .cabin-number, .cabin-layout .cabins .seat .cabin-number, #availableCabins .cabin .cabin-number {
   font-size: 13pt;
@@ -242,6 +245,8 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .cabin.empty {
   background: none;
+  border: 0px !important;
+  box-shadow: none;
 }
 .cabin.empty > .cabin-price, .cabin.empty > .topLap {
   display: none;

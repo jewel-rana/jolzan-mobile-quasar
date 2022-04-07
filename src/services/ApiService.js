@@ -4,7 +4,7 @@ const qs = require("querystring");
 
 const apiClient = axios.create({
   // baseURL: "http://merchant.jolzatra.com/api/v2/",
-  baseURL: "https://merchant.jolzan.com/api/v2/",
+  baseURL: "http://localhost:8000/api/v2/",
   withCredentials: false,
   crossDomain: true,
   crossdomain: true,

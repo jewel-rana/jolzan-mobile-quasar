@@ -30,6 +30,7 @@ export default {
             this.$router.push('/terms')
             break;
           case 'terms':
+            console.log(JSON.stringify(this.cart))
             this.$parent.$q.loading.show()
             this.$store.dispatch('general/orderConfirm')
               .then((response) => {

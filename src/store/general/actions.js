@@ -223,7 +223,7 @@ export default {
     commit("ADD_PAYMENT_METHOD", payload)
   },
   orderConfirm({state, commit}) {
-    return Api.confirmOrder({items: state.cart, coupon: state.coupon}, state.user)
+    return Api.confirmOrder({items: JSON.stringify(state.cart), coupon: state.coupon}, state.user)
       .then(response => {
         commit("ORDER_CONFIRMED", response.data)
       })

@@ -10,7 +10,7 @@ import {mapState} from "vuex";
 export default {
   created() {
       this.$parent.$q.loading.show()
-      this.$store.dispatch('general/getPage', 'refund-policy')
+      this.$store.dispatch('general/getPage', 'cancel-and-refund-policy')
         .then((response) => {
           this.$parent.$q.loading.hide()
         })
