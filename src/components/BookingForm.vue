@@ -58,16 +58,16 @@
         <div class="row">
           <div class="col">
             <q-input class="q-ma-sm" filled v-model="trip_date" label="Journey date" mask="date"
-                     @click="$refs.qDateProxy.show()">
+                     @click="ShowStartDatePicker" @change="removeFocus($event)">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
                     <q-date
                       v-model="trip_date"
-                      @input="closeFromDate">
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat/>
-                      </div>
+                      @input="closeDialog">
+<!--                      <div class="row items-center justify-end">-->
+<!--                        <q-btn v-close-popup label="Close" color="primary" flat/>-->
+<!--                      </div>-->
                     </q-date>
                   </q-popup-proxy>
                 </q-icon>
@@ -76,15 +76,16 @@
           </div>
           <div class="col">
             <q-input class="q-ma-sm" filled v-model="trip_return_date" label="Return date" mask="date"
-                     @click="$refs.qDateProxy2.show()" @input="$refs.qDateProxy2.hide()">
+                     @click="$refs.qDateProxy2.show()" @input="closeDialog">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
                   <q-popup-proxy ref="qDateProxy2" cover transition-show="scale" transition-hide="scale">
                     <q-date
-                      v-model="trip_return_date">
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat/>
-                      </div>
+                      v-model="trip_return_date"
+                      @input="closeDialog">
+<!--                      <div class="row items-center justify-end">-->
+<!--                        <q-btn v-close-popup label="Ok" color="primary" flat/>-->
+<!--                      </div>-->
                     </q-date>
                   </q-popup-proxy>
                 </q-icon>
@@ -132,6 +133,18 @@ export default {
     }
   },
   methods: {
+    ShowStartDatePicker() {
+      this.$refs.qDateProxy.show();
+      this.$el.blur()
+    },
+    closeDialog() {
+      alert('ok')
+      this.$refs.qDateProxy.hide()
+      this.$refs.qDateProxy2.hide()
+    },
+    removeFocus(el) {
+      el.blur()
+    },
     formSubmit({commit}, payload) {
       console.log(this.$store)
       this.$parent.$q.loading.show()

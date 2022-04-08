@@ -22,7 +22,8 @@ const routes = [
       { path: '/faq', component: () => import('pages/UnderConstruction.vue'), name: 'FAQ'},
       { path: '/settings', component: () => import('pages/Settings.vue'), name: 'Settings'},
       { path: '/how-to-buy-tickets', component: () => import('pages/HowToBuyTickets.vue'), name: 'How to buy tickets'},
-      { path: '/refund-policy', component: () => import('pages/CancelAndRefundPolicy.vue'), name: 'Cancel & Refund Policy'}
+      { path: '/refund-policy', component: () => import('pages/CancelAndRefundPolicy.vue'), name: 'Cancel & Refund Policy'},
+      { path: '/profile', component: () => import('pages/Profile.vue'), name: 'My Profile'}
     ]
   },
 
