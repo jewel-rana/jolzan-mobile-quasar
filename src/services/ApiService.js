@@ -3,8 +3,8 @@ import axios from "axios";
 const qs = require("querystring");
 
 const apiClient = axios.create({
-  // baseURL: "https://merchant.jolzan.com/api/v2/",
-  baseURL: "http://localhost:8000/api/v2/",
+  baseURL: "https://merchant.jolzan.com/api/v2/",
+  // baseURL: "http://localhost:8000/api/v2/",
   withCredentials: false,
   crossDomain: true,
   crossdomain: true,
