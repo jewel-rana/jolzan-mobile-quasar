@@ -20,7 +20,7 @@
               label="From"
               :options="options"
               @filter="filterFn"
-              behavior="menu"
+              behavior="dialog"
               class="q-pa-sm"
             >
               <template v-slot:no-option>
@@ -41,7 +41,7 @@
               label="To"
               :options="options"
               @filter="filterFn"
-              behavior="menu"
+              behavior="dialog"
               class="q-pa-sm"
             >
               <template v-slot:no-option>
@@ -58,13 +58,13 @@
         <div class="row">
           <div class="col">
             <q-input class="q-ma-sm" filled v-model="trip_date" label="Journey date" mask="date"
-                     @click="ShowStartDatePicker" @change="removeFocus($event)">
+                     @input="removeFocus($event)">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy ref="qDateProxy" cover transition-show="scale" transition-hide="scale">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                     <q-date
                       v-model="trip_date"
-                      @input="closeDialog">
+                      @input="$refs.qDateProxy.hide()">
 <!--                      <div class="row items-center justify-end">-->
 <!--                        <q-btn v-close-popup label="Close" color="primary" flat/>-->
 <!--                      </div>-->
@@ -75,14 +75,13 @@
             </q-input>
           </div>
           <div class="col">
-            <q-input class="q-ma-sm" filled v-model="trip_return_date" label="Return date" mask="date"
-                     @click="$refs.qDateProxy2.show()" @input="closeDialog">
+            <q-input class="q-ma-sm" filled v-model="trip_return_date" label="Return date" mask="date">
               <template v-slot:append>
                 <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy ref="qDateProxy2" cover transition-show="scale" transition-hide="scale">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
                     <q-date
                       v-model="trip_return_date"
-                      @input="closeDialog">
+                      @input="$refs.qDateProxy.hide()">
 <!--                      <div class="row items-center justify-end">-->
 <!--                        <q-btn v-close-popup label="Ok" color="primary" flat/>-->
 <!--                      </div>-->
@@ -146,7 +145,6 @@ export default {
       el.blur()
     },
     formSubmit({commit}, payload) {
-      console.log(this.$store)
       this.$parent.$q.loading.show()
       this.$store.dispatch('general/searchTrip')
       .then((response) => {

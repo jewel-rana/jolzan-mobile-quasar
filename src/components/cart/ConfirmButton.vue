@@ -22,8 +22,10 @@ export default {
       } else {
         switch (this.order.step) {
           case 'cart':
+            this.$parent.$q.loading.show()
             this.$store.commit('general/HANDLE_CONFIRM', 'passenger')
             this.$router.push('/passenger')
+            this.$parent.$q.loading.hide()
             break;
           case 'passenger':
             this.$store.commit('general/HANDLE_CONFIRM', 'terms')
