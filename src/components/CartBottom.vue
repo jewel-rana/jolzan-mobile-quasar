@@ -61,7 +61,7 @@ export default {
         }
       ]
     },
-    ...mapState('general', ['cart']),
+    ...mapState('general', ['cart', 'coupon']),
     ...mapGetters('general', ['getSubTotal', 'getVatTotal', 'getServiceCharge', 'getTotal'])
   }
 }

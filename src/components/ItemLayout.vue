@@ -1,11 +1,13 @@
 <template>
   <div class="cabin-layout">
-    <div class="cabins">
+    <div class="cabins q-pb-lg">
         <div class="overflow-auto" id="cabinLayoutContainer">
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
             <div class="cabin" v-for="(data, indx) in item" :class="cabinClass(data)" :key="indx" @click="addToCard($event, data)">
-              <div class="topLap" >AC</div>
-              <div class="checked-mark" v-if="data.cabin_class === 'cabin-selected'"><q-icon name="check" size="18px"/></div>
+              <div class="topLap" v-if="data.cabin_is_ac">AC</div>
+              <div class="checked-mark" v-if="data.cabin_class === 'cabin-selected'">
+                <q-icon name="check" size="18px"/>
+              </div>
 <!--              <div class="checked-mark"><q-icon name="img:favicon.ico" /></div>-->
               <div class="cabin-number">{{ data.cabin_no }}</div>
               <div class="cabin-price">৳ {{ data.fare }}</div>
@@ -225,7 +227,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   border-top-right-radius: 4px;
   font-weight: bold;
   line-height: 18px;
-  position: relative;
+  position: absolute;
 }
 .cabin-layout .cabins .cabin .cabin-number, .cabin-layout .cabins .seat .cabin-number, #availableCabins .cabin .cabin-number {
   font-size: 13pt;
@@ -233,7 +235,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   text-align: center;
   color: #fff;
   font-weight: bold;
-  line-height: 16px;
+  line-height: 40px;
 }
 .cabin-layout .cabins .cabin .cabin-price, .cabin-layout .cabins .seat .cabin-price, #availableCabins .cabin .cabin-price {
   position: absolute;

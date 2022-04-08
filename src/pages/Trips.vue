@@ -1,10 +1,11 @@
 <template>
   <q-page>
     <q-infinite-scroll @load="onLoad" :offset="80" class="q-pa-xs q-mt-lg">
-      <q-list v-if="loggedIn">
+      <q-list v-if="loggedIn && bookings.data.length">
         <trip-item v-for="(booking, index) in bookings.data" :key="index" :booking="booking" @click="goToBookingDetails(booking)"></trip-item>
       </q-list>
-      <template v-slot:loading v-if="1===2">
+      <no-result v-else :msg="`No trip found`"></no-result>
+      <template v-slot:loading v-if="isPageAvailable">
         <div class="row justify-center q-my-md">
           <q-spinner-dots color="primary" size="40px" />
         </div>
@@ -19,11 +20,12 @@
 <script>
 import TripItem from "components/TripItem";
 import {mapState} from "vuex";
+import NoResult from "components/NoResult";
 export default {
-  components: {TripItem},
+  components: {NoResult, TripItem},
   setup() {
   },
-  created() {
+  beforeCreate() {
       this.$parent.$q.loading.show()
       this.$store.dispatch('general/myJourney')
       .then(() => {
@@ -48,6 +50,9 @@ export default {
     }
   },
   computed: {
+    isPageAvailable() {
+      return this.bookings.last_page > this.bookings.current_page
+    },
     ...mapState('general', ['bookings', 'loggedIn'])
   }
 }
