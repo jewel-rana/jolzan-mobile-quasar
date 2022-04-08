@@ -49,33 +49,41 @@
       <q-separator/>
       <div class="row q-pt-sm">
         <div class="col-7">Dues</div>
-        <div class="col-5">: {{ booking.total_dues > 0 || booking.payment_status === 'pending' ? booking.total_payable : booking.dues }} <q-btn class="q-mb-sm" size="sm" color="orange" v-if="booking.total_dues > 0 || booking.payment_status === 'pending'">Pay now</q-btn></div>
+        <div class="col-5">:
+          {{ booking.total_dues > 0 || booking.payment_status === 'pending' ? booking.total_payable : booking.dues }}
+          <q-btn class="q-mb-sm" size="sm" color="orange"
+                 v-if="booking.total_dues > 0 || booking.payment_status === 'pending'">Pay now
+          </q-btn>
+        </div>
       </div>
     </div>
 
     <div class="text-teal-3 text-bold q-mt-lg">Tickets</div>
     <q-separator/>
     <div id="ticketItems">
-      <q-list>
-        <cart-item v-for="item in booking.items" :item="item" :index="item.id"></cart-item>
-      </q-list>
+      <fieldset v-for="(items, indx) in booking.items" :key="indx">
+        <legend>{{ items.date }}</legend>
+        <q-list>
+          <ticket-item v-for="item in items.tickets" :item="item" :index="item.id"></ticket-item>
+        </q-list>
+      </fieldset>
     </div>
   </q-page>
 </template>
 
 <script>
 import {mapState} from "vuex";
-import CartItem from "components/CartItem";
+import TicketItem from "components/TicketItem";
 
 export default {
-  components: {CartItem},
+  components: {TicketItem},
   created() {
-    if(!!this.booking) {
+    if (!!this.booking) {
       this.$parent.$q.loading.show()
       this.$store.dispatch('general/bookingDetails', this.$route.params.id)
-      .then(() => {
-        this.$parent.$q.loading.hide()
-      })
+        .then(() => {
+          this.$parent.$q.loading.hide()
+        })
     }
   },
   computed: {

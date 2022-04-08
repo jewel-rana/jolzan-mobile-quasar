@@ -164,7 +164,6 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   overflow:hidden;
-  float: left;
 
 }
 .cabin:hover, .seat:hover{

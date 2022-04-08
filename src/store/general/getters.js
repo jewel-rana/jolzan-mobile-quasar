@@ -26,7 +26,7 @@ export default {
   },
   getServiceCharge(state, getters) {
     console.log(state.cart)
-    let chargeOption = state.siteData.options['service_charge_web'] || 0
+    let chargeOption = state.siteData.options['service_charge_mobile'] || 0
     let charge = 0
     for (let i = 0; i < state.cart.length; i++) {
       charge += (state.cart[i].fare * (chargeOption / 100))
