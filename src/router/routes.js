@@ -23,7 +23,8 @@ const routes = [
       { path: '/settings', component: () => import('pages/Settings.vue'), name: 'Settings'},
       { path: '/how-to-buy-tickets', component: () => import('pages/HowToBuyTickets.vue'), name: 'How to buy tickets'},
       { path: '/refund-policy', component: () => import('pages/CancelAndRefundPolicy.vue'), name: 'Cancel & Refund Policy'},
-      { path: '/profile', component: () => import('pages/Profile.vue'), name: 'My Profile'}
+      { path: '/profile', component: () => import('pages/Profile.vue'), name: 'My Profile'},
+      { path: '/trip-details/:id', component: () => import('pages/TripDetails.vue'), name: 'Booking details'}
     ]
   },
 

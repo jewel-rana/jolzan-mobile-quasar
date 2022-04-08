@@ -65,9 +65,9 @@
                     <q-date
                       v-model="trip_date"
                       @input="$refs.qDateProxy.hide()">
-<!--                      <div class="row items-center justify-end">-->
-<!--                        <q-btn v-close-popup label="Close" color="primary" flat/>-->
-<!--                      </div>-->
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Ok" color="primary" flat/>
+                      </div>
                     </q-date>
                   </q-popup-proxy>
                 </q-icon>
@@ -82,9 +82,9 @@
                     <q-date
                       v-model="trip_return_date"
                       @input="$refs.qDateProxy.hide()">
-<!--                      <div class="row items-center justify-end">-->
-<!--                        <q-btn v-close-popup label="Ok" color="primary" flat/>-->
-<!--                      </div>-->
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Ok" color="primary" flat/>
+                      </div>
                     </q-date>
                   </q-popup-proxy>
                 </q-icon>
@@ -142,7 +142,7 @@ export default {
       this.$refs.qDateProxy2.hide()
     },
     removeFocus(el) {
-      el.blur()
+      console.log(el)
     },
     formSubmit({commit}, payload) {
       this.$parent.$q.loading.show()

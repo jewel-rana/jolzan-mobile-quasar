@@ -199,7 +199,7 @@ export default {
     return apiClient.get("page/" + payload)
   },
   getMyBookings(payload) {
-    return apiClient.get("my/bookings", {
+    return apiClient.get("my/get-bookings", {
       params: payload
     })
   },

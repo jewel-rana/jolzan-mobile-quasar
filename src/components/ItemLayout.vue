@@ -16,6 +16,8 @@
   </div>
 </template>
 <script>
+import {mapState} from "vuex";
+
 export default {
   props: ['items'],
   created()
@@ -46,7 +48,7 @@ export default {
       this.$store.dispatch("general/AddDeckTicketToCart")
     },
     cabinClass(cabin) {
-      return cabin.cabin_class || 'empty'
+      return cabin.cabin_class || 'empty cursor-not-allowed'
     },
     cabinStatus(cabin)
     {
@@ -60,11 +62,10 @@ export default {
           break;
       }
       return status
-    },
-    filterCabinByType(property = 'cabin', type)
-    {
-      this.$store.dispatch('general/FilterByType', {property: property, type: type})
     }
+  },
+  computed: {
+    ...mapState('general', ['search'])
   }
 }
 </script>
@@ -82,6 +83,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 #cabinLayoutContainer {
   width: 100%;
+  display: table;
 }
 .search-container > .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1)
@@ -94,10 +96,12 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 .layoutRowCol {
   width: 102px;
+  height: 100% !important;
   padding: 10px;
   display: table-cell;
-  flex-direction: row;
+  /*display: table;*/
   border-left: 1px solid #f2f2f2;
+  /*float: left;*/
 }
 .layoutRowCol.empty {
   background: #f9f9f9;
@@ -112,11 +116,11 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 .cabinLayoutContainer .nav-link {
   padding: 8px;
 }
-.cabin-layout {
-  min-height: 320px;
-  max-height: 480px;
-  overflow: hidden;
-}
+/*.cabin-layout {*/
+/*  min-height: 320px;*/
+/*  max-height: 480px;*/
+/*  overflow: hidden;*/
+/*}*/
 .cabin-layout:hover {
   overflow-y: auto;
   overflow-x: auto;
@@ -147,7 +151,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 .cabin, .seat {
   width: 75px;
   height: 75px;
-  margin: 0 auto 30px;
+  margin: auto 15px;
   border: 0px solid #F0EFEF;
   padding: 0px;
   background: #69b3f4;
@@ -158,6 +162,8 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   overflow:hidden;
+  float: left;
+
 }
 .cabin:hover, .seat:hover{
   background: #c2cac1;
@@ -227,7 +233,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   text-align: center;
   color: #fff;
   font-weight: bold;
-  line-height: 40px;
+  line-height: 16px;
 }
 .cabin-layout .cabins .cabin .cabin-price, .cabin-layout .cabins .seat .cabin-price, #availableCabins .cabin .cabin-price {
   position: absolute;
@@ -247,6 +253,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background: none;
   border: 0px !important;
   box-shadow: none;
+  cursor: none;
 }
 .cabin.empty > .cabin-price, .cabin.empty > .topLap {
   display: none;

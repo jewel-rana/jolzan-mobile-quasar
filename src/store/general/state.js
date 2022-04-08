@@ -32,8 +32,8 @@ export default function () {
       floor: {label: '2nd Floor', value: 2},
       type: 'launch',
       launch_name: "",
-      cabin_type: null,
-      seat_type: null
+      cabin_type: { label: 'All', value: 0},
+      seat_type: { label: 'All', value: 0}
     },
     help: {
       name: "",
@@ -100,11 +100,7 @@ export default function () {
     },
     suggestions: [],
     searchResults: {},
-    bookings: {
-      data: [],
-      recent: {},
-      history: {}
-    },
+    bookings: {},
     activities: {
       data: []
     },

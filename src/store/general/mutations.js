@@ -33,6 +33,15 @@ export default {
       case 'type':
         state.search.type = payload.value
         break;
+      case 'floor':
+        state.search.floor = payload.value
+        break
+      case 'cabin_type':
+        state.search.cabin_type = payload.value
+        break
+      case 'seat_type':
+        state.search.seat_type = payload.value
+        break
     }
   },
   SET_NOTICE_COUNTER(state, payload) {
@@ -161,9 +170,8 @@ export default {
     state.alert.status = payload.success
   },
   MY_BOOKINGS(state, payload) {
-    state.bookings = payload
-    state.bookings.recent = payload.data.recent
-    state.bookings.history = payload.data.history
+    console.log(payload)
+    state.bookings = payload.bookings
   },
   MY_ACTIVITIES(state, payload) {
     state.activities = payload

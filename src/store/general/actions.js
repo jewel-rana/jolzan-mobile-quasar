@@ -152,7 +152,7 @@ export default {
       .catch(error => {
       })
   },
-  searchTrip({state, commit, rootState}) {
+  searchTrip({state, commit}) {
     console.log(state)
     commit("CLEAR_SEARCH_DATA")
     let tripFrom = state.search.trip_from ? state.search.trip_from.value : ''
@@ -166,7 +166,6 @@ export default {
       })
   },
   viewTrip({commit}, payload) {
-    commit("CLEAR_TRIP_DATA")
     return Api.view(payload)
       .then(response => {
         commit("SET_TRIP_ITEM", response.data)
@@ -339,8 +338,9 @@ export default {
   myJourney({commit}) {
     return Api.getMyBookings()
       .then(response => {
+        console.log(response)
         if (response.data.success) {
-          commit('MY_BOOKINGS', response.data.data)
+          commit('MY_BOOKINGS', response.data)
         }
       })
       .catch(error => {

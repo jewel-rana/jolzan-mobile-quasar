@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <q-card class="my-card">
+    <q-card class="my-card" v-if="trip">
         <q-img :src="trip.vehicle_photo || '/images/default-banner.jpg'" height="140px">
           <div class="absolute-bottom text-h6">
             {{ trip.vehicle_name }} <br/>
@@ -17,8 +17,8 @@
           indicator-color="primary"
           narrow-indicator
         >
-          <q-tab name="mails" label="Tab 1"/>
-          <q-tab name="alarms" label="Tab 2"/>
+          <q-tab name="mails" label="Cabin"/>
+          <q-tab name="alarms" label="Seat"/>
         </q-tabs>
 
         <q-separator/>
@@ -27,26 +27,27 @@
           <q-tab-panel name="mails">
             <div class="row">
               <div class="col q-pa-sm">
-                <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"
-                          @change="floorChange"/>
+                <q-select standout="bg-teal text-white" v-model="cabin_floor" :options="floors" label="Floor"/>
               </div>
               <div class="col q-pa-sm">
                 <q-select standout="bg-teal text-white" v-model="cabin_type" :options="cabinTypes" label="Type"/>
               </div>
             </div>
-            <item-layout :items="trip.cabins"></item-layout>
+            <item-layout v-if="trip.cabins" :items="trip.cabins"></item-layout>
+            <no-result v-else :msg="`No cabin found`"></no-result>
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
             <div class="row">
               <div class="col q-pa-sm">
-                <q-select standout="bg-teal text-white" v-model="floor" :options="floors" label="Floor"/>
+                <q-select standout="bg-teal text-white" v-model="cabin_floor" :options="floors" label="Floor"/>
               </div>
               <div class="col q-pa-sm">
                 <q-select standout="bg-teal text-white" v-model="seat_type" :options="seatTypes" label="Type"/>
               </div>
             </div>
-            <item-layout :items="trip.seats"></item-layout>
+            <item-layout v-if="trip.seats" :items="trip.seats"></item-layout>
+            <no-result v-else :msg="`No seat found`"></no-result>
           </q-tab-panel>
 
           <q-tab-panel name="movies">
@@ -56,6 +57,7 @@
         </q-tab-panels>
       </q-card-section>
     </q-card>
+    <no-result v-else></no-result>
     <cart-section></cart-section>
   </q-page>
 </template>
@@ -64,9 +66,10 @@ import {ref} from 'vue'
 import ItemLayout from "components/ItemLayout";
 import {mapState} from "vuex";
 import CartSection from "components/CartSection"
+import NoResult from "components/NoResult";
 
 export default {
-  components: {ItemLayout, CartSection},
+  components: {NoResult, ItemLayout, CartSection},
   setup() {
     return {
       tab: ref('mails')
@@ -94,9 +97,6 @@ export default {
     }
   },
   methods: {
-    floorChange() {
-      alert('ok')
-    },
     cabinStatus(cabin) {
       let status = "cabin-active"
       switch (cabin.status) {
@@ -109,8 +109,17 @@ export default {
       }
       return status
     },
-    filterCabinByType(property = 'cabin', type) {
-      this.$store.dispatch('general/FilterByType', {property: property, type: type})
+    loadTrip() {
+      this.$parent.$q.loading.show()
+      this.$store.dispatch("general/viewTrip", {
+        id: this.$route.params.id,
+        floor: this.search.floor.value || 2,
+        cabin_type: this.search.cabin_type.value || 0,
+        seat_type: this.search.seat_type.value || 0
+      })
+        .then(() => {
+          this.$parent.$q.loading.hide()
+        })
     }
   },
   computed: {
@@ -120,6 +129,16 @@ export default {
       },
       set(value) {
         this.$store.commit('general/UPDATE_FORM_DATA', {key: 'cabin_type', value: value})
+        this.$store.dispatch('general/FilterByType', {property: 'cabin', type: value.value})
+      }
+    },
+    cabin_floor: {
+      get() {
+        return this.$store.state.general.search.floor
+      },
+      set(val) {
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'floor', value: val})
+        this.loadTrip()
       }
     },
     seat_type: {
@@ -128,6 +147,7 @@ export default {
       },
       set(value) {
         this.$store.commit('general/UPDATE_FORM_DATA', {key: 'seat_type', value: value})
+        this.$store.dispatch('general/FilterByType', {property: 'seat', type: value.value})
       }
     },
     floors() {
@@ -139,7 +159,7 @@ export default {
     seatTypes() {
       return this.trip.seat_types
     },
-    ...mapState('general', ['trip', 'searchResults'])
+    ...mapState('general', ['trip', 'search', 'searchResults'])
   }
 }
 </script>
