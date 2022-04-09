@@ -8,6 +8,8 @@
                       src="~assets/logo-white.png"
                       style="width: auto; height: 36px"
                       title="Jolzan"
+                      @click="gotToHome"
+                      class="cursor-pointer"
                     >
         </q-toolbar-title>
         <profile-menu></profile-menu>
@@ -102,6 +104,9 @@ export default defineComponent({
     }
   },
   methods: {
+    gotToHome(){
+      this.$router.push('/')
+    },
     goToBack() {
       return this.$router.go(-1)
     },

@@ -16,14 +16,22 @@
           <q-separator vertical inset class="q-mx-lg" v-if="1===2"/>
 
           <div class="column items-center">
-            <q-avatar size="72px">
-              <img :src="user.photo">
+            <q-avatar size="72px"  @click="goToProfile">
+              <img :src="user.photo" class="cursor-pointer">
             </q-avatar>
 
             <div class="text-subtitle1 q-mt-md q-mb-xs">{{ user.name }}</div>
             <div class="q-pa-md q-gutter-sm">
+
               <q-btn
-                class="glossy full-width" rounded color="deep-orange"
+                class="full-width" flat
+                color="primary"
+                label="My profile"
+                icon="people"
+                @click="goToProfile"
+              />
+              <q-btn
+                class="full-width" flat color="deep-orange"
                 label="Logout"
                 icon="logout"
                 push
@@ -42,6 +50,9 @@ import {mapState} from "vuex";
 
 export default {
   methods: {
+    goToProfile(){
+      this.$router.push('/profile')
+    },
     openLoginDialogue(){
       this.$store.commit('general/OPEN_LOGIN_FORM')
     },
