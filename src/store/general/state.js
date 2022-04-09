@@ -100,7 +100,11 @@ export default function () {
     },
     suggestions: [],
     searchResults: {},
-    bookings: {},
+    bookings: {
+      current_page: 1,
+      last_page: 1,
+      data: []
+    },
     activities: {
       data: []
     },
