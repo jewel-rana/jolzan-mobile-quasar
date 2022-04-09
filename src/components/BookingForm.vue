@@ -6,8 +6,8 @@
     >
       <div class="q-gutter-sm">
         <q-radio v-model="trip_type" val="launch" label="Launch"/>
-        <q-radio v-model="trip_type" val="bus" label="Bus"/>
-        <q-radio v-model="trip_type" val="air" label="Air"/>
+        <q-radio v-model="trip_type" val="bus" label="Bus" disable/>
+<!--        <q-radio v-model="trip_type" val="air" label="Air" hide/>-->
       </div>
       <div class="row items-start">
         <div class="row">

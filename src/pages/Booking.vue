@@ -20,6 +20,13 @@ export default {
     SearchResult,
     NoResult
   },
+  created() {
+    this.$parent.$q.loading.show()
+    this.$store.dispatch('general/searchTrip')
+    .then(() => {
+      this.$parent.$q.loading.hide()
+    })
+  },
   methods: {
     goToBooking(item) {
       this.$parent.$q.loading.show()

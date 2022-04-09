@@ -2,7 +2,7 @@
   <q-page>
     <home-card class="q-pa-md" align="center"></home-card>
     <cancel-booking></cancel-booking>
-    <home-slider></home-slider>
+    <home-slider v-if="1===3"></home-slider>
   </q-page>
 </template>
 
