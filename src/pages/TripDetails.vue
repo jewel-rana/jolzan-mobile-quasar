@@ -61,7 +61,7 @@
     <div class="text-teal-3 text-bold q-mt-lg">Tickets</div>
     <q-separator/>
     <div id="ticketItems">
-      <fieldset v-for="(items, indx) in booking.items" :key="indx">
+      <fieldset v-for="(items, indx) in booking.items" :key="indx" class="q-mb-lg">
         <legend>{{ items.date }}</legend>
         <q-list>
           <ticket-item v-for="item in items.tickets" :item="item" :index="item.id"></ticket-item>
@@ -78,7 +78,7 @@ import TicketItem from "components/TicketItem";
 export default {
   components: {TicketItem},
   created() {
-    if (!!this.booking) {
+    if(!!this.booking) {
       this.$parent.$q.loading.show()
       this.$store.dispatch('general/bookingDetails', this.$route.params.id)
         .then(() => {

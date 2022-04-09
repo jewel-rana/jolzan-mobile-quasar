@@ -1,11 +1,11 @@
 <template>
   <q-page>
-    <q-infinite-scroll @load="onLoad" :offset="80" class="q-pa-xs q-mt-lg">
+    <q-infinite-scroll v-if="bookings.data.length" @load="onLoad" :offset="80" class="q-pa-xs q-mt-lg">
       <q-list v-if="loggedIn && bookings.data.length">
         <trip-item v-for="(booking, index) in bookings.data" :key="index" :booking="booking" @click="goToBookingDetails(booking)"></trip-item>
       </q-list>
       <no-result v-else :msg="`No trip found`"></no-result>
-      <template v-slot:loading v-if="isPageAvailable">
+      <template v-slot:loading v-show="isPageAvailable">
         <div class="row justify-center q-my-md">
           <q-spinner-dots color="primary" size="40px" />
         </div>
@@ -25,17 +25,27 @@ export default {
   components: {NoResult, TripItem},
   setup() {
   },
-  beforeCreate() {
+  created() {
+    let bookings = localStorage.getItem('bookings')
+    console.log(JSON.parse(bookings))
+    if(bookings) {
+      this.$store.commit('general/MY_BOOKINGS', JSON.parse(bookings))
+    } else {
       this.$parent.$q.loading.show()
       this.$store.dispatch('general/myJourney')
-      .then(() => {
-        this.$parent.$q.loading.hide()
-      })
+        .then(() => {
+          this.$parent.$q.loading.hide()
+        })
+    }
   },
   methods: {
     goToBookingDetails(booking) {
-      this.$store.commit('general/SHOW_BOOKING', booking)
-      this.$router.push('/trip-details/' + booking.id)
+      this.$parent.$q.loading.show()
+      this.$store.dispatch('general/bookingDetails', this.$route.params.id)
+        .then(() => {
+          this.$parent.$q.loading.hide()
+          this.$router.push('/trip-details/' + booking.id)
+        })
     },
     onLoad (index, done) {
       setTimeout((e) => {

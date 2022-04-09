@@ -62,9 +62,6 @@ import {mapState} from "vuex";
 
 export default {
   props: ['item', 'index'],
-  created() {
-    console.log(this.item)
-  },
   methods: {
     removeCartItem(index) {
       console.log(index)
@@ -145,6 +142,6 @@ export default {
 
 <style scoped>
 legend {
-  border: 1px solid #CCC;
+  border: 1px solid #f2f2f2;
 }
 </style>

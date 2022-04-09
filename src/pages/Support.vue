@@ -5,10 +5,8 @@
         <div class="text-h5">{{ getOption('company_name', "Jolzan.com") }}</div><br>
         <strong>Email:</strong> info@jolzan.com<br>
         <strong>Website:</strong> jolzan.com<br>
-          <strong>Hotline:</strong> 01911785317<br/>
-        <strong>Address:</strong> 367, City Plaza Market (3rd Floor), <br>
-        Fazlul Haque Avenue, Barisal Sadar<br>
-        Barisal
+          <strong>Hotline:</strong> {{ getOption('company_phone', '09639 101515')}}<br/>
+        <strong>Address:</strong> {{ getOption('company_address', '367, City Plaza Market (3rd Floor), Fazlul Haque Avenue, Barisal Sadar, Barisal')}}
       </address>
     </div>
   </q-page>

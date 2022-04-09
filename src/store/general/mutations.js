@@ -172,6 +172,11 @@ export default {
   MY_BOOKINGS(state, payload) {
     console.log(payload)
     state.bookings = payload.bookings
+    // let bookings = localStorage.getItem('bookings')
+    // if(bookings) {
+    //   localStorage.removeItem('bookings')
+    //   localStorage.setItem('bookings', JSON.stringify(state.bookings))
+    // }
   },
   MY_ACTIVITIES(state, payload) {
     state.activities = payload
