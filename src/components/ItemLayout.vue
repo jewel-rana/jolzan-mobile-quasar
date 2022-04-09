@@ -1,6 +1,6 @@
 <template>
-  <div class="cabin-layout">
-    <div class="cabins q-pb-lg">
+  <div class="cabin-layout q-mb-lg">
+    <div class="cabins q-mb-lg">
         <div class="overflow-auto" id="cabinLayoutContainer">
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
             <div class="cabin" v-for="(data, indx) in item" :class="cabinClass(data)" :key="indx" @click="addToCard($event, data)">
@@ -101,9 +101,8 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   height: 100% !important;
   padding: 10px;
   display: table-cell;
-  /*display: table;*/
   border-left: 1px solid #f2f2f2;
-  /*float: left;*/
+  vertical-align: top;
 }
 .layoutRowCol.empty {
   background: #f9f9f9;

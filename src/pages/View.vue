@@ -37,7 +37,7 @@
             <no-result v-else :msg="`No cabin found`"></no-result>
           </q-tab-panel>
 
-          <q-tab-panel name="alarms">
+          <q-tab-panel name="alarms" class="q-mb-lg">
             <div class="row">
               <div class="col q-pa-sm">
                 <q-select standout="bg-teal text-white" v-model="cabin_floor" :options="floors" label="Floor"/>
