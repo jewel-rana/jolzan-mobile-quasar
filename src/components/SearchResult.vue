@@ -7,7 +7,7 @@
           </q-item-section>
 
           <q-item-section>
-            <q-item-label style="font-size: 17px; color: dodgerblue"><strong>{{ item.vehicle_name}}</strong></q-item-label>
+            <q-item-label class="text-primary" style="font-size: 17px;"><strong>{{ item.vehicle_name}}</strong></q-item-label>
             <q-item-label><q-icon name="route" size="15px"></q-icon><strong>{{ item.route_name }}</strong></q-item-label>
             <q-item-label caption><q-icon name="event" size="18px"></q-icon> {{ item.leaving_at }}</q-item-label>
           </q-item-section>

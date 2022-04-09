@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="cartSection" :class="cartSectionDeviceClass">
-      <div class="cartPopup cursor-pointer" clickable  @click="displayCartContent">
+      <div class="cartPopup cursor-pointer bg-primary text-white" clickable  @click="displayCartContent">
         <q-icon name="expand_less" size="32px" v-if="!cartContent"></q-icon>
         <q-icon name="keyboard_arrow_down" size="32px" v-else></q-icon>
       </div>
@@ -77,15 +77,13 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .cartPopup {
   width: 54px;
   padding: 0 12px;
   margin: -32px 0 0 15px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: #1976d2;
-  color: #fff;
 }
 #cartExpandButton {
 }
@@ -95,7 +93,7 @@ export default {
   right: 0;
   top: auto;
   height: auto;
-  border-top: 3px solid #1976d2;
+  border-top: 3px solid $primary;
   background: #ffffff;
   z-index: 1001;
 }

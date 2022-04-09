@@ -2,12 +2,12 @@
   <div class="q-pa-md items-start">
       <div class="row">
         <div class="col q-pa-sm">
-          <q-card class="my-card active cursor-pointer" @click="goToBooking('launch')">
+          <q-card class="my-card bg-primary cursor-pointer" @click="goToBooking('launch')">
             <q-card-section>
               <div class="text-h6">
-                <q-icon name="directions_boat_filled"></q-icon>
+                <q-icon name="directions_boat_filled" color="white"></q-icon>
               </div>
-              <div class="text-subtitle2">Launch</div>
+              <div class="text-subtitle2 text-white">Launch</div>
             </q-card-section>
           </q-card>
         </div>
