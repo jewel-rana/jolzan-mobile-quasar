@@ -26,6 +26,9 @@ export default {
     NoResult,
     ConfirmButton
   },
+  created() {
+    this.$store.commit('general/HANDLE_CONFIRM', 'terms')
+  },
   computed: {
     getPolicy() {
       return this.getOptionByKey('cancellation_policy') || 'Cancellation policy here'

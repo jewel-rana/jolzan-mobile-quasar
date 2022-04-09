@@ -29,20 +29,23 @@ export default {
   methods: {
     addToCard(event, cabin)
     {
-      console.log(cabin)
       if (cabin.status == 1 && cabin.cabin_class == 'cabin-active') {
-        this.$parent.$q.loading.show()
-        this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
-          .then(() => {
-            this.$parent.$q.loading.hide()
-            this.$parent.$q.notify({
-              type: 'positive',
-              message: 'item has been added to cart'
+        if(this.cart.length >= 2) {
+          this.$parent.$q.notify({type: 'negetive', message: 'You have already two items in your cart.'})
+        } else {
+          this.$parent.$q.loading.show()
+          this.$store.dispatch('general/addCart', {item: cabin, token: this.customer_token})
+            .then(() => {
+              this.$parent.$q.loading.hide()
+              this.$parent.$q.notify({
+                type: 'positive',
+                message: 'item has been added to cart'
+              })
             })
-          })
-          .catch(error => {
-            console.log(error)
-          })
+            .catch(error => {
+              console.log(error)
+            })
+        }
       }
     },
     addToCartDeck()
@@ -67,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('general', ['search'])
+    ...mapState('general', ['search', 'cart'])
   }
 }
 </script>
