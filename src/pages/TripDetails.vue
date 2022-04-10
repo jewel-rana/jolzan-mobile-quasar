@@ -52,7 +52,8 @@
         <div class="col-5">:
           {{ booking.total_dues > 0 || booking.payment_status === 'pending' ? booking.total_payable : booking.dues }}
           <q-btn class="q-mb-sm" size="sm" color="orange"
-                 v-if="booking.total_dues > 0 || booking.payment_status === 'pending'">Pay now
+                 v-if="booking.total_dues > 0 || booking.payment_status === 'pending'"
+            @click="gotToPayment(booking.pnr)">Pay now
           </q-btn>
         </div>
       </div>
@@ -74,6 +75,7 @@
 <script>
 import {mapState} from "vuex";
 import TicketItem from "components/TicketItem";
+import Constants from "src/services/constants";
 
 export default {
   components: {TicketItem},
@@ -84,6 +86,11 @@ export default {
         .then(() => {
           this.$parent.$q.loading.hide()
         })
+    }
+  },
+  methods: {
+    gotToPayment(pnr) {
+      window.location.href = Constants.BACKEND_URL + '/checkout/paynow/' + pnr
     }
   },
   computed: {

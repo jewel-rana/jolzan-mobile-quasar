@@ -89,6 +89,12 @@
               </template>
             </q-input>
 
+            <q-input color="teal" filled v-model="nid" label="NID Number">
+              <template v-slot:prepend>
+                <q-icon name="branding_watermark"/>
+              </template>
+            </q-input>
+
             <q-input color="teal" filled v-model="name" label="Your name">
               <template v-slot:prepend>
                 <q-icon name="people"/>
@@ -231,6 +237,14 @@ export default {
       },
       set(value) {
         this.$store.commit('general/HANDLE_LOGIN_FORM', {key: 'mobile', value:value})
+      }
+    },
+    nid: {
+      get(){
+        return this.login.nid
+      },
+      set(value) {
+        this.$store.commit('general/HANDLE_LOGIN_FORM', {key: 'nid', value:value})
       }
     },
     password: {

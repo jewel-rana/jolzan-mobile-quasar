@@ -46,6 +46,7 @@ export default function () {
       name: "",
       email: "",
       mobile: "",
+      nid: "",
       password: "",
       confirm_password: "",
       otp: "",
