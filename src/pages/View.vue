@@ -163,10 +163,11 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .q-img__content > div {
   padding: 5px 15px;
-  background: rgba(24, 104, 174, 0.62);
+  background: $primary;
+  opacity: .6;
 }
 .q-card {
   border-radius: 0;
@@ -178,7 +179,7 @@ export default {
 }
 
 .q-tabs--dense .q-tab {
-  background: #1976d2;
+  background: $primary;
   color: #fff;
 }
 

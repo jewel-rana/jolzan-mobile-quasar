@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background: inherit;
   opacity: 0;
@@ -158,7 +158,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   margin: auto 15px;
   border: 0px solid #F0EFEF;
   padding: 0px;
-  background: #69b3f4;
+  background: $primary;/*#69b3f4;*/
   position: relative;
   cursor: pointer !important;
   border-radius: 4px;
@@ -179,7 +179,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   background-color: #1bc616;
 }
 .cabin-layout .cabins .cabin.cabin-selected, .cabin-layout .cabins .seat.cabin-selected {
-  background: #0743b5;
+  //background: #0743b5;
 }
 .cabin-layout .cabins .cabin.cabin-checked, .cabin-layout .cabins .seat.cabin-checked {
   color: #fff;
@@ -243,8 +243,9 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   bottom: 0;
   right: 0;
   left: 0;
-  background: #2c79dd;
-  color: #fff;
+  background: white;
+  margin: 2px;
+  color: $primary;
   font-size: 12pt;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
