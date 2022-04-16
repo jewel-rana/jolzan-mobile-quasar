@@ -119,13 +119,6 @@ export default {
       }
       return status
     },
-    cartRemovable() {
-      let status = true
-      if(this.order.step !== 'cart') {
-        status = false
-      }
-      return status
-    },
     passengerType: {
       get(itemId) {
         console.log(itemId)
