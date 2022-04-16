@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-item :key="index">
+    <q-item :key="index" :class="ticketStatus">
       <q-item-section avatar top>
         <q-icon v-if="item.cabin_type === 'cabin'" name="bed" color="black" size="26px"/>
         <q-icon v-if="item.cabin_type === 'seat'" name="chair" color="black" size="26px"/>
@@ -16,15 +16,15 @@
         </q-item-label>
       </q-item-section>
 
-      <q-item-section top class="col-2">
+      <q-item-section top side class="q-pl-xs">
         <q-item-label>{{ item.price }}/-</q-item-label>
       </q-item-section>
 
-      <q-item-section top side class="q-pl-xs">
-        <div class="text-grey-8">
-          <q-btn flat dense round :label="ticketStatus" color="teal"/>
-        </div>
-      </q-item-section>
+<!--      <q-item-section top side class="q-pl-xs">-->
+<!--        <div class="text-grey-8">-->
+<!--          <q-btn flat dense round :label="ticketStatus" color="teal"/>-->
+<!--        </div>-->
+<!--      </q-item-section>-->
     </q-item>
     <q-item v-if="1===2">
       <q-item-label>
