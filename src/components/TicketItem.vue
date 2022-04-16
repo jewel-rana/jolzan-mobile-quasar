@@ -110,10 +110,10 @@ export default {
     ticketStatus() {
       let status = 'Pending'
       switch (this.item.status) {
-        case '1':
+        case 1:
           status = 'Success'
           break
-        case '2':
+        case 2:
           status = 'Canceled'
           break
       }
