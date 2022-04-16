@@ -50,9 +50,9 @@
       <div class="row q-pt-sm">
         <div class="col-7">Dues</div>
         <div class="col-5">:
-          {{ booking.total_dues > 0 || booking.payment_status === 'pending' ? booking.total_payable : booking.dues }}
+          {{ booking.total_dues }}
           <q-btn class="q-mb-sm" size="sm" color="orange"
-                 v-if="booking.total_dues > 0 || booking.payment_status === 'pending'"
+                 v-if="booking.total_dues > 0 "
             @click="gotToPayment(booking.pnr)">Pay now
           </q-btn>
         </div>
