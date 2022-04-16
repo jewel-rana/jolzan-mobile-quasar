@@ -5,7 +5,7 @@
         <q-toolbar-title class="q-pt-sm">
                     <img
                       alt="Jolzan"
-                      src="~assets/logo-white.png"
+                      src="images/logo-white.png"
                       style="width: auto; height: 36px"
                       title="Jolzan"
                       @click="gotToHome"
