@@ -100,9 +100,10 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   align-items: center;
 }
 .layoutRowCol {
-  width: 102px;
+  width: auto;
+  min-width: 75px;
   height: 100% !important;
-  padding: 10px;
+  padding: 10px 0;
   display: table-cell;
   border-left: 1px solid #f2f2f2;
   vertical-align: top;
@@ -166,7 +167,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
   -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.25);
   overflow:hidden;
-
+  margin-bottom: 15px;
 }
 .cabin:hover, .seat:hover{
   background: #c2cac1;
