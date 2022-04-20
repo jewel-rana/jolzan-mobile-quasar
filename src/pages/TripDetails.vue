@@ -85,8 +85,14 @@ export default {
       this.$store.dispatch('general/bookingDetails', this.$route.params.id)
         .then(() => {
           this.$parent.$q.loading.hide()
+          if(this.$route.query.payment !== null && this.$route.query.payment == 'success') {
+            this.$parent.$q.notify({type: 'positive', message: 'Your payment success'})
+          }
         })
     }
+  },
+  mounted(){
+    // alert('ok')
   },
   methods: {
     gotToPayment(pnr) {
