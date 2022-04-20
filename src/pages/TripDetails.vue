@@ -69,6 +69,11 @@
         </q-list>
       </fieldset>
     </div>
+    <div id="bookingActions" v-if="booking.payment_status === 'success'">
+      <q-btn-group spread>
+        <q-btn color="primary" size="md" label="Download ticket" icon="download" @click="downloadInvoice(booking.pnr)"/>
+      </q-btn-group>
+    </div>
   </q-page>
 </template>
 
@@ -76,6 +81,7 @@
 import {mapState} from "vuex";
 import TicketItem from "components/TicketItem";
 import Constants from "src/services/constants";
+import Axios from"axios";
 
 export default {
   components: {TicketItem},
@@ -97,6 +103,9 @@ export default {
   methods: {
     gotToPayment(pnr) {
       window.location.href = Constants.BACKEND_URL + '/checkout/paynow/' + pnr
+    },
+    downloadInvoice(pnr) {
+      window.location.href = Constants.BACKEND_URL +'/download/' + pnr
     }
   },
   computed: {
