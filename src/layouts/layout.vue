@@ -29,13 +29,7 @@
       show-if-above
       bordered
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Navigation
-        </q-item-label>
-      </q-list>
+      <sidebar></sidebar>
     </q-drawer>
 
     <q-page-container>
@@ -61,7 +55,8 @@
 
 <script>
 import FooterNavigation from 'components/FooterNavigation.vue'
-import ProfileMenu from "components/ProfileMenu";
+import ProfileMenu from "components/ProfileMenu"
+import Sidebar from "components/Sidebar"
 
 const navigations = [
   {
@@ -84,12 +79,63 @@ const navigations = [
 import {defineComponent, ref} from 'vue'
 import {mapState} from "vuex";
 
+const bottomSheetNavigations = [
+  {
+    label: 'Support',
+    icon: 'support_agent',
+    id: 'support'
+  },
+  {},
+  {
+    label: 'About us',
+    icon: 'info',
+    id: 'about'
+  },
+  {
+    label: 'Our Service',
+    icon: 'design_services',
+    id: 'services'
+  },
+  {
+    label: 'Privacy policy',
+    icon: 'policy',
+    id: 'policy'
+  },
+  {
+    label: 'Terms & Condition',
+    icon: 'ac_unit',
+    id: 'terms'
+  },
+  {
+    label: 'Cancel & Refund Policy',
+    icon: 'cancel_presentation',
+    id: 'refund_policy'
+  },
+  {
+    label: 'How to Buy Tickets',
+    icon: 'how_to_vote',
+    id: 'how_to'
+  },
+  {
+    label: 'FAQ',
+    icon: 'quiz',
+    id: 'faq'
+  },
+  {},
+  {
+    label: 'Settings',
+    icon: 'settings',
+    id: 'settings'
+  },
+  {},
+];
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
     FooterNavigation,
-    ProfileMenu
+    ProfileMenu,
+    Sidebar
   },
 
   setup() {
@@ -114,56 +160,7 @@ export default defineComponent({
       this.$parent.$q.bottomSheet({
         message: 'More links',
         grid,
-        actions: [
-          {
-            label: 'Support',
-            icon: 'support_agent',
-            id: 'support'
-          },
-          {},
-          {
-            label: 'About us',
-            icon: 'info',
-            id: 'about'
-          },,
-          {
-            label: 'Our Service',
-            icon: 'design_services',
-            id: 'services'
-          },
-          {
-            label: 'Privacy policy',
-            icon: 'policy',
-            id: 'policy'
-          },
-          {
-            label: 'Terms & Condition',
-            icon: 'ac_unit',
-            id: 'terms'
-          },
-          {
-            label: 'Cancel & Refund Policy',
-            icon: 'cancel_presentation',
-            id: 'refund_policy'
-          },
-          {
-            label: 'How to Buy Tickets',
-            icon: 'how_to_vote',
-            id: 'how_to'
-          },
-          {
-            label: 'FAQ',
-            icon: 'quiz',
-            id: 'faq'
-          },
-          {},
-          {
-            label: 'Settings',
-            icon: 'settings',
-            id: 'settings'
-          },
-          {},
-        ]
+        actions: bottomSheetNavigations
       }).onOk(action => {
         console.log('Action chosen:', action.id)
         switch (action.id) {
