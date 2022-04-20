@@ -3,14 +3,14 @@
     <q-header elevated dark="true">
       <q-toolbar>
         <q-toolbar-title class="q-pt-sm">
-<!--                    <img-->
-<!--                      alt="Jolzan"-->
-<!--                      src="images/logo-white.png"-->
-<!--                      style="width: auto; height: 36px"-->
-<!--                      title="Jolzan"-->
-<!--                      @click="gotToHome"-->
-<!--                      class="cursor-pointer"-->
-<!--                    >-->
+                    <img
+                      alt="Jolzan"
+                      src="images/logo-white.png"
+                      style="width: auto; height: 36px"
+                      title="Jolzan"
+                      @click="gotToHome"
+                      class="cursor-pointer"
+                    >
         </q-toolbar-title>
         <profile-menu></profile-menu>
       </q-toolbar>
