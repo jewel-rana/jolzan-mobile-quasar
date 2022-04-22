@@ -4,10 +4,10 @@
     <q-card class="q-mt-lg" v-if="cart.length">
       <q-card-section class="q-pb-none">
         <div class="text-blue-5 q-pb-none">Accept out terms & conditions</div>
-        <div v-html="getOptionByKey('cancellation_policy')"></div>
+        <div id="termsScroller" v-html="getOption('cancellation_policy')"></div>
       </q-card-section>
       <q-card-section>
-        <div id="termsScroller" class="q-pa-md" v-html="getpolicy"></div>
+        <q-checkbox keep-color v-model="accept" label="Accept" color="cyan" />
       </q-card-section>
     </q-card>
     <confirm-button :step="`terms`"></confirm-button>
@@ -30,11 +30,25 @@ export default {
   created() {
     this.$store.commit('general/HANDLE_CONFIRM', 'terms')
   },
+  methods: {
+    getOption(key, default_val = '') {
+      let options = this.siteData.options
+      return options[key] || default_val;
+    }
+  },
   computed: {
+    accept: {
+      get(){
+        return this.$store.state.general.order.terms_accept
+      },
+      set(value){
+        this.$store.commit('general/UPDATE_FORM_DATA', {key: 'terms_accept', value: value})
+      }
+    },
     getPolicy() {
       return this.getOptionByKey('cancellation_policy') || 'Cancellation policy here'
     },
-    ...mapState('general', ['cart']),
+    ...mapState('general', ['cart', 'siteData']),
     ...mapGetters('general', ['getOptionByKey'])
   }
 }

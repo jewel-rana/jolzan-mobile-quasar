@@ -80,7 +80,7 @@ export default function () {
       transaction_id: "",
       coupon: "",
       title: "Cart",
-      terms_accept: 0
+      terms_accept: true
     },
     coupon: {
       code: "",

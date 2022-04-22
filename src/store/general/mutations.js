@@ -42,6 +42,9 @@ export default {
       case 'seat_type':
         state.search.seat_type = payload.value
         break
+      case 'terms_accept':
+        state.order.terms_accept = payload.value
+        break
     }
   },
   SET_NOTICE_COUNTER(state, payload) {

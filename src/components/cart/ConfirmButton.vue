@@ -33,14 +33,18 @@ export default {
             break;
           case 'terms':
             console.log(JSON.stringify(this.cart))
-            this.$parent.$q.loading.show()
-            this.$store.dispatch('general/orderConfirm')
-              .then((response) => {
-                this.$parent.$q.loading.hide()
-                if(this.order.id) {
-                  this.$router.push('/payment')
-                }
-              })
+            if(this.$store.state.general.order.terms_accept) {
+              this.$parent.$q.loading.show()
+              this.$store.dispatch('general/orderConfirm')
+                .then((response) => {
+                  this.$parent.$q.loading.hide()
+                  if (this.order.id) {
+                    this.$router.push('/payment')
+                  }
+                })
+            } else {
+              this.$parent.$q.notify({type: 'negative', message: 'Sorry! you must accept our terms and Conditions.'})
+            }
             break;
         }
       }
