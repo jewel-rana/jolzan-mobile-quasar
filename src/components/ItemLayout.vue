@@ -88,7 +88,6 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 }
 #cabinLayoutContainer {
   width: 100%;
-  display: table;
   overflow: scroll;
 }
 .search-container > .card {
