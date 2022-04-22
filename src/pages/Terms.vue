@@ -4,6 +4,7 @@
     <q-card class="q-mt-lg" v-if="cart.length">
       <q-card-section class="q-pb-none">
         <div class="text-blue-5 q-pb-none">Accept out terms & conditions</div>
+        <div v-html="getOptionByKey('cancellation_policy')"></div>
       </q-card-section>
       <q-card-section>
         <div id="termsScroller" class="q-pa-md" v-html="getpolicy"></div>
