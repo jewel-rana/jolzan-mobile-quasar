@@ -1,7 +1,7 @@
 <template>
   <div class="cabin-layout q-mb-lg">
     <div class="cabins q-mb-lg">
-        <div class="overflow-auto" id="cabinLayoutContainer">
+        <div id="cabinLayoutContainer">
           <div class="layoutRowCol" v-for="(item, index) in items" :key="index">
             <div class="cabin" v-for="(data, indx) in item" :class="cabinClass(data)" :key="indx" @click="addToCard($event, data)">
               <div class="topLap" v-if="data.cabin_is_ac">AC</div>
@@ -89,6 +89,7 @@ body .q-expansion-item__container .q-hoverable:hover .q-focus-helper {
 #cabinLayoutContainer {
   width: 100%;
   display: table;
+  overflow: scroll;
 }
 .search-container > .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1)
